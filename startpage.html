@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>StartPage</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root{
+            --color-body: #eee;
+            --color-past: #555;
+            --color-present: #000;
+            --color-future: #eee;
+            --color-highlight: #ff0;
+            --color-highlight-alt: #6441a5;
+            --color-black: #000;
+        }
+        html {
+            box-sizing: border-box;
+        }
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+        body {
+            background-color: #000;
+            color: var(--color-body);
+            font-family: monospace;
+        }
+        .row {
+            display: block;
+            width: 100%;
+            max-width: 1366px;
+            margin: 1rem auto;
+        }
+        #current-task{
+            font-weight: bold;
+            font-size: 5rem;
+            color: var(--color-highlight);
+            margin: 0 1rem;
+        }
+        #date {
+            display: block;
+            font-weight: bold;
+            font-size: 5rem;
+            color: var(--color-highlight-alt);
+            /* text-align: center; */
+            border-left: 5px solid var(--color-highlight-alt);
+            padding-left: 1rem;
+            margin-top: 1rem;
+        }
+        #time {
+            display: block;
+            font-weight: bold;
+            font-size: 7rem;
+            color: var(--color-highlight-alt);
+            /* text-align: center; */
+            border-left: 5px solid var(--color-highlight-alt);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+        #mission {
+            /* text-align: center; */
+            padding: 1rem;
+            color: var(--color-highlight);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        #day-progress{
+            background-color: var(--color-highlight);
+            color: var(--color-black);
+            padding: 1rem;
+            display: inline-block;
+        }
+        #poem {
+            text-align: left;
+            margin: 0 1rem;
+            display: inline-block;
+            font-size: 1.2rem;
+            color: #000;
+            border:1px solid var(--color-body);
+        }
+        #poem:hover{
+            color: var(--color-body);
+        }
+        .column{
+            float: left;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .past{
+            background-color: #000;
+            color: var(--color-past);
+        }
+        .present{
+            background-color: var(--color-highlight);
+            color: var(--color-present);
+        }
+        .future{
+            background-color: #000;
+            color: var(--color-future);
+        }
+        th{
+            text-align: left;
+        }
+    </style>
+    <script>
+        var SCHEDULE_GRANULARITY = 30;
+        var weekday = new Array(7);
+        weekday[0] = "Sun";
+        weekday[1] = "Mon";
+        weekday[2] = "Tue";
+        weekday[3] = "Wed";
+        weekday[4] = "Thu";
+        weekday[5] = "Fri";
+        weekday[6] = "Sat";
+        function startRender() {
+            var today = new Date();
+            var hour = today.getHours();
+            var minute = today.getMinutes();
+            var second = today.getSeconds();
+            var day = today.getDate();
+            var month = today.getMonth() + 1;
+            var year = today.getFullYear();
+            var dayotw = weekday[today.getDay()];
+            hour = prependZero(hour);
+            minute = prependZero(minute);
+            second = prependZero(second);
+            document.getElementById('date').innerHTML =
+                dayotw + ": " + day + "-" + month + "-" + year;
+            document.getElementById('time').innerHTML =
+                hour + ":" + minute + ":" + second;
+            var time = setTimeout(startRender, 1000);
+
+            //paint progress in table
+            // var tableId = getTableId(hour, minute, SCHEDULE_GRANULARITY);
+            var tableId = getTableId(hour, minute, SCHEDULE_GRANULARITY);
+            document.getElementById("current-task").innerHTML = document.getElementById(tableId).innerHTML;
+
+            if(second == 0){
+                updateTableHighlights(tableId);
+                updateDayProgress(parseInt(hour*60) + parseInt(minute));
+                console.log((hour*60));
+            }
+
+            //burn in protection
+            let root = document.documentElement;
+            if(second == "00"){
+                root.style.setProperty('--color-body', '#f00')
+                root.style.setProperty('--color-past', '#f00')
+                root.style.setProperty('--color-present', '#f00')
+                root.style.setProperty('--color-future', '#f00')
+                root.style.setProperty('--color-highlight', '#f00')
+                root.style.setProperty('--color-highlight-alt', '#f00')
+            }
+            if(second == "01"){
+                root.style.setProperty('--color-body', '#0f0')
+                root.style.setProperty('--color-past', '#0f0')
+                root.style.setProperty('--color-present', '#0f0')
+                root.style.setProperty('--color-future', '#0f0')
+                root.style.setProperty('--color-highlight', '#0f0')
+                root.style.setProperty('--color-highlight-alt', '#0f0')
+            }
+            if(second == "02"){
+                root.style.setProperty('--color-body', '#00f')
+                root.style.setProperty('--color-past', '#00f')
+                root.style.setProperty('--color-present', '#00f')
+                root.style.setProperty('--color-future', '#00f')
+                root.style.setProperty('--color-highlight', '#00f')
+                root.style.setProperty('--color-highlight-alt', '#00f')
+            }
+            if(second == "03"){
+                root.style.setProperty('--color-body', '#eee')
+                root.style.setProperty('--color-past', '#555')
+                root.style.setProperty('--color-present', '#000')
+                root.style.setProperty('--color-future', '#eee')
+                root.style.setProperty('--color-highlight', '#ff0')
+                root.style.setProperty('--color-highlight-alt', '#6441a5')
+            }
+        }
+
+        function updateTableHighlights(tableId){
+            //var current = parseInt(tableId);
+            for(i=0; i<1440; i=i+30){
+                if(i<tableId){
+                    // need to loop through table ids here
+                    setPast(i);
+                }
+                if(i==tableId){
+                    setPresent(i);
+                }
+                if(i>tableId){
+                    setFuture(i);
+                }
+            }
+            setPresent(tableId);
+        }
+
+        function updateDayProgress(timestamp){
+            document.getElementById("day-progress").innerHTML = Math.floor((timestamp/1440)*100) + "%";
+        }
+
+        function getTableId(hour, minute, granularity){
+            // hour*60 + minute rounded to granularity
+            var id = hour*60;
+            if(minute<granularity){
+                return id;
+            }else{
+                return id+granularity;
+            }
+        }
+
+        function setPast(id){
+            document.getElementById(id).classList.remove("present");
+            document.getElementById(id).classList.remove("future");
+            document.getElementById(id).classList.add("past");
+        }
+        function setPresent(id){
+            document.getElementById(id).classList.remove("past");
+            document.getElementById(id).classList.remove("future");
+            document.getElementById(id).classList.add("present");
+        }
+        function setFuture(id){
+            document.getElementById(id).classList.remove("past");
+            document.getElementById(id).classList.remove("present");
+            document.getElementById(id).classList.add("future");
+        }
+        function prependZero(i) {
+            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+            return i;
+        }
+    </script>
+</head>
+
+<body onload="startRender()">
+    <div class="row">
+        <span id="day-progress"></span>
+        <span id="mission">What? The <b>legendary computer scientist</b> that reshaped the field <br>
+            What's my first step in that? Breaking the gate record by <b></b>working like  a madman</b> today
+            <br>What do I think when in doubt? Ask what would the legend do
+        </span>
+    </div>
+    <div class="row">
+        <div class="column">
+            <span id="current-task"></span>
+        </div>
+        <div class="column">
+            <span id="date"></span>
+            <span id="time"></span>
+        </div>
+    </div>
+    <div class="row">
+        <table class="column">
+            <th>AM</th>
+            <tr><th>Time</th><th>Task</th></tr> 
+            <tr><td>0:00</td><td id="0">sleep</td></tr>
+            <tr><td>0:30</td><td id="30">sleep</td></tr>
+            <tr><td>1:00</td><td id="60">sleep</td></tr>
+            <tr><td>1:30</td><td id="90">sleep</td></tr>
+            <tr><td>2:00</td><td id="120">sleep</td></tr>
+            <tr><td>2:30</td><td id="150">sleep</td></tr>
+            <tr><td>3:00</td><td id="180">sleep</td></tr>
+            <tr><td>3:30</td><td id="210">sleep</td></tr>
+            <tr><td>4:00</td><td id="240">sleep</td></tr>
+            <tr><td>4:30</td><td id="270">sleep</td></tr>
+            <tr><td>5:00</td><td id="300">wakeup,plan</td></tr>
+            <tr><td>5:30</td><td id="330">exercise</td></tr>
+            <tr><td>6:00</td><td id="360">exercise</td></tr>
+            <tr><td>6:30</td><td id="390">brush, bathe</td></tr>
+            <tr><td>7:00</td><td id="420">session1</td></tr>
+            <tr><td>7:30</td><td id="450">session1</td></tr>
+            <tr><td>8:00</td><td id="480">session2</td></tr>
+            <tr><td>8:30</td><td id="510">session2</td></tr>
+            <tr><td>9:00</td><td id="540">session3</td></tr>
+            <tr><td>9:30</td><td id="570">session3</td></tr>
+            <tr><td>10:00</td><td id="600">breakfast</td></tr>
+            <tr><td>10:30</td><td id="630">chill</td></tr>
+            <tr><td>11:00</td><td id="660">session4</td></tr>
+            <tr><td>11:30</td><td id="690">session4</td></tr>
+        </table>
+        <table class="column">
+            <th>PM</th>
+            <tr><th>Time</th><th>Task</th></tr> 
+            <tr><td>12:00</td><td id="720">session5</td></tr>
+            <tr><td>12:30</td><td id="750">sleep?</td></tr>
+            <tr><td>13:00</td><td id="780">sleep?</td></tr>
+            <tr><td>13:30</td><td id="810">sleep?</td></tr>
+            <tr><td>14:00</td><td id="840">session5</td></tr>
+            <tr><td>14:30</td><td id="870">session5</td></tr>
+            <tr><td>15:00</td><td id="900">session6</td></tr>
+            <tr><td>15:30</td><td id="930">session6</td></tr>
+            <tr><td>16:00</td><td id="960">exercise</td></tr>
+            <tr><td>16:30</td><td id="990">exercise&shower</td></tr>
+            <tr><td>17:00</td><td id="1020">session7</td></tr>
+            <tr><td>17:30</td><td id="1050">session7</td></tr>
+            <tr><td>18:00</td><td id="1080">session8</td></tr>
+            <tr><td>18:30</td><td id="1110">session8</td></tr>
+            <tr><td>19:00</td><td id="1140">session9</td></tr>
+            <tr><td>19:30</td><td id="1170">session9</td></tr>
+            <tr><td>20:00</td><td id="1200">dinner</td></tr>
+            <tr><td>20:30</td><td id="1230">session10</td></tr>
+            <tr><td>21:00</td><td id="1260">session10</td></tr>
+            <tr><td>21:30</td><td id="1290">chill down</td></tr>
+            <tr><td>22:00</td><td id="1320">sleep</td></tr>
+            <tr><td>22:30</td><td id="1350">sleep</td></tr>
+            <tr><td>23:00</td><td id="1380">sleep</td></tr>
+            <tr><td>23:30</td><td id="1410">sleep</td></tr>
+        </table>
+
+        <div class="column">
+            <span>
+                1. Set Theory<br>
+                2. Combinatorics<br>
+                3. Digital logic<br>
+                4. Programming, recursion<br>
+            </span>
+            <span id="poem">
+                When you get what you want in your struggle for pelf,<br>
+                And the world makes you King for a day,<br>
+                Then go to the mirror and look at yourself,<br>
+                And see what that guy has to say.<br>
+                <br>
+                For it isn't your Father, or Mother, or Wife,<br>
+                Who judgement upon you must pass.<br>
+                The feller whose verdict counts most in your life<br>
+                Is the guy staring back from the glass.<br>
+                <br>
+                He's the feller to please, never mind all the rest,<br>
+                For he's with you clear up to the end,<br>
+                And you've passed your most dangerous, difficult test<br>
+                If the guy in the glass is your friend.<br>
+                <br>
+                You may be like Jack Horner and "chisel" a plum,<br>
+                And think you're a wonderful guy,<br>
+                But the man in the glass says you're only a bum<br>
+                If you can't look him straight in the eye.<br>
+                <br>
+                You can fool the whole world down the pathway of years,<br>
+                And get pats on the back as you pass,<br>
+                But your final reward will be heartaches and tears<br>
+                If you've cheated the guy in the glass.<br>
+            </span>
+        </div>
+    </div>
+</body>
+
+</html>
