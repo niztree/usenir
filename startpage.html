@@ -36,14 +36,14 @@
         }
         #current-task{
             font-weight: bold;
-            font-size: 5rem;
+            font-size: 2rem;
             color: var(--color-highlight);
             margin: 0 1rem;
         }
         #date {
             display: block;
             font-weight: bold;
-            font-size: 5rem;
+            font-size: 1.5rem;
             color: var(--color-highlight-alt);
             /* text-align: center; */
             border-left: 5px solid var(--color-highlight-alt);
@@ -53,7 +53,7 @@
         #time {
             display: block;
             font-weight: bold;
-            font-size: 7rem;
+            font-size: 1.5rem;
             color: var(--color-highlight-alt);
             /* text-align: center; */
             border-left: 5px solid var(--color-highlight-alt);
@@ -65,7 +65,7 @@
             padding: 1rem;
             color: var(--color-highlight);
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         #day-progress{
             background-color: var(--color-highlight);
@@ -77,8 +77,8 @@
             text-align: left;
             margin: 0 1rem;
             display: inline-block;
-            font-size: 1.2rem;
-            color: #000;
+            font-size: 1rem;
+            color: var(--color-body);
             border:1px solid var(--color-body);
         }
         #poem:hover{
@@ -267,18 +267,18 @@
             <tr><td>3:30</td><td id="210">sleep</td></tr>
             <tr><td>4:00</td><td id="240">sleep</td></tr>
             <tr><td>4:30</td><td id="270">sleep</td></tr>
-            <tr><td>5:00</td><td id="300">wakeup,plan</td></tr>
+            <tr><td>5:00</td><td id="300">exercise</td></tr>
             <tr><td>5:30</td><td id="330">exercise</td></tr>
-            <tr><td>6:00</td><td id="360">exercise</td></tr>
-            <tr><td>6:30</td><td id="390">brush, bathe</td></tr>
-            <tr><td>7:00</td><td id="420">session1</td></tr>
+            <tr><td>6:00</td><td id="360">music+plan</td></tr>
+            <tr><td>6:30</td><td id="390">(anime)GTO</td></tr>
+            <tr><td>7:00</td><td id="420">Brush, bathe, eat</td></tr>
             <tr><td>7:30</td><td id="450">session1</td></tr>
             <tr><td>8:00</td><td id="480">session2</td></tr>
             <tr><td>8:30</td><td id="510">session2</td></tr>
             <tr><td>9:00</td><td id="540">session3</td></tr>
             <tr><td>9:30</td><td id="570">session3</td></tr>
-            <tr><td>10:00</td><td id="600">breakfast</td></tr>
-            <tr><td>10:30</td><td id="630">chill</td></tr>
+            <tr><td>10:00</td><td id="600">lunch and chill</td></tr>
+            <tr><td>10:30</td><td id="630">lunch and chill</td></tr>
             <tr><td>11:00</td><td id="660">session4</td></tr>
             <tr><td>11:30</td><td id="690">session4</td></tr>
         </table>
@@ -312,12 +312,14 @@
         </table>
 
         <div class="column">
+            <span>Order:</span><hr>
             <span>
                 1. Set Theory<br>
                 2. Combinatorics<br>
                 3. Digital logic<br>
                 4. Programming, recursion<br>
             </span>
+            <hr>
             <span id="poem">
                 When you get what you want in your struggle for pelf,<br>
                 And the world makes you King for a day,<br>
@@ -345,6 +347,45 @@
                 If you've cheated the guy in the glass.<br>
             </span>
         </div>
+        
+        <pre>
+Simple rules to live worry-free. 
+
+Password management:
+1)All passwords have one offline copy
+2)Passwords are never saved in digital lockers
+3)The id and its password is never stored in the same place. Always split with 
+ some algorithm. 
+
+Exception : Github/sourcehut/suckless passwords are stored digitally, but only 
+ on the dedicated laptop. 
+Note(updated June2020) : Only ephemeral oasswords are written with a pen. Rest 
+ are by pencil or waterproof marker. 
+
+--------
+
+The social rules (2012-present)
+I have a simple social life, because I let the complexity be in other things:
+1) Never let identities in projects and real life meet.
+1) No personal into to people not met in real life. 
+2) No home address to people not vetted irl.
+
+In case of doubt, remember the sept 2012 incident.
+Trust management : Never lie about circumstances and facts. Only manage personal
+  info.
+
+--------
+
+Financial management :
+Money from projects is to never be used for real life purposes.
+Money from projects is used purely to expand or sustain. 
+
+--------
+Content management :
+1)All private notes are encrypted. Always assume passwords are present in notes.
+2)All backups are taken on 1st Sunday of every month.
+3)
+        </pre>
     </div>
 </body>
 

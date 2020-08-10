@@ -1,0 +1,34 @@
+https://jsoneditoronline.org/#left=local.bufuqa&right=local.dujatu
+https://setu.co/
+    Color scheme and design
+
+
+
+<div class="index-entry">
+                    <a class="index-entry--title" href="_blank">The recurrences of patterns in multirepo projects</a>
+                    <br>
+                    <span class="index-entry--metadata">20 July 2020</span>
+                    <span class="index-entry--metadata">Tags:</span>
+                    <a class="index-entry--tag" href="_blank">Technology</a><a class="index-entry--tag" href="_blank">Mechanics</a>
+                </div><div class="index-entry">
+                    <a class="index-entry--title" href="_blank">The recurrences of patterns in multirepo projects</a>
+                    <br>
+                    <span class="index-entry--metadata">20 July 2020</span>
+                    <span class="index-entry--metadata">Tags:</span>
+                    <a class="index-entry--tag" href="_blank">Technology</a><a class="index-entry--tag" href="_blank">Mechanics</a>
+                </div><div class="index-entry">
+                    <a class="index-entry--title" href="_blank">The recurrences of patterns in multirepo projects</a>
+                    <br>
+                    <span class="index-entry--metadata">20 July 2020</span>
+                    <span class="index-entry--metadata">Tags:</span>
+                    <a class="index-entry--tag" href="_blank">Technology</a><a class="index-entry--tag" href="_blank">Mechanics</a>
+                </div><div class="index-entry">
+                    <a class="index-entry--title" href="_blank">The recurrences of patterns in multirepo projects</a>
+                    <br>
+                    <span class="index-entry--metadata">20 July 2020</span>
+                    <span class="index-entry--metadata">Tags:</span>
+                    <a class="index-entry--tag" href="_blank">Technology</a><a class="index-entry--tag" href="_blank">Mechanics</a>
+                </div>
+
+
+
