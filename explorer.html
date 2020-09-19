@@ -1,0 +1,559 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>Usenir.com</title><meta name=description content=usenir.com><meta name=author content=usenir.com><meta name=viewport content="width=device-width, initial-scale=1"><style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-background: #f7f9fb;
+            /* --color-highlight: #4e42d4; */
+            --color-highlight-strong: #ff3859;
+            --color-highlight: #4e42d4;
+            --color-highlight-weak: #4e42d430;
+            /* Text colors */
+            --color-fg: #4e42d4;
+            --color-fg-secondary: #616161;
+            --color-fg-tertiary: #616161;
+            /* disabled blue: #bccbed*/
+
+            /* div bg colors */
+            --color-bg-light: #fff;
+            --color-bg-dark: #ccc;
+            --color-bg-highlight: #fff;
+
+
+            /* link colors */
+            --color-hyperink: #3f34b8;
+
+            --color-border-invisible: transparent;
+            --color-border-neutral: #ccc;
+            --color-border-highlight: #4e42d4;
+
+            /* tag states: active, inactive, disabled */
+            --color-tag--active-fg: #ffffff;
+            --color-tag--active-bg: #4e42d4;
+
+            --color-tag--neutral-fg: #000000;
+            /* --color-tag--neutral-bg: #eaeffc; */
+            --color-tag--neutral-bg: #4e42d430;
+
+            --color-tag--disabled-fg: #00000090;
+            --color-tag--disabled-bg: #c4c5d250;
+
+            /*entry list colors*/
+            --color-entry-neutral-bg: #f3f2f5;
+            --color-entry-neutral-bg-alt:#ffffff;
+            --color-entry-neutral-fg: #fff;
+
+            --color-entry-active-bg: #fff;
+            --color-entry-active-fg: #fff;
+
+            --color-entry-hover-fg: #ffffff;
+            --color-entry-hover-bg: #4e42d4;
+
+
+            /* content colors */
+            --color-content-bg: #f3f2f5;
+
+            /* box shadow colours */
+            --color-shadow-neutral: #ccc;
+            --color-shadow-highlight: #8a87ac;
+            --box-shadow-spread: 8px;
+            --box-shadow-x: 0px;
+            --box-shadow-y: 2px;
+
+            --animation-speed: 0.4s;
+
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        ::-moz-selection { /* Code for Firefox */
+            color:#fff);
+            background: var(--color-highlight-strong);
+        }
+
+        ::selection {
+            color:#fff;
+            background: var(--color-highlight-strong);
+        }
+
+        body {
+            background-color: var(--color-background);
+            font-family: monospace;
+            font-size: 1.1em;
+
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            color: var(--color-fg);
+
+            scrollbar-color: var(--color-highlight) var(--color-highlight-weak);
+        }
+        ::-webkit-scrollbar {
+            width: 0.75rem;
+        }
+ 
+        ::-webkit-scrollbar-track {
+            background-color: var(--color-highlight-weak);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--color-highlight);
+        }
+
+        .titlebar {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 5px;
+            padding: 5px;
+            display: block;
+        }
+
+        a {
+            color: var(--color-hyperink);
+        }
+
+        a:hover {
+            color: var(--color-highlight-strong);
+        }
+
+        input[type="checkbox"]+label {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+            color: var(--color-tag--neutral-fg);
+            background-color: var(--color-tag--neutral-bg);
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        label {
+            width: 100%;
+            border-radius: 0.25rem;
+        }
+
+        input[type="checkbox"]:checked+label {
+            color: var(--color-tag--active-fg);
+            background-color: var(--color-tag--active-bg);
+        }
+
+        input[type="checkbox"]:disabled+label {
+            color: var(--color-tag--disabled-fg);
+            background-color: var(--color-tag--disabled-bg);
+            cursor: auto;
+        }
+
+        .container--checkbox {
+            display: block;
+            margin: 3px;
+        }
+
+        /* containers */
+        #container-primary {
+            border: 8px solid var(--color-highlight);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+        #container--filters{
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            height: 100%;
+
+            /* max-width: 30%; */
+            overflow: hidden;
+            overflow-y: auto;
+            height: 100%;
+            padding: 5px;
+
+            /* width: 15%; */
+        }
+
+        #container--logo {
+            display: block;
+            font-weight: bold;
+            width:100%;
+            /* border:1px solid var(--color-highlight); */
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        #container--logo>a {
+            font-size: 1.5rem;
+            text-decoration: none;
+            padding: 5px;
+            color: var(--color-highlight);
+            border-bottom:0.25rem solid var(--color-highlight);
+            width:100%;
+            float: left;
+        }
+
+        #container--tags-parent {
+            /* border: 1px solid var(--color-highlight); */
+            padding: 5px;
+            /* flex: 45%; */
+            height: 100%;
+            display: flex;
+            flex-flow: column;
+
+            animation: fadein 0.5s;
+        }
+
+        #container--tags {
+            flex: 1;
+            padding: 5px;
+            /* border: 1px solid var(--color-highlight); */
+            overflow-x: visible;
+            overflow-y: auto;
+        }
+
+        /* #container--tags {
+            
+            overflow-y: auto;
+            display: block;
+        } */
+
+        #container--entries-parent {
+            display: flex;
+            flex-flow: column;
+            max-width: 15rem;
+
+            animation: fadein 1.5s;
+        }
+
+        #container--entries {
+            flex: 1;
+            /* border: 1px solid var(--color-highlight); */
+            overflow-x: visible;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        #container--content-parent {
+            padding: 5px;
+            display: flex;
+            flex: 1;
+            flex-flow: column;
+            
+            animation: fadein 2.5s;
+        }
+
+        #container--content {
+            overflow-y: auto;
+        }
+
+        .container--entry {
+            cursor: pointer;
+            background-color: var(--color-entry-neutral-bg);
+            padding: 0.25rem;
+            margin: 0 5%;
+
+            animation: fadein var(--animation-speed);
+        }
+
+        .container--entry:nth-child(even){
+            background-color: var(--color-entry-neutral-bg-alt);
+        }
+
+        .container--entry:hover {
+            /* color: var(--color-entry-hover-fg); */
+            /* background-color: var(--color-entry-hover-bg); */
+            background-color: var(--color-highlight-weak);
+        }
+
+        .entry-metadata-title{
+            font-size: 1.2em;
+        }
+
+        .metadata--label{
+            color: var(--color-fg-tertiary);
+        }
+        .metadata--tag{
+            color: var(--color-fg-tertiary);
+            border-bottom: 1px dotted var(--color-fg-tertiary);
+            /* background-color: var(--color-highlight-weak); */
+            /* border-radius: 5px; */
+            padding: 0 5px;
+            margin-right: 5px;
+        }
+
+        
+
+        .content {
+            background-color: var(--color-content-bg);
+            margin: 0;
+            padding: 0.5rem;
+            max-height: 100%;
+            overflow-y: auto;
+            animation: fadein 0.5s;
+
+            border: 1px solid var(--color-highlight);
+        }
+
+        .box {
+            -webkit-transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .box:hover {
+            -webkit-transform: scale(105%, 105%);
+            transform: scale(105%, 105%);
+        }
+
+        .box::after {
+            content: "";
+            border-radius: 5px;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: var(--box-shadow-x) var(--box-shadow-y) var(--box-shadow-spread) var(--color-shadow-highlight);
+            opacity: 0;
+            -webkit-transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .box:hover::after {
+            opacity: 1;
+        }
+
+        .hidden {
+            display: hidden;
+        }
+    </style></head><body><div id=container-primary><div id=container--filters><div id=container--tags-parent><div id=container--logo><a href=www.usenir.com>USENIR</a></div><div class=titlebar>Tags:</div><div id=container--tags></div></div><div id=container--entries-parent><div class=titlebar>Entries found:</div><div id=container--entries></div></div></div><div id=container--content-parent><div class=titlebar>Entries opened:</div><div id=container--content></div></div></div><script>
+        const prefixes = { "tag": "tg", "entry": "e" };
+        var data = {"tags": [], "entries": []} ;
+        var filter_tags = [];
+        var entries_buffer = [];
+        const prefix_tag = prefixes.tag;
+        const prefix_entry = prefixes.entry;
+
+        const entry_div_classlist = "container--entry box";
+        const entry_title_classlist = "entry-metadata-title";
+        const entry_metadata_label_classlist = "metadata--label";
+        const entry_metadata_tag_classlist = "metadata--tag";
+        const label_classlist = "label box"
+        const checkbox_container_classlist = "container--checkbox";
+
+        const content_div_classList = "content";
+
+        const titlebar_classList = "titlebar";
+
+        window.onload = initialize;
+
+        function initialize() {
+            render_filters();
+            preprocess_data();
+        }
+        function preprocess_data() {
+            //console.log("processing");
+            // add prefix to tagId in json, to directly use it later on
+            data.tags.forEach(element => {
+                element.id = prefix_tag + element.id;
+            });
+            // add prefix to tagId in json, to directly use it later on
+            // data.entries.forEach(entry => {
+            //     entry.tags.forEach(function (id, index, tagIds) {
+            //         //console.log(tagIds[index]);
+            //         tags[index] = prefix_tag + tags[index];
+            //     });
+            // });
+            data.entries.forEach(entry => {
+                entry.tags.forEach(element => {
+                    element.id = prefix_tag + element.id;
+                });
+            });
+        }
+
+        function modify_filters(event) {
+            var state = this;
+            var reset_buffer = false;
+
+            /*
+            efficient buffer use requires knowing if filtration got stricter or looser
+            stricter:
+                more filters to be applied, so need to purely cut elements from current buffer
+            looser:
+                more entries from the universal set have become eligible to enter into the buffer set,
+                so need to reset buffer by copying the universal set into it
+                ToDo: Instead of resetting buffer, find a way to add entries to it more surgicallly
+                    Why? Because loading up the entire universal set for processing when a filter
+                    that barely has any effect is removed causes a huge computation debt for a tiny
+                    change in the list
+                    What to keep in mind? resetting the buffer is actually fast because it's getting set by reference
+            */
+            tag_id = this.id;
+
+            if (this.checked) {
+                filter_tags.push(tag_id);
+            } else {
+                filter_tags.splice(filter_tags.indexOf(tag_id), 1);
+                reset_buffer = true;
+            }
+
+            if (reset_buffer === true) {
+                reset_entries_buffer();
+            }
+            //console.clear();
+            get_entries();
+            render_entries();
+        }
+        function reset_entries_buffer() {
+            entries_buffer = data.entries;
+        }
+
+        function get_entries() {
+            //reset entries_buffer with universal set if the filter tag isn't empty
+            if (filter_tags.length != 0 && entries_buffer.length == 0) {
+                entries_buffer = data.entries;
+            }
+            let processing_buffer = [];
+
+            //sort tags in ascending order to improve filtration speed
+            filter_tags.sort();
+
+            //console.log(filter_tags);
+            // the concept is: filter entries_buffer and put whatever is relevant into processing_buffer
+            for (var iter_filter = 0, len = filter_tags.length; iter_filter < len; iter_filter++) {
+                let tag_id = filter_tags[iter_filter];
+                console.log("entries buffer:", entries_buffer);
+                processing_buffer = entries_buffer.filter(function (e) {
+                    //return e.tags.includes(tag_id);
+                    //console.log(does_entry_have_tag(e, tag_id));
+                    return does_entry_have_tag(e, tag_id);
+                });
+                console.log(processing_buffer);
+                //update entries_buffer with freshly processed trimmed down data for next iteration
+                entries_buffer = processing_buffer;
+                //console.log(entries_buffer);
+            }
+            //finally dump processing_buffer into entries_buffer no matter what
+            entries_buffer = processing_buffer;
+        }
+
+        function does_entry_have_tag(entry, tag_id) {
+            for (i = 0, len = entry.tags.length; i < len; i++) {
+                if (entry.tags[i].id == tag_id) {
+                    console.log(entry.tags.id + "vs" + tag_id)
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function render_filters() {
+            var checkboxes = document.createDocumentFragment();
+
+            // let disabled_counter = 0;
+
+            for (var i = 0, len = data.tags.length; i < len; i++) {
+                var checkbox_container = document.createElement("div");
+                checkbox_container.classList = checkbox_container_classlist;
+                var checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.id = prefix_tag + data.tags[i].id;
+
+                // checkbox.name = data.tags[i].name;
+                checkbox.onclick = modify_filters;
+
+                var label = document.createElement('label');
+                label.htmlFor = prefix_tag + data.tags[i].id;
+                label.classList = label_classlist;
+                label.append(document.createTextNode(data.tags[i].name));
+
+                // if (disabled_counter % 2 == 1) {
+                //     checkbox.disabled = true;
+                //     label.classList.remove("box");
+                // }
+                // disabled_counter += 1;
+
+                checkbox_container.appendChild(checkbox);
+                checkbox_container.appendChild(label);
+                checkboxes.appendChild(checkbox_container);
+            }
+
+            // Clear parent div
+            var parent = document.getElementById("container--tags");
+            parent.innerHTML = "";
+            parent.appendChild(checkboxes);
+        }
+
+        function render_entries() {
+            var entries = document.createDocumentFragment();
+            for (var i = 0, len = entries_buffer.length; i < len; i++) {
+                var entry_div = document.createElement("div");
+                entry_div.classList = entry_div_classlist;
+                entry_div.id = prefix_entry + entries_buffer[i].id;
+                entry_div.onclick = load_entry;
+                entry_div.path = entries_buffer[i].path;
+                //console.log(entries_buffer[i].path);
+
+                let entry_title = document.createElement("span");
+                entry_title.append(document.createTextNode(entries_buffer[i].title))
+                entry_title.classList = entry_title_classlist;
+                entry_div.appendChild(entry_title);
+
+                let br = document.createElement("br");
+                entry_div.appendChild(br);
+                
+                let entry_metadata_label = document.createElement("span");
+                entry_metadata_label.append(document.createTextNode("tags:"));
+                entry_metadata_label.classList = entry_metadata_label_classlist;
+                entry_div.appendChild(entry_metadata_label);
+                
+                entries_buffer[i].tags.forEach(tag => {
+                    let entry_metadata_tag = document.createElement("span");
+                    entry_metadata_tag.append(document.createTextNode(tag.name));
+                    entry_metadata_tag.classList = entry_metadata_tag_classlist;
+                    entry_div.appendChild(entry_metadata_tag);
+                });
+
+
+                // add tags
+
+                entries.append(entry_div);
+            }
+
+            div_parent = document.getElementById("container--entries");
+            div_parent.innerHTML = "";
+            div_parent.appendChild(entries);
+        }
+
+        function load_entry(event) {
+            let state = this;
+            console.log(state.path)
+            fetch(state.path).then(function (response) {
+                return response.text();
+            }).then(function (html) {
+                // This is the HTML from our response as a text string
+                let parent = document.getElementById("container--content");
+                parent.innerHTML = "";
+
+                var content_div = document.createElement("div");
+                content_div.classList = content_div_classList;
+                content_div.innerHTML = html;
+                parent.appendChild(content_div);
+            });
+        }
+    </script></body></html>

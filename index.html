@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en">
 
 <head>
@@ -8,100 +7,129 @@
     <meta name="description" content="usenir.com">
     <meta name="author" content="usenir.com">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<script>
-    var all_entries = [
-        {
-            "title": "Entry 1 title",
-            "tags": ["tag1", "tag2", "tag3"],
-            "filename": "startpage.html",
-            "date": "2020-08-03"
-        },
-        {
-            "title": "Entry 2 title",
-            "tags": ["tag3", "tag4", "tag5"],
-            "filename": "wolo.html",
-            "date": "2020-08-03"
+    <style>
+        * {
+            box-sizing: border-box;
         }
-    ];
 
-    for (let i = 0; i < all_entries.length; i++) {
-        generate_entry_in_dom(all_entries[i])
-    }
+        :root {
+            --color-background: #f7f9fb;
+            /* --color-highlight: #4e42d4; */
+            --color-highlight-strong: #ff3859;
+            --color-highlight: #4e42d4;
+            --color-highlight-weak: #4e42d430;
+            /* Text colors */
+            --color-fg: #4e42d4;
+            --color-fg-secondary: #616161;
+            --color-fg-tertiary: #616161;
 
-    function generate_entry_in_dom(entry_json) {
-        console.log(entry_json);
-    }
-/*
-    
-    functions
-        1   Split master json into entries
-        2   Generate entry from json and render it by appending it to dom
-        3   Access tags from entry's json
-        4   Check if tag exists in entry's json
-        5   Maintain dictionary of tags (tag: id-in-dom)
-        6   Generate tag filter checkboxes in dom
-        7   Handle checkbox events
-        8   Search box: search in titles
-    
-    Data structuring:
-        Master json variable: inserted via generator
-        Current display variable: List of stuff that's being displayed (after filtering)
-    
-    */
-</script>
+            /* link colors */
+            --color-hyperink: #3f34b8;
+            --color-hyperink-hover: #ff3859;
+
+            /* box shadow colours */
+            --color-shadow-neutral: #555;
+            --box-shadow-spread: 1rem;
+            --box-shadow-x: 0px;
+            --box-shadow-y: 2px;
+
+            --animation-speed: 0.4s;
+
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        body {
+            background-color: var(--color-background);
+            font-family: monospace;
+            font-size: 1.1em;
+
+            margin: 0;
+            padding: 0;
+            color: var(--color-fg);
+
+            /* firefox */
+            scrollbar-color: var(--color-highlight) var(--color-highlight-weak);
+            /* chrome and safari */
+        }
+
+        ::-webkit-scrollbar {
+            width: 0.75rem;
+        }
+
+        ::-webkit-scrollbar-track {
+            /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
+            background-color: var(--color-highlight-weak);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--color-highlight);
+        }
+
+        a {
+            color: var(--color-hyperink);
+        }
+
+        a:hover {
+            color: var(--color-hyperink-hover);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 768px;
+            margin: auto;
+            text-align: center;
+        }
+
+        #container--logo {
+            margin: auto;
+            width: 100%;
+            text-align: center;
+        }
+
+        #container--logo>a {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 2rem;
+            text-decoration: none;
+            padding: 5px;
+        }
+
+        #button--explore {
+            background-color: var(--color-highlight);
+            color: #fff;
+            font-size: 2rem;
+            padding: 1rem 3rem;
+            border-radius: 1rem;
+            display: inline-block;
+            margin: 5rem auto;
+            text-decoration: none;
+
+            box-shadow: var(--box-shadow-x) var(--box-shadow-y) var(--box-shadow-spread) var(--color-shadow-neutral);
+        }
+        #button--explore:hover{
+            background-color: var(--color-highlight-strong);
+            -webkit-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+
+            -webkit-transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+    </style>
+</head>
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="column" id="headerbox">
-                <div id="logo">
-                    <a href="www.usenir.com">usenir.com</a>
-                </div>
-            </div>
-            <!-- <a href="www.usenir.com">home</a>
-            <a href="www.usenir.com/index">index</a> -->
-        </div>
-
-        <div class="row">
-            <div class="column" id="filterbox">
-                <label>
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                    Technology
-                </label>
-                <br>
-                <button type="button" id="button--filter">Filter</button>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="column" id="entrybox">
-                <div class="index-entry">
-                    <a class="index-entry--title" href="_blank">The recurrences of patterns in multirepo projects</a>
-                    <br>
-                    <span class="index-entry--date">20 July 2020</span>
-                    <span class="index-entry--metadata">Tags:</span>
-                    <a class="index-entry--tag" href="_blank">Technology</a><a class="index-entry--tag" href="_blank">Mechanics</a>
-                </div>
-            </div>
-            
-        </div>
-        <div class="row">
-            <div class="column" id="contentbox">
-                <h1>WoloSoloProlo</h1>
-                <p>
-                    <a href="google.com">Google</a>
-                    What is Lorem Ipsum?
-                    
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    Why do we use it?
-                    
-                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                </p>
-            </div>
-        </div>
+        <div id="container--logo"><a href="www.usenir.com">USENIR</a></div>
+        <a id="button--explore" href="./explorer.html">Explore</a>
     </div>
 </body>
 
