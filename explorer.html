@@ -1,4 +1,9 @@
 <!doctype html><html lang=en><head><meta charset=utf-8><title>Usenir.com</title><meta name=description content=usenir.com><meta name=author content=usenir.com><meta name=viewport content="width=device-width, initial-scale=1"><style>
+        /*  peaceful green #5f9b65 
+            noob blue: #0056b3
+            blue: #0056b3
+            red: #ff3859
+        */
         * {
             box-sizing: border-box;
         }
@@ -6,13 +11,11 @@
         :root {
             --color-background: #f7f9fb;
             /* --color-highlight: #4e42d4; */
-            --color-highlight-strong: #ff3859;
-            --color-highlight: #4e42d4;
-            --color-highlight-weak: #4e42d430;
+            --color-highlight: #5f9b65;
+            --color-highlight-strong:#eee;
             /* Text colors */
-            --color-fg: #4e42d4;
-            --color-fg-secondary: #616161;
-            --color-fg-tertiary: #616161;
+            --color-fg: #444;
+            --color-fg-alt: #666;
             /* disabled blue: #bccbed*/
 
             /* div bg colors */
@@ -22,25 +25,28 @@
 
 
             /* link colors */
-            --color-hyperink: #3f34b8;
+            --color-hyperink: #5f9b65;
+            --color-hyperink-hover-bg: #00000030;
+            --color-hyperink-hover-fg: #000; 
 
             --color-border-invisible: transparent;
             --color-border-neutral: #ccc;
-            --color-border-highlight: #4e42d4;
+            --color-border-highlight: #5f9b65;
 
             /* tag states: active, inactive, disabled */
             --color-tag--active-fg: #ffffff;
-            --color-tag--active-bg: #4e42d4;
+            /* --color-tag--active-bg: #4e42d4; */
+            --color-tag--active-bg: #444;
 
             --color-tag--neutral-fg: #000000;
-            /* --color-tag--neutral-bg: #eaeffc; */
             --color-tag--neutral-bg: #4e42d430;
+            --color-tag--neutral-bg: #eee;
 
             --color-tag--disabled-fg: #00000090;
-            --color-tag--disabled-bg: #c4c5d250;
+            --color-tag--disabled-bg: #fff;
 
             /*entry list colors*/
-            --color-entry-neutral-bg: #f3f2f5;
+            --color-entry-neutral-bg: #eee;
             --color-entry-neutral-bg-alt:#ffffff;
             --color-entry-neutral-fg: #fff;
 
@@ -48,7 +54,7 @@
             --color-entry-active-fg: #fff;
 
             --color-entry-hover-fg: #ffffff;
-            --color-entry-hover-bg: #4e42d4;
+            --color-entry-hover-bg: #444;
 
 
             /* content colors */
@@ -56,13 +62,24 @@
 
             /* box shadow colours */
             --color-shadow-neutral: #ccc;
-            --color-shadow-highlight: #8a87ac;
+            --color-shadow-highlight: #aaa;
             --box-shadow-spread: 8px;
             --box-shadow-x: 0px;
             --box-shadow-y: 2px;
 
-            --animation-speed: 0.4s;
+            --animation-speed: 0.2s;
 
+            /* scrollbar colors */
+            --color-scroll-thumb: #444;
+            --color-scroll-track: #ccc;
+
+            /* text selection colors */
+            --color-selection-fg: #fff;
+            --color-selection-bg: #333;
+
+            /* border colors */
+            --color-border-weak: #aaa;
+            --color-border-strong: #444;
         }
 
         @keyframes fadein {
@@ -76,13 +93,13 @@
         }
 
         ::-moz-selection { /* Code for Firefox */
-            color:#fff);
-            background: var(--color-highlight-strong);
+            color:var(--color-selection-fg);
+            background: var(--color-selection-bg);
         }
 
         ::selection {
-            color:#fff;
-            background: var(--color-highlight-strong);
+            color:var(--color-selection-fg);
+            background: var(--color-selection-bg);
         }
 
         body {
@@ -95,18 +112,18 @@
             height: 100vh;
             color: var(--color-fg);
 
-            scrollbar-color: var(--color-highlight) var(--color-highlight-weak);
+            scrollbar-color: var(--color-scroll-thumb) var(--color-scroll-track);
         }
         ::-webkit-scrollbar {
             width: 0.75rem;
         }
  
         ::-webkit-scrollbar-track {
-            background-color: var(--color-highlight-weak);
+            background-color: var(--color-scroll-track);
         }
         
         ::-webkit-scrollbar-thumb {
-            background-color: var(--color-highlight);
+            background-color: var(--color-scroll-thumb);
         }
 
         .titlebar {
@@ -122,7 +139,8 @@
         }
 
         a:hover {
-            color: var(--color-highlight-strong);
+            color: var(--color-hyperink-hover-fg);
+            background-color: var(--color-hyperink-hover-bg);
         }
 
         input[type="checkbox"]+label {
@@ -159,8 +177,7 @@
         }
 
         /* containers */
-        #container-primary {
-            border: 8px solid var(--color-highlight);
+        #container--primary {
             margin: 0;
             padding: 0;
             display: flex;
@@ -191,7 +208,6 @@
             display: block;
             font-weight: bold;
             width:100%;
-            /* border:1px solid var(--color-highlight); */
             display: inline-block;
             width: 100%;
             text-align: center;
@@ -202,13 +218,12 @@
             text-decoration: none;
             padding: 5px;
             color: var(--color-highlight);
-            border-bottom:0.25rem solid var(--color-highlight);
+            /* border-bottom:0.25rem solid var(--color-highlight); */
             width:100%;
             float: left;
         }
 
         #container--tags-parent {
-            /* border: 1px solid var(--color-highlight); */
             padding: 5px;
             /* flex: 45%; */
             height: 100%;
@@ -221,7 +236,6 @@
         #container--tags {
             flex: 1;
             padding: 5px;
-            /* border: 1px solid var(--color-highlight); */
             overflow-x: visible;
             overflow-y: auto;
         }
@@ -237,12 +251,11 @@
             flex-flow: column;
             max-width: 15rem;
 
-            animation: fadein 1.5s;
+            animation: fadein 1s;
         }
 
         #container--entries {
             flex: 1;
-            /* border: 1px solid var(--color-highlight); */
             overflow-x: visible;
             overflow-y: auto;
             height: 100%;
@@ -254,49 +267,12 @@
             flex: 1;
             flex-flow: column;
             
-            animation: fadein 2.5s;
+            animation: fadein 1.5s;
         }
 
         #container--content {
             overflow-y: auto;
         }
-
-        .container--entry {
-            cursor: pointer;
-            background-color: var(--color-entry-neutral-bg);
-            padding: 0.25rem;
-            margin: 0 5%;
-
-            animation: fadein var(--animation-speed);
-        }
-
-        .container--entry:nth-child(even){
-            background-color: var(--color-entry-neutral-bg-alt);
-        }
-
-        .container--entry:hover {
-            /* color: var(--color-entry-hover-fg); */
-            /* background-color: var(--color-entry-hover-bg); */
-            background-color: var(--color-highlight-weak);
-        }
-
-        .entry-metadata-title{
-            font-size: 1.2em;
-        }
-
-        .metadata--label{
-            color: var(--color-fg-tertiary);
-        }
-        .metadata--tag{
-            color: var(--color-fg-tertiary);
-            border-bottom: 1px dotted var(--color-fg-tertiary);
-            /* background-color: var(--color-highlight-weak); */
-            /* border-radius: 5px; */
-            padding: 0 5px;
-            margin-right: 5px;
-        }
-
-        
 
         .content {
             background-color: var(--color-content-bg);
@@ -306,7 +282,47 @@
             overflow-y: auto;
             animation: fadein 0.5s;
 
-            border: 1px solid var(--color-highlight);
+            border: 1px solid var(--color-border-weak);
+        }
+
+        .entry {
+            cursor: pointer;
+            background-color: var(--color-entry-neutral-bg);
+            padding: 0.25rem;
+            margin: 5px 5%;
+            /* border: 1px solid red; */
+
+            animation: fadein var(--animation-speed);
+        }
+
+        .entry:nth-child(even){
+            background-color: var(--color-entry-neutral-bg-alt);
+        }
+
+        .entry:hover {
+            color: #fff;
+            background-color: var(--color-entry-hover-bg);
+        }
+
+        .entry:hover .metadata--label{
+            color: #aaa;
+        }
+        .entry:hover .metadata--tag{
+            color: #aaa;
+        }
+
+        .entry-metadata--title{
+            font-size: 1.2em;
+        }
+
+        .metadata--label{
+            color: var(--color-fg-alt);
+        }
+        .metadata--tag{
+            color: var(--color-fg-alt);
+            border-bottom: 1px dotted var(--color-fg-alt);
+            padding: 0 5px;
+            margin-right: 5px;
         }
 
         .box {
@@ -341,16 +357,16 @@
         .hidden {
             display: hidden;
         }
-    </style></head><body><div id=container-primary><div id=container--filters><div id=container--tags-parent><div id=container--logo><a href=http://www.usenir.com>USENIR</a></div><div class=titlebar>Tags:</div><div id=container--tags></div></div><div id=container--entries-parent><div class=titlebar>Entries found:</div><div id=container--entries></div></div></div><div id=container--content-parent><div class=titlebar>Entries opened:</div><div id=container--content></div></div></div><script>
+    </style></head><body><div id=container--primary><div id=container--filters><div id=container--tags-parent><div id=container--logo><a href=./index.html>USENIR</a></div><div class=titlebar>Tags:</div><div id=container--tags></div></div><div id=container--entries-parent><div class=titlebar>Entries found:</div><div id=container--entries></div></div></div><div id=container--content-parent><div class=titlebar>Entries opened:</div><div id=container--content></div></div></div><script>
         const prefixes = { "tag": "tg", "entry": "e" };
-        var data = {"tags": [], "entries": []} ;
+        var data = {"tags": [{"name": "technology", "occurrences": 1, "tag_id": 0}, {"name": "startup", "occurrences": 1, "tag_id": 1}], "entries": [{"title": " Small tech", "tags": [{"name": "technology", "entry_tag_id": 0}, {"name": "startup", "entry_tag_id": 1}], "entry_id": 0, "path": "entries/links.html", "modified": "1600834685.29649"}]} ;
         var filter_tags = [];
         var entries_buffer = [];
         const prefix_tag = prefixes.tag;
         const prefix_entry = prefixes.entry;
 
-        const entry_div_classlist = "container--entry box";
-        const entry_title_classlist = "entry-metadata-title";
+        const entry_div_classlist = "entry box";
+        const entry_title_classlist = "entry-metadata--title";
         const entry_metadata_label_classlist = "metadata--label";
         const entry_metadata_tag_classlist = "metadata--tag";
         const label_classlist = "label box"
@@ -370,7 +386,7 @@
             //console.log("processing");
             // add prefix to tagId in json, to directly use it later on
             data.tags.forEach(element => {
-                element.id = prefix_tag + element.id;
+                element.tag_id = prefix_tag + element.tag_id;
             });
             // add prefix to tagId in json, to directly use it later on
             // data.entries.forEach(entry => {
@@ -381,7 +397,7 @@
             // });
             data.entries.forEach(entry => {
                 entry.tags.forEach(element => {
-                    element.id = prefix_tag + element.id;
+                    element.entry_tag_id = prefix_tag + element.entry_tag_id;
                 });
             });
         }
@@ -454,8 +470,8 @@
 
         function does_entry_have_tag(entry, tag_id) {
             for (i = 0, len = entry.tags.length; i < len; i++) {
-                if (entry.tags[i].id == tag_id) {
-                    console.log(entry.tags.id + "vs" + tag_id)
+                console.log( entry.tags[i].entry_tag_id+ " vs "+tag_id)
+                if (entry.tags[i].entry_tag_id == tag_id) {
                     return true;
                 }
             }
@@ -472,13 +488,13 @@
                 checkbox_container.classList = checkbox_container_classlist;
                 var checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
-                checkbox.id = prefix_tag + data.tags[i].id;
+                checkbox.id = prefix_tag + data.tags[i].tag_id;
 
                 // checkbox.name = data.tags[i].name;
                 checkbox.onclick = modify_filters;
 
                 var label = document.createElement('label');
-                label.htmlFor = prefix_tag + data.tags[i].id;
+                label.htmlFor = prefix_tag + data.tags[i].tag_id;
                 label.classList = label_classlist;
                 label.append(document.createTextNode(data.tags[i].name));
 
@@ -504,7 +520,7 @@
             for (var i = 0, len = entries_buffer.length; i < len; i++) {
                 var entry_div = document.createElement("div");
                 entry_div.classList = entry_div_classlist;
-                entry_div.id = prefix_entry + entries_buffer[i].id;
+                entry_div.entry_id = prefix_entry + entries_buffer[i].entry_id;
                 entry_div.onclick = load_entry;
                 entry_div.path = entries_buffer[i].path;
                 //console.log(entries_buffer[i].path);
@@ -524,7 +540,7 @@
                 
                 entries_buffer[i].tags.forEach(tag => {
                     let entry_metadata_tag = document.createElement("span");
-                    entry_metadata_tag.append(document.createTextNode(tag.name));
+                    entry_metadata_tag.append(document.createTextNode("#"+tag.name));
                     entry_metadata_tag.classList = entry_metadata_tag_classlist;
                     entry_div.appendChild(entry_metadata_tag);
                 });

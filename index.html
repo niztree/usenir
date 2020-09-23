@@ -15,25 +15,75 @@
         :root {
             --color-background: #f7f9fb;
             /* --color-highlight: #4e42d4; */
-            --color-highlight-strong: #ff3859;
-            --color-highlight: #4e42d4;
-            --color-highlight-weak: #4e42d430;
+            --color-highlight: #5f9b65;
+            --color-highlight-strong:#eee;
             /* Text colors */
-            --color-fg: #4e42d4;
-            --color-fg-secondary: #616161;
-            --color-fg-tertiary: #616161;
+            --color-fg: #444;
+            --color-fg-alt: #666;
+            /* disabled blue: #bccbed*/
+
+            /* div bg colors */
+            --color-bg-light: #fff;
+            --color-bg-dark: #eee;
+            --color-bg-highlight: #fff;
+
 
             /* link colors */
-            --color-hyperink: #3f34b8;
-            --color-hyperink-hover: #ff3859;
+            --color-hyperink: #5f9b65;
+            --color-hyperink-hover-bg: #00000030;
+            --color-hyperink-hover-fg: #000; 
+
+            --color-border-invisible: transparent;
+            --color-border-neutral: #ccc;
+            --color-border-highlight: #5f9b65;
+
+            /* tag states: active, inactive, disabled */
+            --color-tag--active-fg: #ffffff;
+            /* --color-tag--active-bg: #4e42d4; */
+            --color-tag--active-bg: #444;
+
+            --color-tag--neutral-fg: #000000;
+            --color-tag--neutral-bg: #4e42d430;
+            --color-tag--neutral-bg: #eee;
+
+            --color-tag--disabled-fg: #00000090;
+            --color-tag--disabled-bg: #fff;
+
+            /*entry list colors*/
+            --color-entry-neutral-bg: #eee;
+            --color-entry-neutral-bg-alt:#ffffff;
+            --color-entry-neutral-fg: #fff;
+
+            --color-entry-active-bg: #fff;
+            --color-entry-active-fg: #fff;
+
+            --color-entry-hover-fg: #ffffff;
+            --color-entry-hover-bg: #444;
+
+
+            /* content colors */
+            --color-content-bg: #f3f2f5;
 
             /* box shadow colours */
-            --color-shadow-neutral: #555;
-            --box-shadow-spread: 1rem;
+            --color-shadow-neutral: #ccc;
+            --color-shadow-highlight: #aaa;
+            --box-shadow-spread: 8px;
             --box-shadow-x: 0px;
             --box-shadow-y: 2px;
 
-            --animation-speed: 0.4s;
+            --animation-speed: 0.2s;
+
+            /* scrollbar colors */
+            --color-scroll-thumb: #444;
+            --color-scroll-track: #ccc;
+
+            /* text selection colors */
+            --color-selection-fg: #fff;
+            --color-selection-bg: #333;
+
+            /* border colors */
+            --color-border-weak: #aaa;
+            --color-border-strong: #444;
 
         }
 
@@ -45,6 +95,9 @@
             to {
                 opacity: 1;
             }
+        }
+        .text--info{
+            background-color: var(--color-bg-dark);
         }
 
         body {
@@ -79,6 +132,11 @@
         }
 
         a:hover {
+            color: var(--color-hyperink-hover-fg);
+            background-color: var(--color-hyperink-hover-bg);
+        }
+
+        a:hover {
             color: var(--color-hyperink-hover);
         }
 
@@ -86,13 +144,12 @@
             width: 100%;
             max-width: 768px;
             margin: auto;
-            text-align: center;
+            padding: 5px;
         }
 
         #container--logo {
             margin: auto;
             width: 100%;
-            text-align: center;
         }
 
         #container--logo>a {
@@ -104,24 +161,17 @@
         }
 
         #button--explore {
-            background-color: var(--color-highlight);
-            color: #fff;
-            font-size: 2rem;
-            padding: 1rem 3rem;
-            border-radius: 1rem;
+            background-color: #ddd;
+            border: 1px solid #444;
+            color: #000;
+            font-size: 1.5rem;
+            padding: 0.5rem 1rem;
             display: inline-block;
-            margin: 5rem auto;
+            margin-top: 0.25rem;
             text-decoration: none;
-
-            box-shadow: var(--box-shadow-x) var(--box-shadow-y) var(--box-shadow-spread) var(--color-shadow-neutral);
         }
         #button--explore:hover{
-            background-color: var(--color-highlight-strong);
-            -webkit-transform: scale(1.2, 1.2);
-            transform: scale(1.2, 1.2);
-
-            -webkit-transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
-            transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+            background-color: #ccc;
         }
     </style>
 </head>
@@ -129,7 +179,19 @@
 <body>
     <div class="container">
         <div id="container--logo"><a href="http://www.usenir.com">USENIR</a></div>
-        <a id="button--explore" href="./explorer.html">Explore</a>
+            <p>This is the personal website of <a href="http://www.usenir.com">Niraj Zade.</a></p>
+            <p>Here I plan to host my tools and my notes here</p>
+            <p>This website has been generated by a custom script. My aims are:
+                <ul>
+                    <li>Have a way to access my notes remotely even over extremely throttled and/or unstable networks</li>
+                    <li>Be able to fetch my knowledge base via any terminal emulator comfortably</li>
+                    <li>Build up a way to explore my notes quickly and intuitively</li>
+                </ul>
+            </p>
+        
+        <span>I recommend trying the exploration mode by clicking the button below. This mode is the a big reason why I made this website out of a custom script.(this mode requires javascript to function):</span>
+        <br>
+        <a id="button--explore" href="explorer.html">Explore &#8594</a>
     </div>
 </body>
 
