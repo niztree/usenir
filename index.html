@@ -1,198 +1,506 @@
-<!doctype html>
-<html lang="en">
+<!doctype html><html lang=en><head><meta charset=utf-8><title>Usenir.com</title><meta name=description content=usenir.com><meta name=author content=usenir.com><meta name=viewport content="width=device-width, initial-scale=1"><style>* {
+    box-sizing: border-box;
+}
 
-<head>
-    <meta charset="utf-8">
-    <title>Usenir.com</title>
-    <meta name="description" content="usenir.com">
-    <meta name="author" content="usenir.com">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+:root {
+    /*
+    orange: 32,100
+    blue: 201,80,57
+    */
+    --hue-highlight:32;
+    --saturation-highlight:100%;
+    /* --hue-highlight:120;
+    --saturation-highlight:60%; */
+    --c-highlight-1: hsl(var(--hue-highlight), var(--saturation-highlight), 95%);
+    --c-highlight-2: hsl(var(--hue-highlight), var(--saturation-highlight), 85%);
+    --c-highlight-3: hsl(var(--hue-highlight), var(--saturation-highlight), 50%);
+    --c-grey-0: hsl(240, 20%, 98%);
+    --c-grey-1: hsl(220, 11%, 95%);;
+    --c-grey-2: hsl(240, 2%, 85%);
+    --c-grey-3: hsl(0, 0%, 74%);
 
-        :root {
-            --color-background: #f7f9fb;
-            /* --color-highlight: #4e42d4; */
-            --color-highlight: #5f9b65;
-            --color-highlight-strong:#eee;
-            /* Text colors */
-            --color-fg: #444;
-            --color-fg-alt: #666;
-            /* disabled blue: #bccbed*/
+    --c-fg-0: hsl(0, 0%, 100%);
+    --c-fg-1: hsl(0, 0%, 60%);
+    --c-fg-2: hsl(0, 0%, 42%);
+    --c-fg-3: hsl(0, 0%, 13%);
 
-            /* div bg colors */
-            --color-bg-light: #fff;
-            --color-bg-dark: #eee;
-            --color-bg-highlight: #fff;
+    --c-border-1:hsl(0, 0%, 67%);
+    --c-border-2:hsl(0, 0%, 53%);
+    --c-border-3:hsl(0, 0%, 27%);
+
+    /* box shadow colours */
+    --c-shadow-1:hsl(0, 0%, 60%);
+    --c-shadow-2:hsl(0, 0%, 42%);
+    --c-shadow-3:hsl(0, 0%, 27%);
+    --box-shadow-spread: 3px;
+    --box-shadow-x: 0px;
+    --box-shadow-y: 2px;
+
+    --animation-speed: 1ms;
+
+    /* scrollbar colors */
+    --c-scroll-thumb: hsl(var(--hue-highlight), var(--saturation-highlight), 50%);
+    --c-scroll-track: hsl(var(--hue-highlight), var(--saturation-highlight), 85%);
+
+    --border-radius-1: 3px;
+    --border-radius-2: 5px;
+
+    --transition-duration: 125ms;
+    --transition-duration-slow: 250ms;
+
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+::-moz-selection { /* Code for Firefox */
+    color:var(--c-highlight-1);
+    background: var(--c-highlight-3);
+}
+
+::selection {
+    color:var(--c-highlight-1);
+    background: var(--c-highlight-3);
+}
+
+body {
+    background: var(--c-grey-0);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    color: var(--c-fg-3);
+    scrollbar-color: var(--c-scroll-thumb) var(--c-scroll-track);
+}
+::-webkit-scrollbar {
+    width: 0.75rem;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--c-scroll-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--c-scroll-thumb);
+}
+
+.titlebar {
+    font-size: 0.9rem;
+    margin: 5px;
+    padding: 5px;
+    display: block;
+    color: var(--c-fg-1);
+    font-family: monospace;
+}
+
+a {
+    text-decoration: none;
+    color: var(--c-fg-3);
+    border-bottom: 1px solid var(--c-fg-3);
+    /* background: var(--c-highlight-1); */
+}
+
+a:hover {
+    /* color: var(--c-highlight-3); */
+    background: var(--c-highlight-1);
+    border-bottom: 1px solid var(--c-highlight-3);
+}
+
+h1{
+    /* color: var(--c-highlight-3); */
+    /* border-bottom: 2px solid var(--c-highlight-3); */
+    font-family: serif;
+    /* font-weight: normal; */
+    color: var(--c-highlight-3);
+    background: linear-gradient(90deg, var(--c-highlight-1) 60%, var(--c-grey-0) 100%);
+    /* border-left: 5px solid var(--c-highlight-3); */
+    padding-left: 0.5rem;
+}
+h2{
+    /* border-bottom: 2px dotted var(--c-highlight-3); */
+    font-family: serif;
+    /* font-weight: normal; */
+    background: linear-gradient(90deg, var(--c-highlight-1) 0%, var(--c-grey-0) 60%);
+    /* border-left: 2px solid var(--c-highlight-3); */
+    padding-left: 0.5rem;
+}
+h3,h4,h5,h6{
+    /* border-bottom: 1px dotted var(--c-highlight-3); */
+    font-family: serif;
+    /* font-weight: normal; */
+    background: linear-gradient(90deg, var(--c-highlight-1) 0%, var(--c-grey-0) 40%);
+    /* border-left: 2px dotted var(--c-highlight-3); */
+    padding-left: 0.5rem;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+label {
+    /* display: inline-block; */
+    width: 100%;
+    border-radius: var(--border-radius-2);
+    border:2px solid var(--c-highlight-3);
+    color: var(--c-highlight-3);
+    background: var(--c-highlight-1);
+}
+label:hover{
+    background: var(--c-highlight-2);
+    transition-duration: var(--transition-duration);
+}
+
+input[type="checkbox"]+label {
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+}
+
+input[type="checkbox"] + label:before {
+    border: 1px solid var(--c-highlight-3);
+    background: var(--c-grey-0);
+    content: "\00a0";
+    display: inline-block;
+    height: 1rem;
+    margin: 0 .25em 0 0;
+    padding: 0;
+    vertical-align: top;
+    width: 1rem;
+}
+
+input[type="checkbox"]:checked+label {
+    color: var(--c-highlight-1);
+    background: var(--c-highlight-3);
+}
+
+input[type="checkbox"]:checked + label:before {
+    background: var(--c-grey-0);
+    color: var(--c-highlight-3);
+    content: "\2713";
+    text-align: center;
+  }
+
+input[type="checkbox"]:disabled+label {
+    cursor: not-allowed;
+    background: var(--c-grey-0);
+    border:1px solid var(--c-highlight-3);
+    opacity: 0.5;
+    transition-duration: var(--transition-duration);
+}
+
+input[type="checkbox"]:active+label {
+    color: var(--c-highlight-1);
+    background: var(--c-highlight-3);
+    /* background: linear-gradient(90deg, var(--c-highlight-3) 50%, var(--c-highlight-2) 100%); */
+    transition-duration: var(--transition-duration);
+}
+
+.container--checkbox {
+    display: flex;
+    margin: 3px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+#container--logo {
+    height: 100%;
+    margin-right: 1rem;
+    padding: 0;
+}
+
+#container--logo>a {
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    color: var(--c-highlight-3);
+    /* background: linear-gradient(90deg, var(--c-highlight-2) 0%, var(--c-grey-0) 75%); */
+    /* border: 1px solid var(--c-highlight-3); */
+    /* background: var(--c-highlight-3); */
+    border: none;
+    height: 100%;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#container--logo>a:hover{
+    color: var(--c-fg-3);
+    /* transition-duration: var(--transition-duration); */
+    transition-duration: var(--transition-duration-slow);
+}
+
+#container--tags-parent {
+    padding: 5px;
+    /* flex: 45%; */
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    animation: fadein 0.5s;
+}
+
+#container--tags {
+    flex: 1;
+    padding: 5px;
+    overflow-x: visible;
+    overflow-y: auto;
+}
+
+#container--entries-parent {
+    display: flex;
+    flex-flow: column;
+    max-width: 15rem;
+
+    animation: fadein 1s;
+}
+
+#container--entries {
+    flex: 1;
+    overflow-x: visible;
+    overflow-y: auto;
+    height: 100%;
+}
+
+#container--content {
+    overflow-y: auto;
+}
+
+.content {
+    margin: 0;
+    padding: 0.5rem;
+    max-height: 100%;
+    overflow-y: auto;
+    animation: fadein 0.5s;
+    border: 2px solid var(--c-grey-2);
+
+    background: var(--c-grey-0);
+    max-width: 650px;
+}
+.content:hover{
+    border: 2px solid var(--c-grey-3);
+}
+
+.entry {
+    cursor: pointer;
+    background: var(--c-grey-0);
+    /* background: linear-gradient(90deg, var(--c-highlight-1) 0%, var(--c-grey-0) 30%); */
+    padding: 0.25rem;
+    margin: 5px 5%;
+    border-radius: var(--border-radius-1);
+    animation: fadein var(--animation-speed);
+    border: 1px solid var(--c-highlight-2);
+}
+
+/* .entry:nth-child(even){
+    background: linear-gradient(90deg, var(--c-grey-0) 70%, var(--c-highlight-1) 100%);
+} */
+
+.entry:hover {
+    background: var(--c-highlight-1);
+    border: 1px solid var(--c-highlight-3);
+    background: linear-gradient(90deg, var(--c-highlight-2) 0%, var(--c-highlight-1) 75%);
+    transition-duration: var(--transition-duration-slow);
+}
+/* .entry:hover .metadata--label{
+}
+.entry:hover .metadata--tag{
+} */
+
+.entry-metadata--title{
+    font-size: 1.2em;
+}
+
+.metadata--label{
+    color: var(--c-fg-1);
+    font-family: monospace;
+}
+.metadata--tag{
+    /* color: var(--c-fg-2); */
+    /* border-bottom: 2px solid var(--c-highlight-2); */
+    margin-right: 5px;
+    font-family: monospace;
+    color: var(--c-highlight-3);
+}
+
+.box {
+    /* -webkit-transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1); */
+    /* -webkit-transition: all var(--animation-speed) cubic-bezier(0.1, 0.84, 0.44, 1);
+    transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1); */
+    -webkit-transition: all 0.1 cubic-bezier(0,0,0,0);
+    transition: all 0.1 cubic-bezier(0,0,0,0);
+}
+.box::after {
+    content: "";
+    border-radius: var(--border-radius-1);
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: var(--box-shadow-x) var(--box-shadow-y) var(--box-shadow-spread) var(--c-shadow-2);
+    opacity: 0;
+    -webkit-transition: all 0.1 cubic-bezier(0,0,0,0);
+    transition: all 0.1 cubic-bezier(0,0,0,0);
+}
+.box:hover {
+    -webkit-transform: scale(105%, 105%);
+    transform: scale(105%, 105%);
+}
+.box:hover::after {
+    opacity: 1;
+}
+
+.button{
+    border: 2px solid var(--c-highlight-3);
+    background: var(--c-highlight-1);
+    color: var(--c-highlight-3);
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-1);
+    margin: 2px 0px;
+}
+.button:hover{
+    background: var(--c-highlight-2);
+    transition-duration: var(--transition-duration);
+}
+.button:active{
+    /* background: var(--c-highlight-3); */
+    color: var(--c-highlight-1);
+    background: linear-gradient(90deg, var(--c-highlight-3) 60%, var(--c-highlight-2) 100%);
+}
+
+.hidden {
+    display: hidden;
+}
 
 
-            /* link colors */
-            --color-hyperink: #5f9b65;
-            --color-hyperink-hover-bg: #00000030;
-            --color-hyperink-hover-fg: #000; 
-
-            --color-border-invisible: transparent;
-            --color-border-neutral: #ccc;
-            --color-border-highlight: #5f9b65;
-
-            /* tag states: active, inactive, disabled */
-            --color-tag--active-fg: #ffffff;
-            /* --color-tag--active-bg: #4e42d4; */
-            --color-tag--active-bg: #444;
-
-            --color-tag--neutral-fg: #000000;
-            --color-tag--neutral-bg: #4e42d430;
-            --color-tag--neutral-bg: #eee;
-
-            --color-tag--disabled-fg: #00000090;
-            --color-tag--disabled-bg: #fff;
-
-            /*entry list colors*/
-            --color-entry-neutral-bg: #eee;
-            --color-entry-neutral-bg-alt:#ffffff;
-            --color-entry-neutral-fg: #fff;
-
-            --color-entry-active-bg: #fff;
-            --color-entry-active-fg: #fff;
-
-            --color-entry-hover-fg: #ffffff;
-            --color-entry-hover-bg: #444;
+.container{
+    margin: 0;
+    padding: 0;
+    max-width: 650px;
+    margin: auto;
+}
 
 
-            /* content colors */
-            --color-content-bg: #f3f2f5;
+.container-flex--v{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
 
-            /* box shadow colours */
-            --color-shadow-neutral: #ccc;
-            --color-shadow-highlight: #aaa;
-            --box-shadow-spread: 8px;
-            --box-shadow-x: 0px;
-            --box-shadow-y: 2px;
+/* containers */
 
-            --animation-speed: 0.2s;
+#container--filters{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
 
-            /* scrollbar colors */
-            --color-scroll-thumb: #444;
-            --color-scroll-track: #ccc;
+    /* max-width: 30%; */
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 5px;
+    /* border: 3px solid #00f; */
 
-            /* text selection colors */
-            --color-selection-fg: #fff;
-            --color-selection-bg: #333;
+    /* width: 15%; */
+}
 
-            /* border colors */
-            --color-border-weak: #aaa;
-            --color-border-strong: #444;
+#container--content-parent {
+    padding: 5px;
+    display: flex;
+    flex: 1;
+    flex-flow: column;
+    animation: fadein 1.5s;
+    /* border: 3px solid #0f0; */
+}
 
-        }
+#test{
+    max-height: 100%;
+    /* border: 5px solid #0f0; */
+    /* border: inset; */
+    overflow: scroll;
+}
 
-        @keyframes fadein {
-            from {
-                opacity: 0;
-            }
+.hidden{
+    display: hidden;
+}
+.overlay {  
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:1000;
+}
 
-            to {
-                opacity: 1;
-            }
-        }
-        .text--info{
-            background-color: var(--color-bg-dark);
-        }
+html, body{
+    height: 100%;
+    margin: 0;
+}
 
-        body {
-            background-color: var(--color-background);
-            font-family: monospace;
-            font-size: 1.1em;
+#container-explorer {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* border: 5px solid #0f0; */
+    display: flex;
+    flex-direction: column;
+}
+#header{
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: row;
+    background: var(--c-grey-0);
+    box-shadow: 0 0 1rem var(--c-grey-3);
+    z-index: 3;
+}
+#footer{
+    display: flex;
+    flex-direction: row;
+    background: var(--c-grey-0);
+    box-shadow: 0 0 1rem var(--c-grey-3);
+    z-index: 3;
+}
+#body{
+    flex: 1;
+    overflow: auto;
+    height: 100%;
+    background: var(--c-grey-1);
+    /* box-shadow: inset 0 0 1rem var(--c-grey-2); */
+    /* box-shadow: inset 0 0 1rem var(--c-grey-2); */
+}
 
-            margin: 0;
-            padding: 0;
-            color: var(--color-fg);
+.container-flex--h{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
 
-            /* firefox */
-            scrollbar-color: var(--color-highlight) var(--color-highlight-weak);
-            /* chrome and safari */
-        }
-
-        ::-webkit-scrollbar {
-            width: 0.75rem;
-        }
-
-        ::-webkit-scrollbar-track {
-            /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
-            background-color: var(--color-highlight-weak);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: var(--color-highlight);
-        }
-
-        a {
-            color: var(--color-hyperink);
-        }
-
-        a:hover {
-            color: var(--color-hyperink-hover-fg);
-            background-color: var(--color-hyperink-hover-bg);
-        }
-
-        a:hover {
-            color: var(--color-hyperink-hover);
-        }
-
-        .container {
-            width: 100%;
-            max-width: 768px;
-            margin: auto;
-            padding: 5px;
-        }
-
-        #container--logo {
-            margin: auto;
-            width: 100%;
-        }
-
-        #container--logo>a {
-            display: inline-block;
-            font-weight: bold;
-            font-size: 2rem;
-            text-decoration: none;
-            padding: 5px;
-        }
-
-        #button--explore {
-            background-color: #ddd;
-            border: 1px solid #444;
-            color: #000;
-            font-size: 1.5rem;
-            padding: 0.5rem 1rem;
-            display: inline-block;
-            margin-top: 0.25rem;
-            text-decoration: none;
-        }
-        #button--explore:hover{
-            background-color: #ccc;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <div id="container--logo"><a href="http://www.usenir.com">USENIR</a></div>
-            <p>This is the personal website of <a href="http://www.usenir.com">Niraj Zade.</a></p>
-            <p>Here I plan to host my tools and my notes here</p>
-            <p>This website has been generated by a custom script. My aims are:
-                <ul>
-                    <li>Have a way to access my notes remotely even over extremely throttled and/or unstable networks</li>
-                    <li>Be able to fetch my knowledge base via any terminal emulator comfortably</li>
-                    <li>Build up a way to explore my notes quickly and intuitively</li>
-                </ul>
-            </p>
-        
-        <span>I recommend trying the exploration mode by clicking the button below. This mode is the a big reason why I made this website out of a custom script.(this mode requires javascript to function):</span>
-        <br>
-        <a id="button--explore" href="explorer.html">Explore &#8594</a>
-    </div>
-</body>
-
-</html>
+/* #btn--filter-toggle{
+    border: 2px solid var(--c-highlight-3);
+    background: var(--c-highlight-1);
+    color: var(--c-highlight-3);
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-1);
+    margin: 2px 0px;
+}
+#btn--filter-toggle:hover{
+    background: var(--c-highlight-2);
+}
+#btn--filter-toggle:active{
+    background: var(--c-highlight-3);
+    color: var(--c-highlight-1);
+    background: linear-gradient(90deg, var(--c-highlight-3) 0%, var(--c-highlight-2) 100%);
+} */</style></head><body><div class=container><div class=container-flex--h id=header><div id=container--logo><a href=./index.html>USENIR.COM</a></div></div><p>I am Niraj Zade and this is my personal website</p><p>This website has been generated by a CMS purely written for this website, and is a work in progress. My aims are: <ul><li>Have a way to access my notes remotely even over extremely slow and/or unstable networks</li><li>Be able to fetch my knowledge base via any terminal emulator comfortably</li><li>Build up a way to explore my notes quickly and intuitively</li></ul></p><span>I recommend trying the exploration mode by clicking the button below. This mode is the a big reason why I made this website out of a custom script.(this mode requires javascript to function):</span><br><form action=explorer.html method=get><button class=button>EXPLORE (requires javascript) &#8594</button></form></div></body></html>
