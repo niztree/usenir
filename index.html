@@ -3,51 +3,37 @@
 }
 
 :root {
-    /*
-    orange: 32,100
-    blue: 201,80,57
-    */
     --hue-highlight:32;
     --saturation-highlight:100%;
-    /* --hue-highlight:120;
-    --saturation-highlight:60%; */
-    --c-highlight-1: hsl(var(--hue-highlight), var(--saturation-highlight), 95%);
-    --c-highlight-2: hsl(var(--hue-highlight), var(--saturation-highlight), 85%);
-    --c-highlight-3: hsl(var(--hue-highlight), var(--saturation-highlight), 50%);
-    --c-grey-0: hsl(240, 20%, 98%);
-    --c-grey-1: hsl(220, 11%, 95%);;
-    --c-grey-2: hsl(240, 2%, 85%);
-    --c-grey-3: hsl(0, 0%, 74%);
 
-    --c-fg-0: hsl(0, 0%, 100%);
-    --c-fg-1: hsl(0, 0%, 60%);
-    --c-fg-2: hsl(0, 0%, 42%);
-    --c-fg-3: hsl(0, 0%, 13%);
+    --c-fg-weak: hsl(0, 0%, 40%);
+    --c-fg-medium:hsl(225, 5%, 52%);
+    --c-fg-strong:hsl(233, 6%, 68%);
+    --c-fg-superstrong:hsl(180, 100%, 100%);
 
-    --c-border-1:hsl(0, 0%, 67%);
-    --c-border-2:hsl(0, 0%, 53%);
-    --c-border-3:hsl(0, 0%, 27%);
+    --c-bg-weak:hsl(0, 0%, 20%);
+    --c-bg-medium:hsl(0, 0%, 16%);
+    --c-bg-strong:hsl(0, 0%, 11%);
 
-    /* box shadow colours */
-    --c-shadow-1:hsl(0, 0%, 60%);
-    --c-shadow-2:hsl(0, 0%, 42%);
-    --c-shadow-3:hsl(0, 0%, 27%);
+    --c-highlight-bright:hsl(72, 88%, 40%);
+    --c-highlight-faint:hsl(72, 88%, 20%);
+    --c-highlight-2:hsl(44, 96%, 52%);
+    --c-highlight-3:hsl(208, 98%, 56%);
+
     --box-shadow-spread: 3px;
     --box-shadow-x: 0px;
     --box-shadow-y: 2px;
 
     --animation-speed: 1ms;
 
-    /* scrollbar colors */
-    --c-scroll-thumb: hsl(var(--hue-highlight), var(--saturation-highlight), 50%);
-    --c-scroll-track: hsl(var(--hue-highlight), var(--saturation-highlight), 85%);
+    --c-scroll-thumb: var(--c-fg-medium);
+    --c-scroll-track: var(--c-bg-weak);
 
-    --border-radius-1: 3px;
-    --border-radius-2: 5px;
+    --border-radius-weak: 0.25rem;
+    --border-radius-medium: 0.5rem;
 
     --transition-duration: 125ms;
     --transition-duration-slow: 250ms;
-
 }
 
 @keyframes fadein {
@@ -61,23 +47,24 @@
 }
 
 ::-moz-selection { /* Code for Firefox */
-    color:var(--c-highlight-1);
-    background: var(--c-highlight-3);
+    color:var(--c-bg-strong);
+    background: var(--c-highlight-bright);
 }
 
 ::selection {
-    color:var(--c-highlight-1);
-    background: var(--c-highlight-3);
+    color:var(--c-bg-strong);
+    background: var(--c-highlight-bright);
 }
 
 body {
-    background: var(--c-grey-0);
+    background: var(--c-bg-weak);
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    height: 100vh;
-    color: var(--c-fg-3);
+    line-height: 1.4;
+    color: var(--c-fg-strong);
     scrollbar-color: var(--c-scroll-thumb) var(--c-scroll-track);
+    font-family: 'Barlow', sans-serif;
 }
 ::-webkit-scrollbar {
     width: 0.75rem;
@@ -96,48 +83,20 @@ body {
     margin: 5px;
     padding: 5px;
     display: block;
-    color: var(--c-fg-1);
+    color: var(--c-fg-weak);
     font-family: monospace;
 }
 
+h1,h2,h3,h4,h5,h6{
+    color: var(--c-fg-medium);
+}
+
 a {
-    text-decoration: none;
-    color: var(--c-fg-3);
-    border-bottom: 1px solid var(--c-fg-3);
-    /* background: var(--c-highlight-1); */
+    color: var(--c-fg-strong);
 }
 
 a:hover {
-    /* color: var(--c-highlight-3); */
-    background: var(--c-highlight-1);
-    border-bottom: 1px solid var(--c-highlight-3);
-}
-
-h1{
-    /* color: var(--c-highlight-3); */
-    /* border-bottom: 2px solid var(--c-highlight-3); */
-    font-family: serif;
-    /* font-weight: normal; */
-    color: var(--c-highlight-3);
-    /* background: linear-gradient(90deg, var(--c-highlight-1) 60%, var(--c-grey-0) 100%); */
-    /* border-left: 5px solid var(--c-highlight-3); */
-    padding-left: 0.5rem;
-}
-h2{
-    /* border-bottom: 2px dotted var(--c-highlight-3); */
-    font-family: serif;
-    /* font-weight: normal; */
-    /* background: linear-gradient(90deg, var(--c-highlight-1) 0%, var(--c-grey-0) 60%); */
-    /* border-left: 2px solid var(--c-highlight-3); */
-    padding-left: 0.5rem;
-}
-h3,h4,h5,h6{
-    /* border-bottom: 1px dotted var(--c-highlight-3); */
-    font-family: serif;
-    /* font-weight: normal; */
-    /* background: linear-gradient(90deg, var(--c-highlight-1) 0%, var(--c-grey-0) 40%); */
-    /* border-left: 2px dotted var(--c-highlight-3); */
-    padding-left: 0.5rem;
+    background-color: var(--c-bg-weak);
 }
 
 input[type="checkbox"] {
@@ -145,27 +104,37 @@ input[type="checkbox"] {
 }
 
 label {
-    /* display: inline-block; */
-    width: 100%;
-    border-radius: var(--border-radius-2);
-    border:2px solid var(--c-highlight-3);
-    color: var(--c-highlight-3);
-    background: var(--c-highlight-1);
+    display: inline-block;
+    margin: 0.1em 0;
+    padding: 0.15em 0.25em;
+    border-radius: 0.15em;
+    color: var(--c-fg-strong);
+    border: none;
+    text-decoration: none;
+    /* border: 1px solid var(--c-fg-weak); */
+    /* background-image: linear-gradient(rgba(255, 255, 255, .3), rgba(255, 255, 255, 0));
+    border: .075rem solid rgba(0, 0, 0, .1);
+    box-shadow: 0 .075rem .1rem rgba(0, 0, 0, .15),
+        inset 0 .075rem rgba(255, 255, 255, .3);
+        width: 100%; */
+    /* border-bottom: 1px solid var(--c-highlight-faint); */
 
 }
+
 label:hover{
-    background: var(--c-highlight-2);
-    transition-duration: var(--transition-duration);
+    background-image: linear-gradient(rgba(255, 255, 255, .1), rgba(0, 0, 0, .1));
+    /* background-color: var(--c-highlight-faint); */
+    box-shadow: 0 0 1px var(--c-highlight-bright);
 }
 
 input[type="checkbox"]+label {
-    padding: 0.25rem 0.5rem;
     cursor: pointer;
 }
 
 input[type="checkbox"] + label:before {
-    border: 1px solid var(--c-highlight-3);
-    background: var(--c-grey-0);
+    font-family: monospace;
+    border-radius: 0.2rem;
+    border: 1px solid var(--c-highlight-bright);
     content: "\00a0";
     display: inline-block;
     height: 1rem;
@@ -176,30 +145,27 @@ input[type="checkbox"] + label:before {
 }
 
 input[type="checkbox"]:checked+label {
-    color: var(--c-highlight-1);
-    background: var(--c-highlight-3);
+    color: var(--c-bg-strong);
+    background-color: var(--c-highlight-bright);
 }
 
 input[type="checkbox"]:checked + label:before {
-    background: var(--c-grey-0);
-    color: var(--c-highlight-3);
+    background: var(--c-highlight-bright);
+    border: 1px solid var(--c-bg-strong);
+    color: var(--c-bg-strong);
     content: "\2713";
     text-align: center;
   }
 
 input[type="checkbox"]:disabled+label {
     cursor: not-allowed;
-    background: var(--c-grey-0);
-    border:1px solid var(--c-highlight-3);
     opacity: 0.5;
-    transition-duration: var(--transition-duration);
+    pointer-events: none;
 }
 
 input[type="checkbox"]:active+label {
-    color: var(--c-highlight-1);
-    background: var(--c-highlight-3);
-    /* background: linear-gradient(90deg, var(--c-highlight-3) 50%, var(--c-highlight-2) 100%); */
-    transition-duration: var(--transition-duration);
+    background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, 0));
+    box-shadow: inset 0 .075rem .1rem rgba(0, 0, 0, .2);
 }
 
 .container--checkbox {
@@ -210,40 +176,46 @@ input[type="checkbox"]:active+label {
 }
 
 #container--logo {
-    height: 100%;
     margin-right: 1rem;
     padding: 0;
     display: inline-block;
+    margin: 0.25rem 0;
+    text-align: left;
 }
 
 #container--logo>a {
     font-size: 1rem;
     text-decoration: none;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    color: var(--c-highlight-3);
-    /* border: 5px solid var(--c-highlight-3); */
-    border: 2px solid var(--c-highlight-3);
-    background: var(--c-highlight-1);
-    box-shadow: 0.5rem 0.5rem 0 var(--c-highlight-3);
-    /* border-left: 0.25rem solid var(--c-grey-3); */
-    height: 100%;
+    display: inline-block;
     font-family: monospace;
-    display: flex;
     justify-content: center;
     align-items: center;
+    border: 0.35rem solid var(--c-highlight-bright);
 }
-#container--logo>a:hover{
-    color: var(--c-fg-3);
-    /* transition-duration: var(--transition-duration); */
-    transition-duration: var(--transition-duration-slow);
+.logo-1{
+    color: var(--c-bg-strong);
+    font-weight: bold;
+    background-color: var(--c-highlight-bright);
+    padding: 0.25rem;
+    float: left;
 }
-
+.logo-2{
+    color: var(--c-highlight-bright);
+    padding: 0.25rem;
+    float: left;
+}
+#container--logo>a:hover>span{
+    background-color: var(--c-highlight-bright);
+    transition-duration: var(--transition-duration);
+    color: var(--c-bg-strong);
+}
 #container--tags-parent {
     height: 100%;
     display: flex;
     flex-flow: column;
     animation: fadein 0.5s;
 }
+
 
 #container--tags {
     flex: 1;
@@ -266,139 +238,119 @@ input[type="checkbox"]:active+label {
     height: 100%;
 }
 
-#container--content-parent {
+#container--display-parent {
     display: flex;
     flex: 1;
     flex-flow: column;
     animation: fadein 1.5s;
-    box-shadow: 0 0 3rem var(--c-grey-3);
+    /* box-shadow: 0 0 3rem var(--c-fg-weak); */
 }
 
-#container--content {
+#container--display {
     overflow-y: auto;
     display: non;
     flex-flow: row;
+    margin-left: 5px;
+    padding: 5px;
 }
 
-.content {
+.display {
     margin: 0;
     padding: 0.5rem;
     max-height: 100%;
     overflow-y: auto;
     animation: fadein 0.5s;
-    border: 2px solid var(--c-grey-2);
+    border-radius: var(--border-radius-medium);
+    border: 1px solid var(--c-fg-weak);
     padding: 5px;
     background: var(--c-grey-0);
     max-width: 650px;
 }
-.content:hover{
-    border: 2px solid var(--c-grey-3);
-}
 
 .entry {
     cursor: pointer;
-    background: var(--c-grey-0);
-    /* background: linear-gradient(90deg, var(--c-highlight-1) 0%, var(--c-grey-0) 30%); */
+    /* background: linear-gradient(90deg, var(--c-highlight-weak) 0%, var(--c-grey-0) 30%); */
     padding: 0.25rem;
     margin: 2px 5%;
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-weak);
     animation: fadein var(--animation-speed);
-    border: 1px solid var(--c-grey-2);
+    border: 1px dashed var(--c-fg-medium);
 }
-
-/* .entry:nth-child(even){
-    background: linear-gradient(90deg, var(--c-grey-0) 70%, var(--c-highlight-1) 100%);
-} */
 
 .entry:hover {
-    background: var(--c-highlight-1);
-    border: 1px solid var(--c-highlight-3);
-    /* background: linear-gradient(90deg, var(--c-highlight-2) 0%, var(--c-highlight-1) 75%); */
-    transition-duration: var(--transition-duration-slow);
+    color: var(--c-highlight-bright);
+    background: var(--c-highlight-medium);
+    border-color: var(--c-highlight-bright);
+    /* background: linear-gradient(90deg, var(--c-highlight-medium) 0%, var(--c-highlight-weak) 75%); */
+    transition-duration: var(--transition-duration);
 }
-/* .entry:hover .metadata--label{
+.entry:active {
+    color: var(--c-bg-strong);
+    background: var(--c-highlight-bright);
 }
-.entry:hover .metadata--tag{
-} */
 
 .entry-metadata--title{
     display: inline-block;
 }
 
 .metadata--label{
-    color: var(--c-fg-1);
-    font-family: monospace;
+    color: var(--c-fg-weak);
+    font-style: italic;
 }
 .metadata--tag{
-    /* color: var(--c-fg-2); */
-    /* border-bottom: 2px solid var(--c-highlight-2); */
+    font-style: italic;
     display: inline-block;
     margin-right: 5px;
-    font-family: monospace;
-    color: var(--c-fg-1);
+    color: var(--c-fg-weak);
 }
 
-.box {
-    /* -webkit-transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
-    transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1); */
-    /* -webkit-transition: all var(--animation-speed) cubic-bezier(0.1, 0.84, 0.44, 1);
-    transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1); */
-    -webkit-transition: all 0.1 cubic-bezier(0,0,0,0);
-    transition: all 0.1 cubic-bezier(0,0,0,0);
-}
-.box::after {
-    content: "";
-    border-radius: var(--border-radius-1);
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: var(--box-shadow-x) var(--box-shadow-y) var(--box-shadow-spread) var(--c-shadow-2);
-    opacity: 0;
-    -webkit-transition: all 0.1 cubic-bezier(0,0,0,0);
-    transition: all 0.1 cubic-bezier(0,0,0,0);
-}
-.box:hover {
-    -webkit-transform: scale(105%, 105%);
-    transform: scale(105%, 105%);
-}
-.box:hover::after {
-    opacity: 1;
-}
-
-.button{
-    border: 2px solid var(--c-highlight-3);
-    background: var(--c-highlight-1);
-    color: var(--c-highlight-3);
+/* .button{
+    color: var(--c-bg-strong);
+    background: var(--c-highlight-bright);
+    border: 2px solid var(--c-highlight-weak);
     font-size: 1.1rem;
     padding: 0.5rem 1rem;
-    border-radius: var(--border-radius-1);
     margin: 2px 0px;
-    /* box-shadow: 5px 5px 0 var(--c-highlight-3); */
+} */
+.button{
+    display: inline-block;
+    font-size: 1.1em;
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    border-radius: 0.15em;
+    background-color: var(--c-highlight-bright);
+    color: var(--c-bg-strong);
+    border: none;
+    text-decoration: none;
+    background-image: linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, 0));
+    border: .075rem solid rgba(0, 0, 0, .1);
+    box-shadow: 0 .075rem .1rem rgba(0, 0, 0, .3);
 }
 .button:hover{
-    background: var(--c-highlight-2);
-    transition-duration: var(--transition-duration);
+    border-color: rgba(0,0,0,0.1);
+    background-image: linear-gradient(rgba(255, 255, 255, .1), rgba(0, 0, 0, .1));
 }
 .button:active{
-    /* background: var(--c-highlight-3); */
-    color: var(--c-highlight-1);
-    background: linear-gradient(90deg, var(--c-highlight-3) 60%, var(--c-highlight-2) 100%);
+    background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, 0));
+    box-shadow: inset 0 .075rem .1rem rgba(0, 0, 0, .2);
+}
+.button:disabled{
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 .hidden {
-    display: hidden;
+    display: none !important;
+    border: 10px solid red;
 }
-
-
 .container {
-    margin: 0;
-    padding: 0 1rem;
+    background: var(--c-bg-medium);
+    padding: 0.5rem 1rem;
+    /* border: 1px solid red; */
     width: 100%;
-    max-width: 650px;
+    max-width: 768px;
     margin: auto;
+    border-radius: 1rem 1rem 0 0;
 }
 
 
@@ -435,41 +387,35 @@ input[type="checkbox"]:active+label {
 }
 
 html, body{
-    height: 100%;
+    min-height: 100vh;
     margin: 0;
 }
 
 #container-explorer {
     margin: 0;
     padding: 0;
-    height: 100%;
-    /* border: 5px solid #0f0; */
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }
-#header{
-    /* border: 2px solid red; */
+.header{
     display: flex;
     flex-direction: row;
-    background: var(--c-grey-0);
-    box-shadow: 0 0 1rem var(--c-grey-3);
     z-index: 3;
 }
-#footer{
+.header> .container{
+    background: none;
+}
+.footer{
     display: flex;
     flex-direction: row;
-    background: var(--c-grey-0);
-    box-shadow: 0 0 1rem var(--c-grey-3);
     z-index: 3;
 }
 #body{
     flex: 1;
     overflow: auto;
     height: 100%;
-    background: var(--c-grey-1);
-    
-    /* box-shadow: inset 0 0 1rem var(--c-grey-2); */
-    /* box-shadow: inset 0 0 1rem var(--c-grey-2); */
+    background: var(--c-grey-weak);
 }
 
 .container-flex--h{
@@ -480,26 +426,66 @@ html, body{
 }
 
 /* #btn--filter-toggle{
-    border: 2px solid var(--c-highlight-3);
-    background: var(--c-highlight-1);
-    color: var(--c-highlight-3);
+    border: 2px solid var(--c-highlight-bright);
+    background: var(--c-highlight-weak);
+    color: var(--c-highlight-bright);
     font-size: 1.1rem;
     padding: 0.5rem 1rem;
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-weak);
     margin: 2px 0px;
 }
 #btn--filter-toggle:hover{
-    background: var(--c-highlight-2);
+    background: var(--c-highlight-medium);
 }
 #btn--filter-toggle:active{
-    background: var(--c-highlight-3);
-    color: var(--c-highlight-1);
-    background: linear-gradient(90deg, var(--c-highlight-3) 0%, var(--c-highlight-2) 100%);
+    background: var(--c-highlight-bright);
+    color: var(--c-highlight-weak);
+    background: linear-gradient(90deg, var(--c-highlight-bright) 0%, var(--c-highlight-medium) 100%);
 } */
 blockquote{
-    border: 2px solid var(--c-highlight-2);
+    font-style: italic;
+    color: var(--c-fg-strong);
     margin: 1rem 0;
     padding: 0.5rem 1rem;
     width: 100%;
-    background-color: var(--c-highlight-1);
-}</style></head><body><div class=container-flex--h id=header><div class=container><div id=container--logo><a href=index.html>USENIR.COM</a></div></div></div><div class=container><blockquote> "The standard process of organizing knowledge by departments, and subdepartments, and further breaking it up into separate courses, tends to conceal the homogeneity of knowledge, and at the same time to omit much which falls between the courses." <br> — Richard Hamming</blockquote><p>Hi, I am Niraj Zade and and you're welcome to usenir.com</p><p>I recommend trying the exploration mode by clicking the button below. This mode is the a big reason why I made this website out of a custom script.(this mode requires javascript to function):</p><form action=explorer.html method=get><button class=button>EXPLORE &#8594</button></form><br><p> This website has been generated by a CMS purely written for this purpose, and is currently work in progress. </p><p> Aims for this project, according to priority are: <ol><li>Have a way to access the notes remotely, even over extremely slow and/or unstable networks, irrespective of the device used to access them.</li><li>Explore UX and find a way to build up 'knowledge contexts' by linking different documents across webpages into a single page, and then be able to share it.</li><li>Build up a way to explore contexts quickly and intuitively using a passive organizer system, paired with an exploration system.</li><li>Offer a way for javascript disabled devices to access webpages effectively (not yet implemented). </li></ol></p><p>Software principles to be followed are: <ul><li>The webpage must stay as lean as possible.</li><li>Plug-ins installation for the explorer must be as simple as including a note in the context.</li><li>The software should never extent 2000loc(including comments). <br> (Inspired by the style of <a href=https://suckless.org/coding_style/ >suckless.org</a>)</li><li>The architecture must stay simple enough to let it scale over itself.</li><li>Notes should be served in a format that is: <ul><li>universally recognized</li><li>non-proprietary</li><li>unambiguous</li></ul> Example:html, txt <br>Note: markdown is an ambiguous format</li></ul></p><hr><p> Future Scope:<br> The internet has a problem of disappearing data. It occurs mainly due to: <ul><li>Changes in url</li><li>Removal of data by the author</li><li>The server going out of business</li></ul> External services like The Internet Archive are cool, but they add another step if all you wanted to do was maintain your presonal knowledge base.<br> An idea to solve this is: combine your information about the topic into a context. Bringing the topic into your context should copy all data you want into the context itself, removing all external dependancy.<br> Then if you want to update the data, the context provides a refresh button. Hit refresh and udpate your content. If the data has gone offline, the context marks the data as no longer available on the www.<br> You still retain the information in your context.<br> This way, you maintiain the updatability of your data, while also getting protection from the short lived nature of urls and websites. </p></div></body></html>
+    background-color: var(--c-bg-weak);
+    border-radius: 0 1em 1em 0;
+    /* background: linear-gradient(180deg, var(--c-bg-weak) 60%, var(--c-bg-strong) 100%); */
+    background: var(--c-bg-weak);
+    border-left: 0.25rem solid var(--c-highlight-bright);
+}
+
+/* ul {
+    list-style: none;
+  }
+  
+ul li::before {
+    content: "\2022";
+    color: var(--c-highlight-bright);
+    font-weight: bold;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+}
+
+ol {
+    list-style: none;
+    counter-reset: my-awesome-counter;
+}
+
+ol li {
+    counter-increment: my-awesome-counter;
+}
+
+ol li::before {
+    content: counter(my-awesome-counter) ". ";
+    color: var(--c-highlight-bright);
+} */
+
+.highlight-strong{
+    background-color: var(--c-highlight-bright);
+}
+
+hr{
+    border: 1px solid var(--c-highlight-faint);
+}</style><link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,800;1,400&display=swap" rel=stylesheet></head><body><div class="container-flex--h header"><div class=container><div id=container--logo><a href=index.html><span class=logo-1>usenir</span><span class=logo-2>.com</span></a></div></div></div><div class="container body"><blockquote> "The standard process of organizing knowledge by departments, and subdepartments, and further breaking it up into separate courses, tends to conceal the homogeneity of knowledge, and at the same time to omit much which falls between the courses." <br> — Richard Hamming</blockquote><p>Hi, I am Niraj Zade and and you're welcome to usenir.com</p><p>I recommend trying the exploration mode by clicking the button below. This mode is the a big reason why I made this website out of a custom script.(this mode requires javascript to function):</p><form action=explorer.html method=get><button class=button>EXPLORE &#8594</button></form><br><p> This website has been generated by a CMS purely written for this purpose, and is currently work in progress. </p><p> Aims for this project, according to priority are: <ol><li>Have a way to access the notes remotely, even over extremely slow and/or unstable networks, irrespective of the device used to access them.</li><li>Explore UX and find a way to build up 'knowledge contexts' by linking different documents across webpages into a single page, and then be able to share it.</li><li>Build up a way to explore contexts quickly and intuitively using a passive organizer system, paired with an exploration system.</li><li>Offer a way for javascript disabled devices to access webpages effectively (not yet implemented). </li></ol></p><p>Software principles to be followed are: <ul><li>The webpage must stay as lean as possible.</li><li>Plug-ins installation for the explorer must be as simple as including a note in the context.</li><li>The software should never extent 2000loc(including comments). <br> (Inspired by the style of <a href=https://suckless.org/coding_style/ >suckless.org</a>)</li><li>The architecture must stay simple enough to let it scale over itself.</li><li>Notes should be served in a format that is: <ul><li>universally recognized</li><li>non-proprietary</li><li>unambiguous</li></ul> Example:html, txt <br>Note: markdown is an ambiguous format</li></ul></p><hr><p> Future Scope:<br> The internet has a problem of disappearing data. It occurs mainly due to: <ul><li>Changes in url</li><li>Removal of data by the author</li><li>The server going out of business</li></ul> External services like The Internet Archive are cool, but they add another step if all you wanted to do was maintain your presonal knowledge base.<br> An idea to solve this is: combine your information about the topic into a context. Bringing the topic into your context should copy all data you want into the context itself, removing all external dependancy.<br> Then if you want to update the data, the context provides a refresh button. Hit refresh and udpate your content. If the data has gone offline, the context marks the data as no longer available on the www.<br> You still retain the information in your context.<br> This way, you maintiain the updatability of your data, while also getting protection from the short lived nature of urls and websites. </p></div></body></html>

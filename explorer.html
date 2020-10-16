@@ -1,524 +1,21 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><title>Usenir.com</title><meta name=description content=usenir.com><meta name=author content=usenir.com><meta name=viewport content="width=device-width, initial-scale=1"><style>* {
-    box-sizing: border-box;
-}
-
-:root {
-    /*
-    orange: 32,100
-    blue: 201,80,57
-    */
-    --hue-highlight:32;
-    --saturation-highlight:100%;
-    /* --hue-highlight:120;
-    --saturation-highlight:60%; */
-    --c-highlight-1: hsl(var(--hue-highlight), var(--saturation-highlight), 95%);
-    --c-highlight-2: hsl(var(--hue-highlight), var(--saturation-highlight), 85%);
-    --c-highlight-3: hsl(var(--hue-highlight), var(--saturation-highlight), 50%);
-    --c-grey-0: hsl(240, 20%, 98%);
-    --c-grey-1: hsl(220, 11%, 95%);;
-    --c-grey-2: hsl(240, 2%, 85%);
-    --c-grey-3: hsl(0, 0%, 74%);
-
-    --c-fg-0: hsl(0, 0%, 100%);
-    --c-fg-1: hsl(0, 0%, 60%);
-    --c-fg-2: hsl(0, 0%, 42%);
-    --c-fg-3: hsl(0, 0%, 13%);
-
-    --c-border-1:hsl(0, 0%, 67%);
-    --c-border-2:hsl(0, 0%, 53%);
-    --c-border-3:hsl(0, 0%, 27%);
-
-    /* box shadow colours */
-    --c-shadow-1:hsl(0, 0%, 60%);
-    --c-shadow-2:hsl(0, 0%, 42%);
-    --c-shadow-3:hsl(0, 0%, 27%);
-    --box-shadow-spread: 3px;
-    --box-shadow-x: 0px;
-    --box-shadow-y: 2px;
-
-    --animation-speed: 1ms;
-
-    /* scrollbar colors */
-    --c-scroll-thumb: hsl(var(--hue-highlight), var(--saturation-highlight), 50%);
-    --c-scroll-track: hsl(var(--hue-highlight), var(--saturation-highlight), 85%);
-
-    --border-radius-1: 3px;
-    --border-radius-2: 5px;
-
-    --transition-duration: 125ms;
-    --transition-duration-slow: 250ms;
-
-}
-
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-::-moz-selection { /* Code for Firefox */
-    color:var(--c-highlight-1);
-    background: var(--c-highlight-3);
-}
-
-::selection {
-    color:var(--c-highlight-1);
-    background: var(--c-highlight-3);
-}
-
-body {
-    background: var(--c-grey-0);
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    color: var(--c-fg-3);
-    scrollbar-color: var(--c-scroll-thumb) var(--c-scroll-track);
-}
-::-webkit-scrollbar {
-    width: 0.75rem;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--c-scroll-track);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--c-scroll-thumb);
-}
-
-.titlebar {
-    font-size: 0.9rem;
-    margin: 5px;
-    padding: 5px;
-    display: block;
-    color: var(--c-fg-1);
-    font-family: monospace;
-}
-
-a {
-    text-decoration: none;
-    color: var(--c-fg-3);
-    border-bottom: 1px solid var(--c-fg-3);
-    /* background: var(--c-highlight-1); */
-}
-
-a:hover {
-    /* color: var(--c-highlight-3); */
-    background: var(--c-highlight-1);
-    border-bottom: 1px solid var(--c-highlight-3);
-}
-
-h1{
-    /* color: var(--c-highlight-3); */
-    /* border-bottom: 2px solid var(--c-highlight-3); */
-    font-family: serif;
-    /* font-weight: normal; */
-    color: var(--c-highlight-3);
-    /* background: linear-gradient(90deg, var(--c-highlight-1) 60%, var(--c-grey-0) 100%); */
-    /* border-left: 5px solid var(--c-highlight-3); */
-    padding-left: 0.5rem;
-}
-h2{
-    /* border-bottom: 2px dotted var(--c-highlight-3); */
-    font-family: serif;
-    /* font-weight: normal; */
-    /* background: linear-gradient(90deg, var(--c-highlight-1) 0%, var(--c-grey-0) 60%); */
-    /* border-left: 2px solid var(--c-highlight-3); */
-    padding-left: 0.5rem;
-}
-h3,h4,h5,h6{
-    /* border-bottom: 1px dotted var(--c-highlight-3); */
-    font-family: serif;
-    /* font-weight: normal; */
-    /* background: linear-gradient(90deg, var(--c-highlight-1) 0%, var(--c-grey-0) 40%); */
-    /* border-left: 2px dotted var(--c-highlight-3); */
-    padding-left: 0.5rem;
-}
-
-input[type="checkbox"] {
-    display: none;
-}
-
-label {
-    /* display: inline-block; */
-    width: 100%;
-    border-radius: var(--border-radius-2);
-    border:2px solid var(--c-highlight-3);
-    color: var(--c-highlight-3);
-    background: var(--c-highlight-1);
-
-}
-label:hover{
-    background: var(--c-highlight-2);
-    transition-duration: var(--transition-duration);
-}
-
-input[type="checkbox"]+label {
-    padding: 0.25rem 0.5rem;
-    cursor: pointer;
-}
-
-input[type="checkbox"] + label:before {
-    border: 1px solid var(--c-highlight-3);
-    background: var(--c-grey-0);
-    content: "\00a0";
-    display: inline-block;
-    height: 1rem;
-    margin: 0 .25em 0 0;
-    padding: 0;
-    vertical-align: top;
-    width: 1rem;
-}
-
-input[type="checkbox"]:checked+label {
-    color: var(--c-highlight-1);
-    background: var(--c-highlight-3);
-}
-
-input[type="checkbox"]:checked + label:before {
-    background: var(--c-grey-0);
-    color: var(--c-highlight-3);
-    content: "\2713";
-    text-align: center;
-  }
-
-input[type="checkbox"]:disabled+label {
-    cursor: not-allowed;
-    background: var(--c-grey-0);
-    border:1px solid var(--c-highlight-3);
-    opacity: 0.5;
-    transition-duration: var(--transition-duration);
-}
-
-input[type="checkbox"]:active+label {
-    color: var(--c-highlight-1);
-    background: var(--c-highlight-3);
-    /* background: linear-gradient(90deg, var(--c-highlight-3) 50%, var(--c-highlight-2) 100%); */
-    transition-duration: var(--transition-duration);
-}
-
-.container--checkbox {
-    display: flex;
-    margin: 3px;
-    width: 100%;
-    border-radius: 5px;
-}
-
-#container--logo {
-    height: 100%;
-    margin-right: 1rem;
-    padding: 0;
-    display: inline-block;
-}
-
-#container--logo>a {
-    font-size: 1rem;
-    text-decoration: none;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    color: var(--c-highlight-3);
-    /* border: 5px solid var(--c-highlight-3); */
-    border: 2px solid var(--c-highlight-3);
-    background: var(--c-highlight-1);
-    box-shadow: 0.5rem 0.5rem 0 var(--c-highlight-3);
-    /* border-left: 0.25rem solid var(--c-grey-3); */
-    height: 100%;
-    font-family: monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#container--logo>a:hover{
-    color: var(--c-fg-3);
-    /* transition-duration: var(--transition-duration); */
-    transition-duration: var(--transition-duration-slow);
-}
-
-#container--tags-parent {
-    height: 100%;
-    display: flex;
-    flex-flow: column;
-    animation: fadein 0.5s;
-}
-
-#container--tags {
-    flex: 1;
-    padding: 5px;
-    overflow-x: visible;
-    overflow-y: auto;
-}
-
-#container--entries-parent {
-    display: flex;
-    flex-flow: column;
-    max-width: 15rem;
-    overflow-x: auto;
-    overflow-y: auto;
-    animation: fadein 1s;
-}
-
-#container--entries {
-    flex: 1;
-    height: 100%;
-}
-
-#container--content-parent {
-    display: flex;
-    flex: 1;
-    flex-flow: column;
-    animation: fadein 1.5s;
-    box-shadow: 0 0 3rem var(--c-grey-3);
-}
-
-#container--content {
-    overflow-y: auto;
-    display: non;
-    flex-flow: row;
-}
-
-.content {
-    margin: 0;
-    padding: 0.5rem;
-    max-height: 100%;
-    overflow-y: auto;
-    animation: fadein 0.5s;
-    border: 2px solid var(--c-grey-2);
-    padding: 5px;
-    background: var(--c-grey-0);
-    max-width: 650px;
-}
-.content:hover{
-    border: 2px solid var(--c-grey-3);
-}
-
-.entry {
-    cursor: pointer;
-    background: var(--c-grey-0);
-    /* background: linear-gradient(90deg, var(--c-highlight-1) 0%, var(--c-grey-0) 30%); */
-    padding: 0.25rem;
-    margin: 2px 5%;
-    border-radius: var(--border-radius-1);
-    animation: fadein var(--animation-speed);
-    border: 1px solid var(--c-grey-2);
-}
-
-/* .entry:nth-child(even){
-    background: linear-gradient(90deg, var(--c-grey-0) 70%, var(--c-highlight-1) 100%);
-} */
-
-.entry:hover {
-    background: var(--c-highlight-1);
-    border: 1px solid var(--c-highlight-3);
-    /* background: linear-gradient(90deg, var(--c-highlight-2) 0%, var(--c-highlight-1) 75%); */
-    transition-duration: var(--transition-duration-slow);
-}
-/* .entry:hover .metadata--label{
-}
-.entry:hover .metadata--tag{
-} */
-
-.entry-metadata--title{
-    display: inline-block;
-}
-
-.metadata--label{
-    color: var(--c-fg-1);
-    font-family: monospace;
-}
-.metadata--tag{
-    /* color: var(--c-fg-2); */
-    /* border-bottom: 2px solid var(--c-highlight-2); */
-    display: inline-block;
-    margin-right: 5px;
-    font-family: monospace;
-    color: var(--c-fg-1);
-}
-
-.box {
-    /* -webkit-transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
-    transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1); */
-    /* -webkit-transition: all var(--animation-speed) cubic-bezier(0.1, 0.84, 0.44, 1);
-    transition: all var(--animation-speed) cubic-bezier(0.165, 0.84, 0.44, 1); */
-    -webkit-transition: all 0.1 cubic-bezier(0,0,0,0);
-    transition: all 0.1 cubic-bezier(0,0,0,0);
-}
-.box::after {
-    content: "";
-    border-radius: var(--border-radius-1);
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: var(--box-shadow-x) var(--box-shadow-y) var(--box-shadow-spread) var(--c-shadow-2);
-    opacity: 0;
-    -webkit-transition: all 0.1 cubic-bezier(0,0,0,0);
-    transition: all 0.1 cubic-bezier(0,0,0,0);
-}
-.box:hover {
-    -webkit-transform: scale(105%, 105%);
-    transform: scale(105%, 105%);
-}
-.box:hover::after {
-    opacity: 1;
-}
-
-.button{
-    border: 2px solid var(--c-highlight-3);
-    background: var(--c-highlight-1);
-    color: var(--c-highlight-3);
-    font-size: 1.1rem;
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius-1);
-    margin: 2px 0px;
-    /* box-shadow: 5px 5px 0 var(--c-highlight-3); */
-}
-.button:hover{
-    background: var(--c-highlight-2);
-    transition-duration: var(--transition-duration);
-}
-.button:active{
-    /* background: var(--c-highlight-3); */
-    color: var(--c-highlight-1);
-    background: linear-gradient(90deg, var(--c-highlight-3) 60%, var(--c-highlight-2) 100%);
-}
-
-.hidden {
-    display: hidden;
-}
-
-
-.container {
-    margin: 0;
-    padding: 0 1rem;
-    width: 100%;
-    max-width: 650px;
-    margin: auto;
-}
-
-
-.container-flex--v{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-}
-
-/* containers */
-
-#container--filters{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow: hidden;
-    overflow-y: auto;
-}
-
-.hidden{
-    display: hidden;
-}
-.overlay {  
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:1000;
-}
-
-html, body{
-    height: 100%;
-    margin: 0;
-}
-
-#container-explorer {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    /* border: 5px solid #0f0; */
-    display: flex;
-    flex-direction: column;
-}
-#header{
-    /* border: 2px solid red; */
-    display: flex;
-    flex-direction: row;
-    background: var(--c-grey-0);
-    box-shadow: 0 0 1rem var(--c-grey-3);
-    z-index: 3;
-}
-#footer{
-    display: flex;
-    flex-direction: row;
-    background: var(--c-grey-0);
-    box-shadow: 0 0 1rem var(--c-grey-3);
-    z-index: 3;
-}
-#body{
-    flex: 1;
-    overflow: auto;
-    height: 100%;
-    background: var(--c-grey-1);
-    
-    /* box-shadow: inset 0 0 1rem var(--c-grey-2); */
-    /* box-shadow: inset 0 0 1rem var(--c-grey-2); */
-}
-
-.container-flex--h{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-}
-
-/* #btn--filter-toggle{
-    border: 2px solid var(--c-highlight-3);
-    background: var(--c-highlight-1);
-    color: var(--c-highlight-3);
-    font-size: 1.1rem;
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius-1);
-    margin: 2px 0px;
-}
-#btn--filter-toggle:hover{
-    background: var(--c-highlight-2);
-}
-#btn--filter-toggle:active{
-    background: var(--c-highlight-3);
-    color: var(--c-highlight-1);
-    background: linear-gradient(90deg, var(--c-highlight-3) 0%, var(--c-highlight-2) 100%);
-} */
-blockquote{
-    border: 2px solid var(--c-highlight-2);
-    margin: 1rem 0;
-    padding: 0.5rem 1rem;
-    width: 100%;
-    background-color: var(--c-highlight-1);
-}</style></head><body><div id=container-explorer><div class=container-flex--h id=header><span class=titlebar>USENIR EXPLORER</span></div><div class=container-flex--h id=body><div id=container--filters><div id=container--tags-parent><div class=titlebar>Tags:</div><div id=container--tags></div></div><div id=container--entries-parent><div class=titlebar>Found:</div><div id=container--entries></div></div></div><div id=container--content-parent><div class=titlebar>Opened:</div><div id=container--content></div></div></div><div class=container-flex--h id=footer><div id=container--logo><a href=./index.html>&#8592USENIR</a></div><button class=button>Show Filters</button></div></div><script>
+<!doctype html><html lang=en><head><meta charset=utf-8><title>Usenir.com</title><meta name=description content=usenir.com><meta name=author content=usenir.com><meta name=viewport content="width=device-width, initial-scale=1"><style>*{box-sizing:border-box}:root{--hue-highlight:32;--saturation-highlight:100%;--c-fg-weak:hsl(0,0%,40%);--c-fg-medium:hsl(225,5%,52%);--c-fg-strong:hsl(233,6%,68%);--c-fg-superstrong:hsl(180,100%,100%);--c-bg-weak:hsl(0,0%,20%);--c-bg-medium:hsl(0,0%,16%);--c-bg-strong:hsl(0,0%,11%);--c-highlight-bright:hsl(72,88%,40%);--c-highlight-faint:hsl(72,88%,20%);--c-highlight-2:hsl(44,96%,52%);--c-highlight-3:hsl(208,98%,56%);--box-shadow-spread:3px;--box-shadow-x:0px;--box-shadow-y:2px;--animation-speed:1ms;--c-scroll-thumb:var(--c-fg-medium);--c-scroll-track:var(--c-bg-weak);--border-radius-weak:0.25rem;--border-radius-medium:0.5rem;--transition-duration:125ms;--transition-duration-slow:250ms}@keyframes fadein{from{opacity:0}to{opacity:1}}::-moz-selection{color:var(--c-bg-strong);background:var(--c-highlight-bright)}::selection{color:var(--c-bg-strong);background:var(--c-highlight-bright)}body{background:var(--c-bg-weak);font-family:sans-serif;margin:0;padding:0;line-height:1.4;color:var(--c-fg-strong);scrollbar-color:var(--c-scroll-thumb) var(--c-scroll-track);font-family:'Barlow',sans-serif}::-webkit-scrollbar{width:0.75rem}::-webkit-scrollbar-track{background:var(--c-scroll-track)}::-webkit-scrollbar-thumb{background:var(--c-scroll-thumb)}.titlebar{font-size:0.9rem;margin:5px;padding:5px;display:block;color:var(--c-fg-weak);font-family:monospace}h1,h2,h3,h4,h5,h6{color:var(--c-fg-medium)}a{color:var(--c-fg-strong)}a:hover{background-color:var(--c-bg-weak)}input[type="checkbox"]{display:none}label{display:inline-block;margin:0.1em 0;padding:0.15em 0.25em;border-radius:0.15em;color:var(--c-fg-strong);border:none;text-decoration:none}label:hover{background-image:linear-gradient(rgba(255,255,255,.1),rgba(0,0,0,.1));box-shadow:0 0 1px var(--c-highlight-bright)}input[type="checkbox"]+label{cursor:pointer}input[type="checkbox"] + label:before{font-family:monospace;border-radius:0.2rem;border:1px solid var(--c-highlight-bright);content:"\00a0";display:inline-block;height:1rem;margin:0 .25em 0 0;padding:0;vertical-align:top;width:1rem}input[type="checkbox"]:checked+label{color:var(--c-bg-strong);background-color:var(--c-highlight-bright)}input[type="checkbox"]:checked + label:before{background:var(--c-highlight-bright);border:1px solid var(--c-bg-strong);color:var(--c-bg-strong);content:"\2713";text-align:center}input[type="checkbox"]:disabled+label{cursor:not-allowed;opacity:0.5;pointer-events:none}input[type="checkbox"]:active+label{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,0));box-shadow:inset 0 .075rem .1rem rgba(0,0,0,.2)}.container--checkbox{display:flex;margin:3px;width:100%;border-radius:5px}#container--logo{margin-right:1rem;padding:0;display:inline-block;margin:0.25rem 0;text-align:left}#container--logo>a{font-size:1rem;text-decoration:none;display:inline-block;font-family:monospace;justify-content:center;align-items:center;border:0.35rem solid var(--c-highlight-bright)}.logo-1{color:var(--c-bg-strong);font-weight:bold;background-color:var(--c-highlight-bright);padding:0.25rem;float:left}.logo-2{color:var(--c-highlight-bright);padding:0.25rem;float:left}#container--logo>a:hover>span{background-color:var(--c-highlight-bright);transition-duration:var(--transition-duration);color:var(--c-bg-strong)}#container--tags-parent{height:100%;display:flex;flex-flow:column;animation:fadein 0.5s}#container--tags{flex:1;padding:5px;overflow-x:visible;overflow-y:auto}#container--entries-parent{display:flex;flex-flow:column;max-width:15rem;overflow-x:auto;overflow-y:auto;animation:fadein 1s}#container--entries{flex:1;height:100%}#container--display-parent{display:flex;flex:1;flex-flow:column;animation:fadein 1.5s}#container--display{overflow-y:auto;display:non;flex-flow:row;margin-left:5px;padding:5px}.display{margin:0;padding:0.5rem;max-height:100%;overflow-y:auto;animation:fadein 0.5s;border-radius:var(--border-radius-medium);border:1px solid var(--c-fg-weak);padding:5px;background:var(--c-grey-0);max-width:650px}.entry{cursor:pointer;padding:0.25rem;margin:2px 5%;border-radius:var(--border-radius-weak);animation:fadein var(--animation-speed);border:1px dashed var(--c-fg-medium)}.entry:hover{color:var(--c-highlight-bright);background:var(--c-highlight-medium);border-color:var(--c-highlight-bright);transition-duration:var(--transition-duration)}.entry:active{color:var(--c-bg-strong);background:var(--c-highlight-bright)}.entry-metadata--title{display:inline-block}.metadata--label{color:var(--c-fg-weak);font-style:italic}.metadata--tag{font-style:italic;display:inline-block;margin-right:5px;color:var(--c-fg-weak)}.button{display:inline-block;font-size:1.1em;margin:0.5em;padding:0.5em 1em;border-radius:0.15em;background-color:var(--c-highlight-bright);color:var(--c-bg-strong);border:none;text-decoration:none;background-image:linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,0));border:.075rem solid rgba(0,0,0,.1);box-shadow:0 .075rem .1rem rgba(0,0,0,.3)}.button:hover{border-color:rgba(0,0,0,0.1);background-image:linear-gradient(rgba(255,255,255,.1),rgba(0,0,0,.1))}.button:active{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,0));box-shadow:inset 0 .075rem .1rem rgba(0,0,0,.2)}.button:disabled{opacity:0.5;pointer-events:none}.hidden{display:none!important;border:10px solid red}.container{background:var(--c-bg-medium);padding:0.5rem 1rem;width:100%;max-width:768px;margin:auto;border-radius:1rem 1rem 0 0}.container-flex--v{display:flex;flex-direction:column;flex-wrap:nowrap;justify-content:flex-start}#container--filters{margin:0;padding:0;display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:flex-start;overflow:hidden;overflow-y:auto}.hidden{display:hidden}.overlay{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1000}html,body{min-height:100vh;margin:0}#container-explorer{margin:0;padding:0;height:100vh;display:flex;flex-direction:column}.header{display:flex;flex-direction:row;z-index:3}.header>.container{background:none}.footer{display:flex;flex-direction:row;z-index:3}#body{flex:1;overflow:auto;height:100%;background:var(--c-grey-weak)}.container-flex--h{display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:flex-start}blockquote{font-style:italic;color:var(--c-fg-strong);margin:1rem 0;padding:0.5rem 1rem;width:100%;background-color:var(--c-bg-weak);border-radius:0 1em 1em 0;background:var(--c-bg-weak);border-left:0.25rem solid var(--c-highlight-bright)}.highlight-strong{background-color:var(--c-highlight-bright)}hr{border:1px solid var(--c-highlight-faint)}</style><link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,800;1,400&display=swap" rel=stylesheet></head><body><div id=container-explorer><div class="container-flex--h header"><span class=titlebar>USENIR EXPLORER</span></div><div class=container-flex--h id=body><div id=container--filters><div id=container--tags-parent><div class=titlebar>Tags:</div><div id=container--tags></div></div><div id=container--entries-parent><div class=titlebar>Found:</div><div id=container--entries></div></div></div><div id=container--display-parent><div class=titlebar>Opened:</div><div id=container--display></div></div></div><div class="container-flex--h footer"><div id=container--logo><a href=index.html><span class=logo-1>usenir</span><span class=logo-2>.com</span></a></div><button class=button onclick=toggleFilterDisplay() id=btn--filter>Show Filters</button></div></div><script>
         const prefixes = { "tag": "tg", "entry": "e" };
-        var data = {"tags": [{"name": "knowledge", "occurrences": 1, "tag_id": 0}, {"name": "principles", "occurrences": 1, "tag_id": 1}, {"name": "wisdom", "occurrences": 1, "tag_id": 2}, {"name": "books", "occurrences": 1, "tag_id": 3}, {"name": "technology", "occurrences": 1, "tag_id": 4}, {"name": "small tech", "occurrences": 1, "tag_id": 5}, {"name": "retention", "occurrences": 1, "tag_id": 6}, {"name": "tools", "occurrences": 1, "tag_id": 7}, {"name": "insights", "occurrences": 1, "tag_id": 8}, {"name": "systems", "occurrences": 1, "tag_id": 9}, {"name": "cycles", "occurrences": 1, "tag_id": 10}, {"name": "development", "occurrences": 1, "tag_id": 11}, {"name": "reading", "occurrences": 2, "tag_id": 12}, {"name": "wip", "occurrences": 3, "tag_id": 13}], "entries": [{"title": " How to read a book", "tags": [{"name": "reading", "entry_tag_id": 12}, {"name": "books", "entry_tag_id": 3}], "entry_id": 0, "path": "entries/htrd.html", "modified": "1601826838.7398"}, {"title": " How to remember knowledge", "tags": [{"name": "retention", "entry_tag_id": 6}, {"name": "reading", "entry_tag_id": 12}], "entry_id": 1, "path": "entries/rmbrth.html", "modified": "1601827518.19403"}, {"title": " Importance of cycles", "tags": [{"name": "wip", "entry_tag_id": 13}, {"name": "systems", "entry_tag_id": 9}, {"name": "cycles", "entry_tag_id": 10}, {"name": "development", "entry_tag_id": 11}], "entry_id": 2, "path": "entries/cycles.html", "modified": "1601827131.99675"}, {"title": " Small tech", "tags": [{"name": "wip", "entry_tag_id": 13}, {"name": "technology", "entry_tag_id": 4}, {"name": "small tech", "entry_tag_id": 5}], "entry_id": 3, "path": "entries/small_tech.html", "modified": "1601827142.46878"}, {"title": " The Munger Operating System: How to Live a Life That Really Works", "tags": [{"name": "wip", "entry_tag_id": 13}, {"name": "knowledge", "entry_tag_id": 0}, {"name": "principles", "entry_tag_id": 1}, {"name": "wisdom", "entry_tag_id": 2}], "entry_id": 4, "path": "entries/fsinsights.html", "modified": "1601904734.98835"}, {"title": " Tool insights", "tags": [{"name": "tools", "entry_tag_id": 7}, {"name": "insights", "entry_tag_id": 8}], "entry_id": 5, "path": "entries/software_principles.html", "modified": "1601832069.08411"}]} ;
-        /* var data = {"tags": [{"name": "knowledge", "occurrences": 1, "tag_id": 0}, {"name": "principles", "occurrences": 1, "tag_id": 1}, {"name": "wisdom", "occurrences": 1, "tag_id": 2}, {"name": "books", "occurrences": 1, "tag_id": 3}, {"name": "technology", "occurrences": 1, "tag_id": 4}, {"name": "small tech", "occurrences": 1, "tag_id": 5}, {"name": "retention", "occurrences": 1, "tag_id": 6}, {"name": "tools", "occurrences": 1, "tag_id": 7}, {"name": "insights", "occurrences": 1, "tag_id": 8}, {"name": "systems", "occurrences": 1, "tag_id": 9}, {"name": "cycles", "occurrences": 1, "tag_id": 10}, {"name": "development", "occurrences": 1, "tag_id": 11}, {"name": "reading", "occurrences": 2, "tag_id": 12}, {"name": "wip", "occurrences": 3, "tag_id": 13}], "entries": [{"title": " How to read a book", "tags": [{"name": "reading", "entry_tag_id": 12}, {"name": "books", "entry_tag_id": 3}], "entry_id": 0, "path": "entries/htrd.html", "modified": "1601826838.7398"}, {"title": " How to remember knowledge", "tags": [{"name": "retention", "entry_tag_id": 6}, {"name": "reading", "entry_tag_id": 12}], "entry_id": 1, "path": "entries/rmbrth.html", "modified": "1601827518.19403"}, {"title": " Importance of cycles", "tags": [{"name": "wip", "entry_tag_id": 13}, {"name": "systems", "entry_tag_id": 9}, {"name": "cycles", "entry_tag_id": 10}, {"name": "development", "entry_tag_id": 11}], "entry_id": 2, "path": "entries/cycles.html", "modified": "1601827131.99675"}, {"title": " Small tech", "tags": [{"name": "wip", "entry_tag_id": 13}, {"name": "technology", "entry_tag_id": 4}, {"name": "small tech", "entry_tag_id": 5}], "entry_id": 3, "path": "entries/small_tech.html", "modified": "1601827142.46878"}, {"title": " The Munger Operating System: How to Live a Life That Really Works", "tags": [{"name": "wip", "entry_tag_id": 13}, {"name": "knowledge", "entry_tag_id": 0}, {"name": "principles", "entry_tag_id": 1}, {"name": "wisdom", "entry_tag_id": 2}], "entry_id": 4, "path": "entries/fsinsights.html", "modified": "1601827136.51276"}, {"title": " Tool insights", "tags": [{"name": "tools", "entry_tag_id": 7}, {"name": "insights", "entry_tag_id": 8}], "entry_id": 5, "path": "entries/software_principles.html", "modified": "1601832069.08411"}]} ; */
+        var data = {"tags": [{"name": "ideas", "occurrences": 1, "tag_id": 0}, {"name": "thinking process", "occurrences": 1, "tag_id": 1}, {"name": "book suggestions", "occurrences": 1, "tag_id": 2}, {"name": "problems", "occurrences": 1, "tag_id": 3}, {"name": "future", "occurrences": 1, "tag_id": 4}, {"name": "time managament", "occurrences": 1, "tag_id": 5}, {"name": "essay", "occurrences": 1, "tag_id": 6}, {"name": "books", "occurrences": 1, "tag_id": 7}, {"name": "small tech", "occurrences": 1, "tag_id": 8}, {"name": "retention", "occurrences": 1, "tag_id": 9}, {"name": "tools", "occurrences": 1, "tag_id": 10}, {"name": "insights", "occurrences": 1, "tag_id": 11}, {"name": "writing", "occurrences": 1, "tag_id": 12}, {"name": "unknown", "occurrences": 1, "tag_id": 13}, {"name": "Book summary", "occurrences": 1, "tag_id": 14}, {"name": "competitive programming", "occurrences": 1, "tag_id": 15}, {"name": "cycles", "occurrences": 1, "tag_id": 16}, {"name": "development", "occurrences": 1, "tag_id": 17}, {"name": "mental models", "occurrences": 1, "tag_id": 18}, {"name": "scrap", "occurrences": 1, "tag_id": 19}, {"name": "technology", "occurrences": 2, "tag_id": 20}, {"name": "reading", "occurrences": 2, "tag_id": 21}, {"name": "thinking", "occurrences": 2, "tag_id": 22}, {"name": "productivity", "occurrences": 2, "tag_id": 23}, {"name": "systems", "occurrences": 2, "tag_id": 24}, {"name": "wip", "occurrences": 15, "tag_id": 25}], "entries": [{"title": "Competitive programming progression", "tags": [{"name": "competitive programming", "entry_tag_id": 15}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 0, "path": "entries/comprog_progression.html", "modified": "1602428679.37545"}, {"title": "Getting things done", "tags": [{"name": "Book summary", "entry_tag_id": 14}, {"name": "productivity", "entry_tag_id": 23}], "entry_id": 1, "path": "entries/gettingthingsdoneBook.html", "modified": "1602481038.86074"}, {"title": "How to read a book", "tags": [{"name": "reading", "entry_tag_id": 21}, {"name": "books", "entry_tag_id": 7}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 2, "path": "entries/htrd.html", "modified": "1602428711.23249"}, {"title": "How to remember knowledge", "tags": [{"name": "retention", "entry_tag_id": 9}, {"name": "reading", "entry_tag_id": 21}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 3, "path": "entries/rmbrth.html", "modified": "1602428719.72077"}, {"title": "How to think", "tags": [{"name": "thinking", "entry_tag_id": 22}, {"name": "systems", "entry_tag_id": 24}, {"name": "mental models", "entry_tag_id": 18}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 4, "path": "entries/howtothink.html", "modified": "1602428701.69618"}, {"title": "How to write", "tags": [{"name": "thinking", "entry_tag_id": 22}, {"name": "writing", "entry_tag_id": 12}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 5, "path": "entries/howtowrite.html", "modified": "1602428706.78435"}, {"title": "Importance of cycles", "tags": [{"name": "wip", "entry_tag_id": 25}, {"name": "systems", "entry_tag_id": 24}, {"name": "cycles", "entry_tag_id": 16}, {"name": "development", "entry_tag_id": 17}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 6, "path": "entries/cycles.html", "modified": "1602428670.00714"}, {"title": "Managing and getting things done", "tags": [{"name": "productivity", "entry_tag_id": 23}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 7, "path": "entries/getthingsdone.html", "modified": "1602481093.70235"}, {"title": "Problems to think about", "tags": [{"name": "problems", "entry_tag_id": 3}, {"name": "future", "entry_tag_id": 4}, {"name": "technology", "entry_tag_id": 20}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 8, "path": "entries/problems.html", "modified": "1602428715.53263"}, {"title": "Scrap", "tags": [{"name": "scrap", "entry_tag_id": 19}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 9, "path": "entries/scrap.html", "modified": "1602428725.09695"}, {"title": "Small tech", "tags": [{"name": "wip", "entry_tag_id": 25}, {"name": "technology", "entry_tag_id": 20}, {"name": "small tech", "entry_tag_id": 8}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 10, "path": "entries/small_tech.html", "modified": "1602428734.65326"}, {"title": "The flow of time in a day and useful productivity", "tags": [{"name": "time managament", "entry_tag_id": 5}, {"name": "essay", "entry_tag_id": 6}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 11, "path": "entries/time.html", "modified": "1602427578.2345"}, {"title": "Tool insights", "tags": [{"name": "tools", "entry_tag_id": 10}, {"name": "insights", "entry_tag_id": 11}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 12, "path": "entries/software_principles.html", "modified": "1602428739.71342"}, {"title": "Unknown Title", "tags": [{"name": "unknown", "entry_tag_id": 13}], "entry_id": 13, "path": "entries/temporary.html", "modified": "1602435602.08179"}, {"title": "Validating ideas", "tags": [{"name": "ideas", "entry_tag_id": 0}, {"name": "thinking process", "entry_tag_id": 1}, {"name": "book suggestions", "entry_tag_id": 2}, {"name": "wip", "entry_tag_id": 25}], "entry_id": 14, "path": "entries/validating_ideas.html", "modified": "1602428748.0537"}]} ;
+        /* var data = {"tags": [{"name": "knowledge", "occurrences": 1, "tag_id": 0}, {"name": "principles", "occurrences": 1, "tag_id": 1}, {"name": "wisdom", "occurrences": 1, "tag_id": 2}, {"name": "books", "occurrences": 1, "tag_id": 3}, {"name": "technology", "occurrences": 1, "tag_id": 4}, {"name": "small tech", "occurrences": 1, "tag_id": 5}, {"name": "retention", "occurrences": 1, "tag_id": 6}, {"name": "tools", "occurrences": 1, "tag_id": 7}, {"name": "insights", "occurrences": 1, "tag_id": 8}, {"name": "systems", "occurrences": 1, "tag_id": 9}, {"name": "cycles", "occurrences": 1, "tag_id": 10}, {"name": "development", "occurrences": 1, "tag_id": 11}, {"name": "reading", "occurrences": 2, "tag_id": 12}, {"name": "wip", "occurrences": 3, "tag_id": 13}], "entries": [{"title": " How to read a book", "tags": [{"name": "reading", "entry_tag_id": 12}, {"name": "books", "entry_tag_id": 3}], "entry_id": 0, "path": "entries/htrd.html", "modified": "1601826838.7398"}, {"title": " How to remember knowledge", "tags": [{"name": "retention", "entry_tag_id": 6}, {"name": "reading", "entry_tag_id": 12}], "entry_id": 1, "path": "entries/rmbrth.html", "modified": "1601827518.19403"}, {"title": " Importance of cycles", "tags": [{"name": "wip", "entry_tag_id": 13}, {"name": "systems", "entry_tag_id": 9}, {"name": "cycles", "entry_tag_id": 10}, {"name": "development", "entry_tag_id": 11}], "entry_id": 2, "path": "entries/cycles.html", "modified": "1601827131.99675"}, {"title": " Small tech", "tags": [{"name": "wip", "entry_tag_id": 13}, {"name": "technology", "entry_tag_id": 4}, {"name": "small tech", "entry_tag_id": 5}], "entry_id": 3, "path": "entries/small_tech.html", "modified": "1601827142.46878"}, {"title": " The Munger Operating System: How to Live a Life That Really Works", "tags": [{"name": "wip", "entry_tag_id": 13}, {"name": "knowledge", "entry_tag_id": 0}, {"name": "principles", "entry_tag_id": 1}, {"name": "wisdom", "entry_tag_id": 2}], "entry_id": 4, "path": "entries/fsinsights.html", "modified": "1601827136.51276"}, {"title": " Tool insights", "tags": [{"name": "tools", "entry_tag_id": 7}, {"name": "insights", "entry_tag_id": 8}], "entry_id": 5, "path": "entries/software_principles.html", "modified": "1601832069.08411"}]}; */
         var filter_tags = [];
         var entries_buffer = [];
         const prefix_tag = prefixes.tag;
         const prefix_entry = prefixes.entry;
 
-        const entry_div_classlist = "entry box";
+        // const entry_div_classlist = "entry box";
+        const entry_div_classlist = "entry";
         const entry_title_classlist = "entry-metadata--title";
         const entry_metadata_label_classlist = "metadata--label";
         const entry_metadata_tag_classlist = "metadata--tag";
         const label_classlist = "label"
         const checkbox_container_classlist = "container--checkbox";
 
-        const content_div_classList = "content";
+        const display_div_classList = "display";
 
         const titlebar_classList = "titlebar";
 
@@ -527,6 +24,7 @@ blockquote{
         function initialize() {
             render_filters();
             preprocess_data();
+            initilaizeVisibility();
         }
         function preprocess_data() {
             //console.log("processing");
@@ -709,13 +207,28 @@ blockquote{
                 return response.text();
             }).then(function (html) {
                 // This is the HTML from our response as a text string
-                let parent = document.getElementById("container--content");
+                let parent = document.getElementById("container--display");
                 parent.innerHTML = "";
 
-                var content_div = document.createElement("div");
-                content_div.classList = content_div_classList;
-                content_div.innerHTML = html;
-                parent.appendChild(content_div);
+                var display_div = document.createElement("div");
+                display_div.classList = display_div_classList;
+                display_div.innerHTML = html;
+                parent.appendChild(display_div);
             });
+        }
+
+        function initilaizeVisibility(){
+            filtersDiv = document.getElementById("container--filters").classList.add("hidden");
+        }
+        function toggleFilterDisplay(){
+            filtersDiv = document.getElementById("container--filters").classList.toggle("hidden");
+            displayDiv = document.getElementById("container--display-parent").classList.toggle("hidden");
+            button = document.getElementById("btn--filter");
+            if(button.innerHTML == "Show Filters"){
+                button.innerHTML = "Hide Filters";
+            }else{
+                button.innerHTML = "Show Filters";
+            }
+            
         }
     </script></body></html>
