@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Usenir.com</title>
+    <meta name="description" content="usenir.com">
+    <meta name="author" content="usenir.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css.css">
+    <!-- <style> $css_data </style> -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,800;1,400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row vertical fullscreen">
+        <div class="col dontgrow">
+            <div class="logo float-l shadow">
+                    <a href="index.html" class="shadow"> usenir.com </a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row height100 padx pady">
+                <div class="col">
+                    <div class="titlebar">Tags:</div>
+                    <div class="scrollx" id="container--tags"></div>
+                </div>
+                <div class="col" style="border: 1px solid red;">
+                    <div class="titlebar" style="border: 2px solid red;">Found:</div>
+                    <div id="container--entries" style="border: 3px solid blue;"></div>
+                </div>
+
+                <div class="col" style="border: 1px solid red;">
+                    <div class="titlebar" style="width: 100%; border: 3px solid blue;">Opened:</div>
+                    <div id="container--display"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const prefixes = { "tag": "tg", "entry": "e" };
+        /* var data = $data_json ; */
+        var data = { "tags": [{ "name": "knowledge", "occurrences": 1, "tag_id": 0 }, { "name": "principles", "occurrences": 1, "tag_id": 1 }, { "name": "wisdom", "occurrences": 1, "tag_id": 2 }, { "name": "books", "occurrences": 1, "tag_id": 3 }, { "name": "technology", "occurrences": 1, "tag_id": 4 }, { "name": "small tech", "occurrences": 1, "tag_id": 5 }, { "name": "retention", "occurrences": 1, "tag_id": 6 }, { "name": "tools", "occurrences": 1, "tag_id": 7 }, { "name": "insights", "occurrences": 1, "tag_id": 8 }, { "name": "systems", "occurrences": 1, "tag_id": 9 }, { "name": "cycles", "occurrences": 1, "tag_id": 10 }, { "name": "development", "occurrences": 1, "tag_id": 11 }, { "name": "reading", "occurrences": 2, "tag_id": 12 }, { "name": "wip", "occurrences": 3, "tag_id": 13 }], "entries": [{ "title": " How to read a book", "tags": [{ "name": "reading", "entry_tag_id": 12 }, { "name": "books", "entry_tag_id": 3 }], "entry_id": 0, "path": "entries/htrd.html", "modified": "1601826838.7398" }, { "title": " How to remember knowledge", "tags": [{ "name": "retention", "entry_tag_id": 6 }, { "name": "reading", "entry_tag_id": 12 }], "entry_id": 1, "path": "entries/rmbrth.html", "modified": "1601827518.19403" }, { "title": " Importance of cycles", "tags": [{ "name": "wip", "entry_tag_id": 13 }, { "name": "systems", "entry_tag_id": 9 }, { "name": "cycles", "entry_tag_id": 10 }, { "name": "development", "entry_tag_id": 11 }], "entry_id": 2, "path": "entries/cycles.html", "modified": "1601827131.99675" }, { "title": " Small tech", "tags": [{ "name": "wip", "entry_tag_id": 13 }, { "name": "technology", "entry_tag_id": 4 }, { "name": "small tech", "entry_tag_id": 5 }], "entry_id": 3, "path": "entries/small_tech.html", "modified": "1601827142.46878" }, { "title": " The Munger Operating System: How to Live a Life That Really Works", "tags": [{ "name": "wip", "entry_tag_id": 13 }, { "name": "knowledge", "entry_tag_id": 0 }, { "name": "principles", "entry_tag_id": 1 }, { "name": "wisdom", "entry_tag_id": 2 }], "entry_id": 4, "path": "entries/fsinsights.html", "modified": "1601827136.51276" }, { "title": " Tool insights", "tags": [{ "name": "tools", "entry_tag_id": 7 }, { "name": "insights", "entry_tag_id": 8 }], "entry_id": 5, "path": "entries/software_principles.html", "modified": "1601832069.08411" }] };
+        var filter_tags = [];
+        var entries_buffer = [];
+        const prefix_tag = prefixes.tag;
+        const prefix_entry = prefixes.entry;
+
+        // const entry_div_classlist = "entry box";
+        const entry_div_classlist = "entry";
+        const entry_title_classlist = "entry-metadata--title strong";
+        const entry_metadata_label_classlist = "metadata--label weak padr";
+        const entry_metadata_tag_classlist = "metadata--tag weak padr";
+        const label_classlist = "label"
+        const checkbox_container_classlist = "container--checkbox";
+
+        const display_div_classList = "display";
+
+        const titlebar_classList = "titlebar";
+
+        window.onload = initialize;
+
+        function initialize() {
+            render_filters();
+            preprocess_data();
+        }
+        function preprocess_data() {
+            //console.log("processing");
+            // add prefix to tagId in json, to directly use it later on
+            data.tags.forEach(element => {
+                element.tag_id = prefix_tag + element.tag_id;
+            });
+            // add prefix to tagId in json, to directly use it later on
+            // data.entries.forEach(entry => {
+            //     entry.tags.forEach(function (id, index, tagIds) {
+            //         //console.log(tagIds[index]);
+            //         tags[index] = prefix_tag + tags[index];
+            //     });
+            // });
+            data.entries.forEach(entry => {
+                entry.tags.forEach(element => {
+                    element.entry_tag_id = prefix_tag + element.entry_tag_id;
+                });
+            });
+        }
+
+        function modify_filters(event) {
+            var state = this;
+            var reset_buffer = false;
+
+            /*
+            efficient buffer use requires knowing if filtration got stricter or looser
+            stricter:
+                more filters to be applied, so need to purely cut elements from current buffer
+            looser:
+                more entries from the universal set have become eligible to enter into the buffer set,
+                so need to reset buffer by copying the universal set into it
+                ToDo: Instead of resetting buffer, find a way to add entries to it more surgicallly
+                    Why? Because loading up the entire universal set for processing when a filter
+                    that barely has any effect is removed causes a huge computation debt for a tiny
+                    change in the list
+                    What to keep in mind? resetting the buffer is actually fast because it's getting set by reference
+            */
+            tag_id = this.id;
+
+            if (this.checked) {
+                filter_tags.push(tag_id);
+            } else {
+                filter_tags.splice(filter_tags.indexOf(tag_id), 1);
+                reset_buffer = true;
+            }
+
+            if (reset_buffer === true) {
+                reset_entries_buffer();
+            }
+            //console.clear();
+            get_entries();
+            render_entries();
+        }
+        function reset_entries_buffer() {
+            entries_buffer = data.entries;
+        }
+
+        function get_entries() {
+            //reset entries_buffer with universal set if the filter tag isn't empty
+            if (filter_tags.length != 0 && entries_buffer.length == 0) {
+                entries_buffer = data.entries;
+            }
+            let processing_buffer = [];
+
+            //sort tags in ascending order to improve filtration speed
+            filter_tags.sort();
+
+            //console.log(filter_tags);
+            // the concept is: filter entries_buffer and put whatever is relevant into processing_buffer
+            for (var iter_filter = 0, len = filter_tags.length; iter_filter < len; iter_filter++) {
+                let tag_id = filter_tags[iter_filter];
+                console.log("entries buffer:", entries_buffer);
+                processing_buffer = entries_buffer.filter(function (e) {
+                    //return e.tags.includes(tag_id);
+                    //console.log(does_entry_have_tag(e, tag_id));
+                    return does_entry_have_tag(e, tag_id);
+                });
+                console.log(processing_buffer);
+                //update entries_buffer with freshly processed trimmed down data for next iteration
+                entries_buffer = processing_buffer;
+                //console.log(entries_buffer);
+            }
+            //finally dump processing_buffer into entries_buffer no matter what
+            entries_buffer = processing_buffer;
+        }
+
+        function does_entry_have_tag(entry, tag_id) {
+            for (i = 0, len = entry.tags.length; i < len; i++) {
+                console.log(entry.tags[i].entry_tag_id + " vs " + tag_id)
+                if (entry.tags[i].entry_tag_id == tag_id) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function render_filters() {
+            var checkboxes = document.createDocumentFragment();
+
+            // let disabled_counter = 0;
+
+            for (var i = 0, len = data.tags.length; i < len; i++) {
+                var checkbox_container = document.createElement("div");
+                checkbox_container.classList = checkbox_container_classlist;
+                var checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.id = prefix_tag + data.tags[i].tag_id;
+
+                // checkbox.name = data.tags[i].name;
+                checkbox.onclick = modify_filters;
+
+                var label = document.createElement('label');
+                label.htmlFor = prefix_tag + data.tags[i].tag_id;
+                label.classList = label_classlist;
+                label.append(document.createTextNode(data.tags[i].name));
+
+                // if (disabled_counter % 2 == 1) {
+                //     checkbox.disabled = true;
+                //     label.classList.remove("box");
+                // }
+                // disabled_counter += 1;
+
+                checkbox_container.appendChild(checkbox);
+                checkbox_container.appendChild(label);
+                checkboxes.appendChild(checkbox_container);
+            }
+
+            // Clear parent div
+            var parent = document.getElementById("container--tags");
+            parent.innerHTML = "";
+            parent.appendChild(checkboxes);
+        }
+
+        function render_entries() {
+            var entries = document.createDocumentFragment();
+            for (var i = 0, len = entries_buffer.length; i < len; i++) {
+                var entry_div = document.createElement("div");
+                entry_div.classList = entry_div_classlist;
+                entry_div.entry_id = prefix_entry + entries_buffer[i].entry_id;
+                entry_div.onclick = load_entry;
+                entry_div.path = entries_buffer[i].path;
+                //console.log(entries_buffer[i].path);
+
+                let entry_title = document.createElement("span");
+                entry_title.append(document.createTextNode(entries_buffer[i].title))
+                entry_title.classList = entry_title_classlist;
+                entry_div.appendChild(entry_title);
+
+                let br = document.createElement("br");
+                entry_div.appendChild(br);
+
+                let entry_metadata_label = document.createElement("span");
+                entry_metadata_label.append(document.createTextNode("tags:"));
+                entry_metadata_label.classList = entry_metadata_label_classlist;
+                entry_div.appendChild(entry_metadata_label);
+
+                entries_buffer[i].tags.forEach(tag => {
+                    let entry_metadata_tag = document.createElement("span");
+                    entry_metadata_tag.append(document.createTextNode("#" + tag.name));
+                    entry_metadata_tag.classList = entry_metadata_tag_classlist;
+                    entry_div.appendChild(entry_metadata_tag);
+                });
+
+
+                // add tags
+
+                entries.append(entry_div);
+            }
+
+            div_parent = document.getElementById("container--entries");
+            div_parent.innerHTML = "";
+            div_parent.appendChild(entries);
+        }
+
+        function load_entry(event) {
+            let state = this;
+            console.log(state.path)
+            fetch(state.path).then(function (response) {
+                return response.text();
+            }).then(function (html) {
+                // This is the HTML from our response as a text string
+                let parent = document.getElementById("container--display");
+                parent.innerHTML = "";
+
+                var display_div = document.createElement("div");
+                display_div.classList = display_div_classList;
+                display_div.innerHTML = html;
+                parent.appendChild(display_div);
+            });
+        }
+    </script>
+</body>
+
+</html>
