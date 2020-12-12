@@ -155,14 +155,20 @@
         }
         function setWork() {
             var body = document.getElementById("body");
+            body.classList.remove("indicator--shortbreak");
+            body.classList.remove("indicator--longbreak");
             body.classList.add("indicator--work");
         }
         function setShortBreak() {
             var body = document.getElementById("body");
+            body.classList.remove("indicator--work");
+            body.classList.remove("indicator--longbreak");
             body.classList.add("indicator--shortbreak");
         }
         function setLongBreak() {
             var body = document.getElementById("body");
+            body.classList.remove("indicator--work");
+            body.classList.remove("indicator--shortbreak");
             body.classList.add("indicator--longbreak");
         }
 
