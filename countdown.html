@@ -1,0 +1,715 @@
+<html lang="en">
+<head>
+    <meta charSet="utf-8" />
+    <title>qCountdown</title>
+    <meta name="description" content="QuickCountdown. Quick countdown timers for busy people." />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords" content="Timer, Countdown">
+    <style>
+        *{box-sizing: border-box;}
+        
+        body{
+            padding: 0.25 1rem 0.25 1rem;
+            color: #6c757d;
+            font-size: 1rem;
+            line-height: 1.7em;
+            background-color: #dfdcd9;
+            color: #000;
+        }
+        .container{
+            max-width: 650px;
+            margin: auto;
+        }
+        .timer{
+            position: relative;
+            padding: 0.5rem 1rem 0.5rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem 2rem 0.5rem 0.5rem;            
+            background: linear-gradient(225deg, #9bd89b, #b8ffb8);
+            color: #00a85d;
+        }
+        .timer::before{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: -1;
+                border-radius: inherit;
+                box-shadow:  -20px 20px 60px #92cc92, 
+                            20px -20px 60px #c6ffc6;
+                
+            }
+        .timer-actions{
+            /* background-color: #FAFAFB; */
+            border-radius: 0.5rem;
+            overflow: auto;
+        }
+        .timer-display{
+            font-family: sans-serif;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .timer-title{
+            font-family: sans-serif;
+        }
+        
+        .timer--neutral{
+            background: linear-gradient(225deg, #c9c6c3, #efebe8);
+            color: #000;
+        }
+        .timer--neutral::before{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: -1;
+                border-radius: inherit;
+                box-shadow:  -20px 20px 60px #bebbb8, 
+                        20px -20px 60px #fffdfa;
+        }        
+        .timer--expired{
+            background: linear-gradient(225deg, #e69f9f, #ffbdbd);
+            color: #ff073a;
+        }
+        .timer--expired::before{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: -1;
+                border-radius: inherit;
+                box-shadow:  -20px 20px 60px #ab7777, 
+                        20px -20px 60px #ffebeb;
+        }
+        .timer--expired .timer-title{
+            font-family: sans-serif;            
+        }
+
+        .timer--new{
+            background: linear-gradient(225deg, #b9c5db, #dceaff);
+        }
+        .timer--new::before{
+            content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: -1;
+                border-radius: inherit;
+                box-shadow:  -20px 20px 60px #afbacf, 
+             20px -20px 60px #edfcff;
+        }
+        .timer--new .timer-title{
+            color: #000;
+        }
+        .row{
+            display: block;
+        }
+        .app-title{
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 2rem;
+            padding: 0.25rem;
+            margin-bottom: 1rem;
+            color: #000;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            text-shadow:inset 1px 1px 1px #fff;
+
+        }
+        input{
+            /* width: 100%; */
+            border: none;
+            margin-bottom: 5px;
+            border-bottom: 2px solid #000;
+            min-height: 1.5rem;
+        }
+        input:disabled{
+            border-bottom: 2px solid #000;
+        }
+        .hidden{
+            display: none;
+        }
+        .timer-input-display{
+            background-color: #00000020;
+        }
+        .button{
+            /* background-color: #4285f4; */
+            background-color: #059BC8;
+            color: #fff;
+            padding: 0.25rem 0.5rem;
+            min-width: 4rem;
+            border: none;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+            margin: 5px;
+            font-size: 1rem;
+        }
+        .button:hover {
+            opacity: 0.8;
+        }
+        .button:disabled{
+            opacity: 0.4;
+        }
+        .button--red {
+            background-color: #ff073a;
+            color: #fff;
+        }
+        .button--green {
+            background-color: #00BC68;
+            color: #fff;
+        }
+        .button--yellow {
+            background-color: eb9c00;
+            color: #fff;
+            background: rgb(235,156,0);
+            background: linear-gradient(45deg, #eb9c00 0%, #b57800 100%);
+        }
+        .button--whatsapp{
+            text-decoration: none;
+            background-color: #00c851;
+            color: #fff;
+            font-size: 1rem;
+            padding: 0 1rem;
+            display: inline-block;
+        }
+        .right{
+            float: right;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body{
+                background-color: #202326;
+                color: #ffffffc0;
+            }
+            .app-title{
+                color: #fff;
+            }
+            .timer{
+                box-shadow: none        ;
+                background-color: #2c2c2c;
+                background: linear-gradient(225deg, #1e2520, #232c25);
+            }
+            .timer::before{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: -1;
+                border-radius: inherit;                
+                box-shadow:  -20px 20px 60px #0d100e, 
+                            20px -20px 60px #354238;
+            }
+            .timer--neutral{
+                background: linear-gradient(225deg, #1d2022, #222529);
+                color: #d0d0d0;
+            }
+            .timer--neutral::before{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: -1;
+                border-radius: inherit;
+                box-shadow:  -20px 20px 60px #0d0e0f, 
+                            20px -20px 60px #33383d;
+            }
+            .timer--expired{
+                background: linear-gradient(225deg, #2A2629, #291D1F);
+            }
+            .timer--expired::before{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: -1;
+                border-radius: inherit;
+                box-shadow:  -20px 20px 60px #0c0809, 
+                            20px -20px 60px #302223;
+            }
+            .timer--new{
+                background: linear-gradient(225deg, #0a1529, #0c1930);
+            }
+            .timer--new::before{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: -1;
+                border-radius: inherit;
+                box-shadow:  -20px 20px 60px #040912, 
+                            20px -20px 60px #122548;
+            }
+            .timer--new .timer-title{
+                color: #fff;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <span class="app-title">qCountdown</span>
+        </div>
+        <div class="row timer timer--neutral app-header">
+            <div>
+                <button style="width: 50%;" class="button" onclick="copyUrlToClipboard('timer1')">Copy link</button>
+                <input style="width: 40%;" type="text" id="page-url" style="width: 100%;" placeholder="generatingPageUrl" disabled>
+                <br>
+                <span style="font-family: monospace;">The LINK is your timer DATA. Save the link to save all your timers.</span>
+            </div>
+            <div>
+                <button style="width: 100%;" class="button button--yellow" onclick="addNewTimer()">+ Add new countdown</button>
+                <!-- <a style="width: 40%; text-align: center;" href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share" class="button button--whatsapp" id="share-button--whatsapp">Share on WhatsApp</a> -->
+                
+            </div>
+        </div>
+        <div class="row timer timer--new hidden" id="timer-new">
+            <div class="row timer-title-container">
+                <span class="timer-title">
+                    Add New Countdown
+                </span>
+            </div>
+            <div class="row" id="timer-new--input">
+                <input type="text" pattern="[a-zA-Z0-9\s]+" id="timer-new-title--input" placeholder="Timer title" style="display: block;width: 100%;">
+                <input type="time" id="timer-new-time--input" step="1">
+                <input type="date" id="timer-new-date--input">
+            </div>
+            <div class="row">
+                <button class="button button--green" id="timer-new-button--savenew" onclick="saveNewTimer('timer1')">Save</button>
+                <button class="button button--yellow" id="timer-new-button--cancelnew" onclick="cancelNewTimer('timer1')">Cancel</button>
+            </div>
+        </div>
+        <!-- <div class="row timer">
+            <div class="row timer-title-container" id="timer1">
+                <span class="timer-title" id="timer1-title">
+                    timer1 title
+                </span>
+            </div>
+            <div class="row" id="timer1--display">
+                <span>Time Left:</span>
+                <span id="timer1-display--text">wip</span>
+            </div>
+            <div class="row hidden" id="timer1--input">
+                <input type="time" id="timer1-time--input" step="1">
+                <input type="date" id="timer1-date--input">
+            </div>
+            <div class="row">
+                <button class="button" id="timer1-button--edit" onclick="editTimer('timer1')">Edit</button>
+                <button class="button" id="timer1-button--save" onclick="saveEditedTimer('timer1')" disabled>Save</button>
+                <button class="button" id="timer1-button--delete" onclick="deleteTimer('timer1')">Delete</button>
+                <button class="button button--yellow" id="timer1-button--confirmdelete" onclick="confirmdeleteTimer('timer1')">Confirm Delete</button>
+            </div>
+        </div> -->
+    </div>
+    <div class="container" id="timer-container">
+
+    <script>
+        /*
+            DateTime handling convention:
+                1. Maintain pure month(index1) in dateTimeString, url and html inputs
+                    Strictly maintain the true value in dateTimeString
+                2. When writing to dateTimeOBJECT, decrement it by one.
+                3. When reading from dateTimeOBJECT, increment it by one.
+        */
+        
+        //set constants
+        const updateInterval = 1000;
+        const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        const modes = {EDIT:'edit', DELETE:'delete',DEFAULT:'default'};
+
+        var counter = 0;
+        // var timers = ['papel01503020210320','something else 01503020210320'];
+        var timers=[];
+        var timerIds=[]
+
+        //initialize variables and dom
+        function initializeApp(){
+            extractTimersFromUrlData();
+            generateDom();
+            updateWindowUrl();
+            updateShareButton();
+            
+            //manually update countdowns immediately on page load
+            updateAllCountdowns();
+        }
+
+        initializeApp();
+
+
+        //automated refresh function
+        window.setInterval(
+            function(){
+                    updateAllCountdowns();
+                }
+            , updateInterval
+        );
+        function updateShareButton(){
+            //Removed button because whatsapp forcibli decodes shared  url making it unusable
+            // document.getElementById('share-button--whatsapp').href = encodeURI('whatsapp://send?text=I am sharing my timers \n '+ document.getElementById('page-url').value);
+            // console.log(document.getElementById('page-url').value);
+        }
+
+
+        function updateUrlDisplay(){
+            //Regenerate url from data in timers array
+            let baseUrl = window.location.href.split('?')[0];
+            //get encoded json
+            let generatedUrl = baseUrl+'?data='+JSON.stringify(timers);
+            document.getElementById('page-url').value=encodeURI(generatedUrl);
+        }
+
+
+        function updateWindowUrl(){
+            updateUrlDisplay();
+            // update window url ONLY IF generatedUrl and current window url do not match
+            // this condition avoids infinite loop in which page gets continously refreshed because window url gets continously set
+            if(document.location.href !=document.getElementById('page-url').value){
+                document.location.href = document.getElementById('page-url').value;
+            }
+        }
+
+
+        function copyUrlToClipboard(){
+            // enable the text field for copying
+            document.getElementById('page-url').disabled=false;
+            var copyText = document.getElementById('page-url');
+            // Select the text field
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            // Copy the text inside the text field
+            document.execCommand("copy");
+            // disable the text field
+            document.getElementById('page-url').disabled=true;
+
+            // Alert the copied text
+            alert("Link Copied");
+        }
+
+
+        //extract timer-array data array from url
+        function extractTimersFromUrlData(){
+            timers=JSON.parse(decodeURIComponent(getQueryVariable('data')));
+            // Edge case: When no data is found in json, timers variable gets set to boolean value false.
+            // In this case, reset it to an empty array
+            if(typeof timers ==='boolean'){
+                timers=[];
+            }
+        }
+
+
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return (false);
+        }
+
+
+        function generateDom(){
+            // reset timerIds array
+            timerIds=[];
+            // reset timer-container dom
+            var timerContainer = document.getElementById('timer-container');
+            timerContainer.innerHTML='';
+            timers.forEach(function(timerData){
+                // generate timerId
+                let timerId='timer'+counter;
+                counter++;
+                // push timer id to timerIds array
+                timerIds.push(timerId);
+                let timerTitle = timerData.slice(0, -14);
+                //append timer to dom
+                appendTimerToDom(timerId,timerTitle,timerData.slice(-14));
+                
+            });
+        }
+
+
+        function appendTimerToDom(timerId,timerTitle,dateTimeString){
+            let timerDivHtml = '<div class="row timer" id="'+timerId+'"><div class="row timer-title-container">		<span class="timer-title" id="'+timerId+'-title">			'+timerTitle+'		</span>	</div><div class="row"><span class="timer-target-display" id="'+timerId+'-target--display">Loading target...</span></div>	<div class="row timer-display" id="'+timerId+'--display"> <span id="'+timerId+'-display--text">Processing...</span> <br><div class="timer-progressbar" id="'+timerId+'-progressbar"></div>	</div>	<div class="row hidden timer-input-display" id="'+timerId+'--input">		<input type="time" id="'+timerId+'-time--input" step="1">		<input type="date" id="'+timerId+'-date--input">	</div>	<div class="row timer-actions">		<button class="button right" id="'+timerId+'-button--edit" onclick="editTimer(\''+timerId+'\')">Edit</button>		<button class="button button--green right hidden" id="'+timerId+'-button--save" onclick="saveEditedTimer(\''+timerId+'\')">Save</button> <button class="button hidden right" id="'+timerId+'-button--canceldelete" onclick="cancelDeleteTimer(\''+timerId+'\')">Cancel Delete</button>	<button class="button button--yellow hidden right" id="'+timerId+'-button--confirmdelete" onclick="confirmDeleteTimer(\''+timerId+'\')">Confirm Delete</button>	<button class="button button--red right" id="'+timerId+'-button--delete" onclick="deleteTimer(\''+timerId+'\')">Delete</button>	</div></div>';
+            let timerDomDiv = document.createElement('div');
+            timerDomDiv.innerHTML=timerDivHtml;
+            var timerContainer = document.getElementById('timer-container');
+            timerContainer.appendChild(timerDomDiv);
+            //set timer input data fields
+            let dateTimeObject = generateDateTimeObject(dateTimeString);
+            setInputDateTime(timerId,dateTimeObject);
+            setTimerTargetDisplay(timerId,dateTimeObject);
+        }
+
+
+        function setTimerTargetDisplay(timerId,dateTimeObject){
+            let dateString = days[ dateTimeObject.getDay() ]
+                            + ' ' + dateTimeObject.getDate()
+                            + ' ' + months[ dateTimeObject.getMonth() ]
+                            + ' ' + dateTimeObject.getFullYear()
+                            + ' ' + formatAMPM(dateTimeObject);
+            document.getElementById(timerId+'-target--display').innerHTML=dateString;
+        }
+
+
+        function formatAMPM(dateTimeObject) {
+            let hours = dateTimeObject.getHours();
+            let minutes = dateTimeObject.getMinutes();
+            let ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            let strTime = hours + ':' + minutes + ' ' + ampm;
+            return strTime;
+        }
+
+
+        function generateDateTimeObject(dateTimeString){
+            //string format: hhmmssyyyyMMdd
+            //indexes(starting-position) hh:0 mm:2 ss:4 yyyy:6 MM:10 dd:12
+            if(dateTimeString.length<14){
+                alert('invalid inputs');
+            }else{
+                //increment month by 1 since it's an old pita
+                //date constructor uses month with index 0
+                let monthFromString = parseInt(dateTimeString.substr(10,2));
+                //using constructor: new Date(year,month,date,hour,minute,second)
+                let dateTimeObject = new Date(dateTimeString.substr(6,4),
+                                // dateTimeString.substr(10,2),
+                                monthFromString-1,
+                                dateTimeString.substr(12,2),
+                                dateTimeString.substr(0,2),
+                                dateTimeString.substr(2,2),
+                                dateTimeString.substr(4,2)
+                                );
+                return dateTimeObject;
+            }
+        }
+
+
+        function generateDateTimeString(dateTimeObject){
+            let hh = ('0' + dateTimeObject.getHours()).slice(-2);
+            let mm = ('0' + dateTimeObject.getMinutes()).slice(-2);
+            let ss = ('0' + dateTimeObject.getSeconds()).slice(-2);
+            let yyyy = ('0' + dateTimeObject.getFullYear()).slice(-4);
+            let MM = ('0' + (dateTimeObject.getMonth()+1)).slice(-2);
+            let dd = ('0' + dateTimeObject.getDate()).slice(-2);
+            return hh+mm+ss+yyyy+MM+dd;
+        }
+
+
+        function getInputDateTime(timerId){
+            let timeInputId=timerId+'-time--input';
+            let dateInputId=timerId+'-date--input';
+            // document.getElementById(timeInputId).value
+            let inputTime = document.getElementById(timeInputId).value;
+            let inputDate = document.getElementById(dateInputId).value;
+            return new Date(inputDate +' '+ inputTime);
+        }
+
+
+        function setInputDateTime(timerId,dateTimeObject){
+            let timeInputId=timerId+'-time--input';
+            let dateInputId=timerId+'-date--input';
+
+            let hh = ('0' + dateTimeObject.getHours()).slice(-2);
+            let mm = ('0' + dateTimeObject.getMinutes()).slice(-2);
+            let ss = ('0' + dateTimeObject.getSeconds()).slice(-2);
+
+            let yyyy = ('0000' + dateTimeObject.getFullYear()).slice(-4);
+            let MM = ('0' + (dateTimeObject.getMonth()+1)).slice(-2);
+            let dd = ('0' + dateTimeObject.getDate()).slice(-2);
+            
+            //time format: HH:mm:ss
+            document.getElementById(timeInputId).value = hh+':'+mm+':'+ss;
+            //date format: yyyy:MM:dd
+            document.getElementById(dateInputId).value = yyyy+'-'+MM+'-'+dd;
+            // document.getElementById(dateInputId).value;
+        }
+
+
+        function editTimer(timerId){
+            setTimerMode(timerId, modes.EDIT);
+        }
+
+
+        function saveEditedTimer(timerId){
+            setTimerMode(timerId,modes.DEFAULT);
+            //update value in array
+            editTimerInArray(timerId);
+        }
+        
+        
+        function setTimerMode(timerId,timerMode){
+            switch(timerMode){
+                case modes.EDIT:
+                // only save button and input fields are visible
+                document.getElementById(timerId+'--input').classList.remove("hidden");
+                document.getElementById(timerId+'-button--edit').classList.add("hidden");
+                document.getElementById(timerId+'-button--save').classList.remove("hidden");
+                document.getElementById(timerId+'-button--delete').classList.add("hidden");
+                document.getElementById(timerId+'-button--confirmdelete').classList.add("hidden");
+                document.getElementById(timerId+'-button--canceldelete').classList.add("hidden");
+                break;
+                
+                case modes.DELETE:
+                // only confirmDelete and cancelDelete buttons are visible
+                document.getElementById(timerId+'--input').classList.add("hidden");
+                document.getElementById(timerId+'-button--edit').classList.add("hidden");
+                document.getElementById(timerId+'-button--save').classList.add("hidden");
+                document.getElementById(timerId+'-button--delete').classList.add("hidden");
+                document.getElementById(timerId+'-button--confirmdelete').classList.remove("hidden");
+                document.getElementById(timerId+'-button--canceldelete').classList.remove("hidden");
+                break;
+                
+                case modes.DEFAULT:
+                // only delete and edit buttons are visible
+                document.getElementById(timerId+'--input').classList.add("hidden");
+                document.getElementById(timerId+'-button--edit').classList.remove("hidden");
+                document.getElementById(timerId+'-button--save').classList.add("hidden");
+                document.getElementById(timerId+'-button--delete').classList.remove("hidden");
+                document.getElementById(timerId+'-button--confirmdelete').classList.add("hidden");
+                document.getElementById(timerId+'-button--canceldelete').classList.add("hidden");
+                break;
+            }
+        }
+
+
+        function updateAllCountdowns(){
+            timerIds.forEach(function(id){
+                updateCountdownById(id);
+            });
+        }
+
+
+        function updateCountdownById(timerId){
+            let countDownDateTime = getInputDateTime(timerId);
+            let timerDisplayId = timerId+'-display--text';
+            //get current date and time
+            now = new Date().getTime();
+            //calculate difference between now and target dateTime
+            var timeDifference = countDownDateTime - now;
+            // calculate dd,hh,mm,ss
+            var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            //update result in element with target id
+            document.getElementById(timerDisplayId).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            
+            //if timer has expired
+            if (timeDifference < 0) {
+                // set countdown display as 'EXPIRED'
+                document.getElementById(timerDisplayId).innerHTML = "EXPIRED";
+                document.getElementById(timerId).classList.add("timer--expired");
+            }else{
+                document.getElementById(timerId).classList.remove("timer--expired");
+            }
+        }
+
+
+        function deleteTimer(timerId){
+            setTimerMode(timerId, modes.DELETE);
+        }
+
+
+        function cancelDeleteTimer(timerId){
+            setTimerMode(timerId, modes.DEFAULT);
+        }
+
+
+        function confirmDeleteTimer(timerId){
+            deleteTimerFromArray(timerId);
+            
+            // Remove timer from dom
+            document.getElementById(timerId).remove();
+            //Update url and reinitialize the app
+            updateWindowUrl();
+            initializeApp();
+        }
+
+
+        //timer array operations
+        function deleteTimerFromArray(timerId){
+            let timerTitle = document.getElementById(timerId+'-title').innerHTML.trim();
+            //find index of timer to be deleted
+            let index  = timers.findIndex(arrayStr => arrayStr.slice(0, -14).trim() === timerTitle);
+
+            // Check if timer exists in timers array and remove it
+            timers = timers.filter(arrayStr => arrayStr.slice(0, -14).trim() !== timerTitle);
+            return index;
+        }
+
+
+        function editTimerInArray(timerId){
+            // Check if old timer exists in timers array and remove it
+            let index = deleteTimerFromArray(timerId);
+            //add new timer value in array:
+            //get input datetime and convert it to dateTimeString
+            let dateTimeObject=getInputDateTime(timerId);
+            let dateTimeString = generateDateTimeString(dateTimeObject);
+            //add input timer data to timers array            
+            //ToDo: add validation for dateTimeString
+            let timerArrayString = document.getElementById(timerId+'-title').innerHTML.trim()+dateTimeString;
+            //insert newly edited timer at its original index
+            timers.splice(index,0,timerArrayString);
+            
+            //save changed data to url
+            updateWindowUrl();
+            initializeApp();
+        }
+
+
+        function addNewTimer(){
+            document.getElementById('timer-new').classList.remove("hidden");
+        }
+
+
+        function cancelNewTimer(){
+            document.getElementById('timer-new').classList.add("hidden");
+        }
+
+
+        function saveNewTimer(){
+            document.getElementById('timer-new').classList.add("hidden");
+            let timerId = 'timer-new';
+            
+            //get input datetime and convert it to dateTimeString
+            let dateTimeObject=getInputDateTime(timerId);
+            let dateTimeString = generateDateTimeString(dateTimeObject);
+            //add input timer data to timers array
+            
+            //ToDo: add validation for dateTimeString
+            let timerArrayString = document.getElementById('timer-new-title--input').value+dateTimeString;
+            timers.push(timerArrayString);
+
+            //update url using updated timers array
+            updateWindowUrl();
+            //reinitialize everything
+            initializeApp();
+        }
+
+
+    </script> 
+</body>
+</html>
