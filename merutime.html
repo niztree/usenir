@@ -8,6 +8,25 @@
     <meta name="author" content="usenir.com">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+
+        :root{
+            --c-work-bg: #c2ffcc;
+            --c-work-fg: #000;
+            --c-shortbreak-bg: #FFDCDC;
+            --c-shortbreak-fg: #000;
+            --c-longbreak-bg: #b9b4fc;
+            --c-longbreak-fg: #000;
+            
+            /* --c-work-bg: #000;
+            --c-work-fg: #00ff00;
+            --c-shortbreak-bg: #000;
+            --c-shortbreak-fg: #f00;
+            --c-longbreak-bg: #000;
+            --c-longbreak-fg: #33f; */
+        }
+
+
+
         html,
         body {
             margin: 0;
@@ -15,19 +34,20 @@
             overflow: hidden;
         }
 
+
         .indicator--work {
-            background-color: #000;
-            color: #0f0;
+            background-color: var(--c-work-bg);
+            color: var(--c-work-fg);
         }
 
         .indicator--shortbreak {
-            background-color: #000;
-            color: #f00;
+            background-color: var(--c-shortbreak-bg);
+            color:var(--c-shortbreak-fg);
         }
 
         .indicator--longbreak {
-            background-color: #000;
-            color: #33f;
+            background-color: var(--c-longbreak-bg);
+            color: var(--c-longbreak-fg);
         }
 
         .fullscreen {
@@ -58,6 +78,32 @@
             font-size: 2rem;
             font-weight: bold;
         }
+        .actionbar{
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            overflow: hidden;
+            margin: auto;
+            box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.35), 0 4px 15px 0 rgba(0, 0, 0, 0.5);
+        }
+        .actionbar>button {
+            float: right;
+        }
+        .actionbar>button:hover{
+            opacity: 0.8;
+        }
+        .actionbar>button:active{
+            opacity: 0.5;
+        }
+        button {
+            background-color: #4285f4;
+            color: #fff;
+            padding: 0.5em 1em;
+            border: none;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+            margin: 5px;
+        }
+
     </style>
 </head>
 
@@ -69,9 +115,14 @@
         <div class="row text--center">
             <span id="display--activity"></span>
         </div>
+        <div class="row actionbar">
+            <button onclick="setLightTheme()">Light</button>
+            <button onclick="setDarkTheme()">Dark</button>
+        </div>
     </div>
 
     <script>
+        updateDom();
         (function () {
             setInterval(updateDom, 1000);
         })();
@@ -186,6 +237,25 @@
                     beepNTimes(n-1);
                 }
             }, 100)
+        }
+
+        function setLightTheme(){
+            var root = document.querySelector(':root');
+            root.style.setProperty('--c-work-bg','#c2ffcc');
+            root.style.setProperty('--c-work-fg','#000');
+            root.style.setProperty('--c-shortbreak-bg',' #b9b4fc');
+            root.style.setProperty('--c-shortbreak-fg',' #000');
+            root.style.setProperty('--c-longbreak-bg',' #FFDCDC');
+            root.style.setProperty('--c-longbreak-fg',' #000');
+        }
+        function setDarkTheme(){
+            var root = document.querySelector(':root');
+            root.style.setProperty('--c-work-bg','#000');
+            root.style.setProperty('--c-work-fg','#00ff00');
+            root.style.setProperty('--c-shortbreak-bg',' #000');
+            root.style.setProperty('--c-shortbreak-fg',' #f00');
+            root.style.setProperty('--c-longbreak-bg',' #000');
+            root.style.setProperty('--c-longbreak-fg',' #33f');
         }
     </script>
 </body>
