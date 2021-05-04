@@ -16,6 +16,7 @@
             max-height: 70px;
             font-family: sans-serif;
             padding: 1rem;
+            padding-bottom: 3rem;
         }
 
         .form {
@@ -379,15 +380,11 @@
                 fetch(url)
                     .then((resp) => resp.json())
                     .then(function (data) {
-                        // console.log(data)
-                        // add date range div
-                        
-                        var dateSeparator = document.createElement("div");
-                        dateSeparator.innerHTML = "<span class='big bold'> "+ JSON.parse(JSON.stringify(dateToUse)) +" + 7 days </span>";
-                        resultContainer.appendChild(dateSeparator);
-
                         var eligibleSlots = filterEligibleSlots(data);
-                        displayEligibleSlots(eligibleSlots);
+                        displayEligibleSlots(
+                            eligibleSlots
+                            , dateToUse
+                        );
                 });
             }
         }
@@ -500,14 +497,18 @@
 
 
 
-        function displayEligibleSlots(slotarray) {
+        function displayEligibleSlots(slotarray, dateFrom) {
+            var resultContainer = document.getElementById("resultContainer");
+
+            var dateSeparator = document.createElement("div");
+                        dateSeparator.innerHTML =  "<span class='big bold'>7 day period: </span>";
+            resultContainer.appendChild(dateSeparator);
+
             // console.log((slotarray).length);
             if(slotarray.length == 0){
-                var resultContainer = document.getElementById("resultContainer");
-                resultContainer.innerHTML = "";
                 var center = document.createElement("div");
                 var center_name = document.createElement("span");
-                center_name.innerHTML = "No eligible slot was found";
+                center_name.innerHTML = " In the 7 day period : No eligible slot was found";
                 center_name.classList.add("centername");
                 center.appendChild(center_name);
                 center.classList.add("centers");
@@ -516,8 +517,6 @@
             } else {
                     
                 // IMPROVED DIV BASED DISPLAY
-
-                var resultContainer = document.getElementById("resultContainer");
                 
                 for (var i = 0; i < slotarray.length; i++) {
                     
