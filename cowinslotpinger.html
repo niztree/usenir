@@ -27,6 +27,7 @@
             border-radius: 0.5rem;
             background-color: #fff;
             box-shadow: 0 0.75rem 1.25rem rgba(0,0,0,0.10);
+            display: block;
         }
 
         input {
@@ -232,13 +233,19 @@
         <br><br>
         <button id="searchslot">Search Slot</button>
 
-        <br><br>
+        
+        <!-- <input type="text" id="intervalcountdown" name="intervalcountdown" disabled> -->
+    </div>
+    <div class="form" id="refreshdiv">
         <input type="checkbox" id="refreshcheckbox" name="refreshcheckbox" value="refresh">
         <label for="refreshinterval">refresh every</label>
         <input type="number" id="refreshinterval" name="refreshinterval" value=15>
         <span>minutes</span>
-        <br>
-        <!-- <input type="text" id="intervalcountdown" name="intervalcountdown" disabled> -->
+    </div>
+    <div class="form" id="unlockdiv">
+        <input type="password" placeholder="enter here" id="unlockstring">
+        <button onclick="unlock()" id="unlockbutton">Unlock</button>
+
     </div>
 
     <div class="slotresults" id="resultContainer">
@@ -711,11 +718,46 @@
             toggleDataRefresh();
         }
 
+        function goodEnoughHash(string) {
+            var hash = 0;
+            if (string.length == 0)
+                return hash;
+            for (let i = 0; i < string.length; i++) {
+                var charCode = string.charCodeAt(i);
+                hash = ((hash << 7) - hash) + charCode;
+                hash = hash & hash;
+            }
+            console.log(hash);
+            return hash;
+        }
+
+        function unlock(){
+            //unlockstring
+            let unlockString = getTextInput("unlockstring");
+            let hash = goodEnoughHash(unlockString);
+            if(hash == -713261987){
+                // show refresh checkbox
+                var refreshDiv = document.getElementById("refreshdiv");
+                refreshDiv.style.display="block";
+                // hide unlockdiv
+                var unlockDiv = document.getElementById("unlockdiv");
+                unlockDiv.style.display="none";
+            }
+
+            //unlockbutton
+        }
+
         window.onload = function () {
             // reset and hide alarm
             stopAlarm()
             // stop refresh by default
             stopRefresh();
+
+            // hide refresh div
+
+            // show refresh checkbox
+            var refreshDiv = document.getElementById("refreshdiv");
+            refreshDiv.style.display="none";
 
             // listeners
             // on state select, load districts
@@ -732,6 +774,12 @@
             var refreshCheckbox = document.getElementById("refreshcheckbox");
             refreshCheckbox.addEventListener("change", function(){
                 toggleDataRefresh();
+            });
+
+            // on checkbox select, set interval
+            var unlockButton = document.getElementById("unlockbutton");
+            unlockButton.addEventListener("click", function(){
+                unlock();
             });
 
             // fetch states from api
