@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+    <meta charset=utf-8>
+    <title>Software tools for the busy professional</title>
+    <meta name=description content=usenir.com>
+    <meta name=author content=usenir.com>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <!-- <link rel=stylesheet href="style.css"> -->
+    <style>
+        :root{--color-background:#f8f8f8;--color-bg-light:#fafafa;--color-bg-dark:#aaa;--color-foreground:#ffffff;--color-highlight-1:#4184f3;--color-highlight-light:#ff8a3c;--color-highlight-medium:#fa6400;--color-highlight-dark:#b64900;--color-highlight-bg:#ffdec8;--color-button-blue:#4184f3;--color-button-yellow:#ffd75b;--color-text-dark:#000;--color-text-medium:#43434d;--color-text-light:#6e757e;--color-border-medium:#dadce0;--color-border-dark:#a7a7a7;--color-metadata:#3c4043;--font-san-serif:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Ubuntu","Roboto","Noto Sans","Droid Sans",sans-serif;--font-mono:ui-monospace,"Cascadia Mono","Segoe UI Mono","Ubuntu Mono","Roboto Mono",Menlo,Monaco,Consolas,monospace;--shadow-medium:rgba(0,0,0,0.1)}*,*:before,*:after{box-sizing:border-box}html{margin:0,padding 0;scroll-behavior:smooth}body{background-color:var(--color-background);font-family:Arial;padding:0 1rem 1rem 1rem;max-width:1400px;margin:auto;font-size:16px;font-family:var(--font-san-serif);line-height:1.6;color:var(--color-text-medium)}table{margin-top:1rem;display:block;overflow-y:auto;border-collapse:collapse;color:var(--color-text-medium)}thead{background:var(--color-background);text-align:left}tr:nth-child(even){background-color:var(--color-bg-light)}tbody tr:hover{background-color:rgba(0,0,0,0.1)}th,td{padding:4px 8px;border:1px solid var(--color-border-medium)}hr{border:none;border:1px solid var(--color-border-medium)}p{margin-bottom:.85rem}h1,h2,h3{font-weight:normal}a{color:var(--color-highlight-medium)}a:hover{background:var(--color-highlight-bg)!important;color:var(--color-text)!important}a:focus,button:focus{border:2px solid var(--color-highlight-medium)}blockquote{display:block;border:2px dashed var(--color-border-dark);font-weight:bold;font-size:1.1rem;padding:1rem 2rem 1rem 2rem;margin:15px auto;color:#000;position:relative;text-align:center}blockquote::before{font-weight:400;font-style:normal;content:"\"";font-size:3rem;line-height:26px;position:absolute;top:20px;left:5px}blockquote::after{font-weight:400;font-style:normal;content:"\"";font-size:3rem;line-height:26px;position:absolute;bottom:0px;right:5px}img{max-width:100%;border-radius:0.75rem;display:block;margin:auto}h1{font-weight:400;margin-top:1.275rem;margin-bottom:.85rem}h2,h3{font-weight:400;margin-top:1.275rem;margin-bottom:.85rem}pre{padding:1rem 1rem;overflow-x:auto;background-color:var(--color-background);font-size:1rem;font-family:var(--font-mono);border:1px solid var(--color-border-medium);opacity:0.8}code{background-color:var(--color-background)}.codehilitetable{background-color:var(--color-background);border-collapse:collapse;overflow-x:auto;border:1px solid var(--color-border-medium)}.codehilitetable pre{border:none}.codehilitetable tr{margin:0;padding:0;border:none}.codehilitetable pre{padding:0;margin:0}.linenos pre{padding-left:5px;padding-right:5px}.codehilite{}.page-title{margin:0}.nav{margin:-1rem -1rem 1rem -1rem;padding-top:1rem;border-bottom:1px solid var(--color-border-medium)}.nav>span{padding:0 0.75rem 0.25rem 0.75rem;color:var(--color-text-light);font-size:0.75rem}.nav a{display:inline-block;text-decoration:none;padding:0 0.5rem 0.25rem 0.5rem;color:#000}.nav .nav--active{background:#fff;box-shadow:0 1rem #fff;border:1px solid var(--color-border-medium);border-bottom:none;box-shadow:0 1rem #fff,inset 0 0.3em 0.3em rgba(0,0,0,0.1)}.logo{font-size:2rem;font-weight:normal}.metadata{font-size:0.75rem;color:var(--color-text-light)}.description{font-size:0.8rem;color:var(--color-text-light)}.italic{font-style:italic}.admonition{margin:0.5rem 0;padding:0.5rem 1rem 0.25rem 1rem}.admonition-title{font-weight:bold;margin:0 -1rem;padding:0.3em 1rem}.note{background:#fae041}.caution{background:#ff6684}.important{background:#20beff}.codehilite .hll{background-color:#ffffcc}.codehilite{background:#f8f8f8}.codehilite .c{color:#8f5902;font-style:italic}.codehilite .err{color:#a40000;border:1px solid #ef2929}.codehilite .g{color:#000000}.codehilite .k{color:#204a87;font-weight:bold}.codehilite .l{color:#000000}.codehilite .n{color:#000000}.codehilite .o{color:#ce5c00;font-weight:bold}.codehilite .x{color:#000000}.codehilite .p{color:#000000;font-weight:bold}.codehilite .ch{color:#8f5902;font-style:italic}.codehilite .cm{color:#8f5902;font-style:italic}.codehilite .cp{color:#8f5902;font-style:italic}.codehilite .cpf{color:#8f5902;font-style:italic}.codehilite .c1{color:#8f5902;font-style:italic}.codehilite .cs{color:#8f5902;font-style:italic}.codehilite .gd{color:#a40000}.codehilite .ge{color:#000000;font-style:italic}.codehilite .gr{color:#ef2929}.codehilite .gh{color:#000080;font-weight:bold}.codehilite .gi{color:#00A000}.codehilite .go{color:#000000;font-style:italic}.codehilite .gp{color:#8f5902}.codehilite .gs{color:#000000;font-weight:bold}.codehilite .gu{color:#800080;font-weight:bold}.codehilite .gt{color:#a40000;font-weight:bold}.codehilite .kc{color:#204a87;font-weight:bold}.codehilite .kd{color:#204a87;font-weight:bold}.codehilite .kn{color:#204a87;font-weight:bold}.codehilite .kp{color:#204a87;font-weight:bold}.codehilite .kr{color:#204a87;font-weight:bold}.codehilite .kt{color:#204a87;font-weight:bold}.codehilite .ld{color:#000000}.codehilite .m{color:#0000cf;font-weight:bold}.codehilite .s{color:#4e9a06}.codehilite .na{color:#c4a000}.codehilite .nb{color:#204a87}.codehilite .nc{color:#000000}.codehilite .no{color:#000000}.codehilite .nd{color:#5c35cc;font-weight:bold}.codehilite .ni{color:#ce5c00}.codehilite .ne{color:#cc0000;font-weight:bold}.codehilite .nf{color:#000000}.codehilite .nl{color:#f57900}.codehilite .nn{color:#000000}.codehilite .nx{color:#000000}.codehilite .py{color:#000000}.codehilite .nt{color:#204a87;font-weight:bold}.codehilite .nv{color:#000000}.codehilite .ow{color:#204a87;font-weight:bold}.codehilite .w{color:#f8f8f8;text-decoration:underline}.codehilite .mb{color:#0000cf;font-weight:bold}.codehilite .mf{color:#0000cf;font-weight:bold}.codehilite .mh{color:#0000cf;font-weight:bold}.codehilite .mi{color:#0000cf;font-weight:bold}.codehilite .mo{color:#0000cf;font-weight:bold}.codehilite .sa{color:#4e9a06}.codehilite .sb{color:#4e9a06}.codehilite .sc{color:#4e9a06}.codehilite .dl{color:#4e9a06}.codehilite .sd{color:#8f5902;font-style:italic}.codehilite .s2{color:#4e9a06}.codehilite .se{color:#4e9a06}.codehilite .sh{color:#4e9a06}.codehilite .si{color:#4e9a06}.codehilite .sx{color:#4e9a06}.codehilite .sr{color:#4e9a06}.codehilite .s1{color:#4e9a06}.codehilite .ss{color:#4e9a06}.codehilite .bp{color:#3465a4}.codehilite .fm{color:#000000}.codehilite .vc{color:#000000}.codehilite .vg{color:#000000}.codehilite .vi{color:#000000}.codehilite .vm{color:#000000}.codehilite .il{color:#0000cf;font-weight:bold}.header{display:block;margin-top:2rem;margin-bottom:3rem;clear:both;color:var(--color-text-medium)}.centrecolumn{background:var(--color-foreground);float:left;width:70%;box-shadow:0 0 1.25rem rgba(0,0,0,0.1);padding:1rem;z-index:2}.rightcolumn{float:left;width:30%;margin:0;position:sticky;top:1rem;z-index:1}.rightcolumn span{color:var(--color-text-light);padding-left:1rem}.card{padding:1rem}.toc{max-height:90vh;overflow-y:auto;padding:0 0 0 1rem}.toc ul{list-style-type:none;padding-left:1rem}.toc>ul{padding-left:0;margin-top:0}.toc>ul>li a{display:inline-block;padding:0.2rem}.toc>ul ul{}.toc a{text-decoration:none}.row:after{content:"";display:table;clear:both}#btntoggletoc{display:none}@media screen and (max-width:992px){}@media screen and (max-width:768px){.centrecolumn,.rightcolumn{width:100%;margin:1% 0 0 0}.toc{position:fixed;bottom:0;left:0;z-index:998;background:var(--color-foreground);box-shadow:0 -0.25rem 0.6rem rgba(0,0,0,0.1);border-top:2px solid var(--color-text-light);width:100%;padding:1rem;max-height:90vh;overflow-y:auto;z-index:99;display:none;opacity:0.94}#btntoggletoc{display:inline-block;position:fixed;bottom:1rem;right:1rem;z-index:999;padding:0.5rem 1.25rem 0.5rem 1.25rem;background:var(--color-button-yellow)!important;border:none;box-shadow:0 0.25rem 0.6rem rgba(0,0,0,0.3);z-index:100}}@media screen and (min-width:768px){.toc{display:block!important}#btntoggletoc{display:none}}@media screen and (max-width:576px){}
+    </style>
+</head>
+
+<body>
+    <button id="btntoggletoc">Index</button>
+
+    <div class="row">
+        <div class="header">
+            <span class="logo">UseNir</span>
+            by Niraj Zade
+        </div>
+    </div>
+    <div class="row">
+        <div class="centrecolumn">
+            <div class="nav">
+                <span>Sections</span>
+                
+                
+                    
+                        <a href="index.html#misc">Misc</a>
+                    
+                    
+                
+                
+                    
+                        <a class="nav--active" href="index.html#practical computing">Practical Computing</a>
+                    
+                    
+                
+                
+                    
+                        <a href="index.html#zero to tonight">Zero To Tonight</a>
+                    
+                    
+                
+            </div>
+
+            <!-- title -->
+            <h1 class="page-title">Software tools for the busy professional</h1>
+            <!-- description -->
+            <span class="italic">Quick and brainless tools to quickly  create software, analyze data, create APIs, websites and quickly host them.</span>
+            <hr>
+
+            <!-- category -->
+            <!-- <span class="">Practical computing</span> &nbsp; -->
+
+            <!-- tags -->
+            <span class="metadata">tags: </span>
+            
+                <span class="metadata italic">development&nbsp;</span> 
+            
+                <span class="metadata italic">tips&nbsp;</span> 
+            
+                <span class="metadata italic">tools&nbsp;</span> 
+            
+            <br>
+            <!-- date -->
+            <span class="metadata">modified: </span>
+            
+                <span class="metadata italic">21 May 2021 &nbsp;</span>
+            
+            <br>
+            <span class="metadata">last modified: </span>
+            <span class="metadata italic">21 May 2021</span>
+            <hr>
+
+                <p>To get things done fast: cheaply and reliably; while using minimum brain power. This is a highly opionated list that I have ended up with over the years.</p>
+<h1 id="data-environment-setup">Data environment setup</h1>
+<ul>
+<li>Just use <a href="https://www.anaconda.com/">Anaconda</a>. Let it manage the packages etc and you just focus on getting work done. It's free for personal use.</li>
+</ul>
+<h1 id="visualizations">Visualizations</h1>
+<ul>
+<li>General<ul>
+<li>For diagrams, use <a href="https://www.diagrams.net/">diagrams.net</a><ul>
+<li>It's free, and exports a highly standardized file which opens in all kinds of softwares. It's future proof and dammn easy to use.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Data<ul>
+<li>Make sure you know Excel. Everyone uses excel everywhere. Everything comes in Excel.</li>
+</ul>
+</li>
+<li>Python<ul>
+<li><a href="https://seaborn.pydata.org/examples/index.html">Seaborn</a>. <ul>
+<li>The graphs come out beautiful enough without touching the deafults or without having to do any tweaking at all. You can always switch to something else later on for polish. Honestly, I never needed to switch.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>R<ul>
+<li>ggplot2. Use it so much that you get fast at it.</li>
+</ul>
+</li>
+<li>Misc<ul>
+<li><a href="https://observablehq.com/">Observable</a><ul>
+<li>Founded by the guy behind <a href="https://d3js.org/">d3.js</a></li>
+<li>This takes some time to learn, but dammn it's good and beautiful. Works in the browser without installation, and you can simply drag and drop sqlite file in it and start visualizing things. Love it.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="huge-datatsets">Huge datatsets</h1>
+<ul>
+<li>sublime text<ul>
+<li>If you regularly deal with huge CSVs and need to quickly zip through it. </li>
+<li>It zips through absolutely huge files insanely fast(even in multi-gigabyte range), even on slow/trash computers. Sublime text is a superpower.</li>
+</ul>
+</li>
+</ul>
+<h1 id="quickly-understand-datasets">Quickly understand datasets</h1>
+<ul>
+<li>Excel</li>
+<li><a href="https://observablehq.com/">Observable</a></li>
+<li>Try <a href="https://datasette.io/">datasette</a>. It's free, open source, and it's dammn simple to get good at fast.</li>
+</ul>
+<h1 id="sharing-datasetsreports">Sharing datasets/reports</h1>
+<ul>
+<li>Excel<ul>
+<li>To share with tech literate managers</li>
+</ul>
+</li>
+<li>Shiny dashboard link<ul>
+<li>To share with top brass and people with other important things to do than tinker in your excel</li>
+</ul>
+</li>
+<li>SQlite<ul>
+<li>Share with anyone who is an analyst or a fellow geek being paid to monkey around with data</li>
+<li>To store data for archival purposes</li>
+<li>Sqlite is timeless, immortal and doesn't do funky magic manipulations to your data like excel. Also all softwares support reading data from sqlite. Use it. There is a reason why every android phone, embedded device, computer and also server uses SQlite.</li>
+</ul>
+</li>
+</ul>
+<h1 id="api-and-web-development">Api and web development</h1>
+<ul>
+<li><a href="https://jsoneditoronline.org/">jsoneditoronline.org</a>to construct and visualize JSON</li>
+<li><a href="https://hoppscotch.io/">hoppscotch.io</a> to quickly try out api.<ul>
+<li>It completely works in the browser, no need to install it or do anything. </li>
+<li>Great free alternative to postman.</li>
+</ul>
+</li>
+</ul>
+<h1 id="hosting">Hosting</h1>
+<ul>
+<li>Static websites<ul>
+<li><a href="https://pages.github.com/">GithubPages</a>: If you don't have a domain name registered. It's free, works without needing a domain name, and all that you have to do to update webwsite is simply push it to github. It has unlimited builds.</li>
+<li><a href="https://pages.cloudflare.com/">CloudflarePages</a>: JAMstack platform. If you already own a domain name. It has unlimited bandwidth etc. Only limitation is the numebr of builds. The free tier has 500 builds per months.(500 website updates per month)</li>
+</ul>
+</li>
+</ul>
+<h1 id="domain-registration">Domain registration</h1>
+<ul>
+<li>Use <a href="https://www.namecheap.com/">namecheap.com</a>. Don't think too much. They have been in business for a long time, have a solid reputation, and don't do shady practices.<ul>
+<li>Godaddy ios straight out scum, full of dark patterns. Go on the inetrnet and you'll find people raging on it.</li>
+<li>Gandi has solid services, but has had many outages and data losses.</li>
+</ul>
+</li>
+</ul>
+<h1 id="deploying-to-cloud">Deploying to cloud</h1>
+<ul>
+<li>To deploy code<ul>
+<li><a href="https://www.heroku.com/">Heroku</a><ul>
+<li>Takes from local code to cloud in 5 minutes. Personal favourite.</li>
+<li>They have such a good tooling to brainlessly deploy to cloud and get done with it. No need to think long and hard about what to service to choose etc.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>To deploy VMs<ul>
+<li><a href="https://www.linode.com/">Linode</a><ul>
+<li>An old player in the game. Good pricing, SOLID service.</li>
+</ul>
+</li>
+<li><a href="https://www.digitalocean.com/">DigitalOcean</a><ul>
+<li>A competitor to Linode. Good pricing, SOLID service.</li>
+<li>Personally, I've only used their bare metal VMs. Don't have experience about their docker and kubernetes offerings.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><em>Notice how I didn't mention aws? Because aws USES UP BRAINPOWER. It's a solid choice for professinals. But not in in the initial stages when you quickly ned to go from 0 to 80. And don't even ask about the amount of money I have lost simply because a service didn't get shut down properly, or some weird hidden checkbox stayed checked and aws kept charging little money every month.</em></p>
+<h1 id="quickly-creating-data-dashboards">Quickly creating data dashboards</h1>
+<ul>
+<li>Use <a href="https://shiny.rstudio.com/">shiny</a> with R.<ul>
+<li>Holy shit this one is a superpower. Insanely fast to prototype and get results out of the door.</li>
+</ul>
+</li>
+</ul>
+<h1 id="quickly-create-crud-apps">Quickly create crud apps</h1>
+<p>The rule of thumb is: use whatever you are right now most comfortable with. However, there are some options which help to bang out stuff really really fast.</p>
+<ul>
+<li>Language: Python<ul>
+<li><a href="https://www.djangoproject.com/">Django</a>. Django is python's killer app. If you know django, use django. It has a clear cut way of doing things (the django way!), and is great for crud stuff. But it will fight you if you try to do fancy stuff outside crud.</li>
+<li>If you don't know django, use flask with WTForms and flask-bootstrap. There's a quick start guide on this website. Look it up. It takes like an hour to quickly learn enough flask to start banging out prototypes.</li>
+<li>Initially build with the default jinja2 templating engine. Later on, replace components with react, vue or whatever if-and-when you find the time.</li>
+</ul>
+</li>
+<li>Database: Postgres<ul>
+<li>Rock solid, battle tested, has sane defaults, quickly meshes with django and flask, and is readily available with every cloud provider. What else do you want?</li>
+</ul>
+</li>
+</ul>
+<h1 id="quickly-create-apis">Quickly create apis</h1>
+<ul>
+<li><a href="https://www.django-rest-framework.org/">Django rest framework</a><ul>
+<li>If django is python's killer app, django rest framework is django's killer app.</li>
+<li>If you use it commercially, kick bakd some money and <a href="https://fund.django-rest-framework.org/topics/funding/">send some funds</a>. The software is f#$^ing awesome</li>
+</ul>
+</li>
+<li>Flask is still an easy choice, if you have enough common sense to decide and stick to a structure.</li>
+</ul>
+<h1 id="blogging">Blogging</h1>
+<ul>
+<li>Use wordpress and get started. <ul>
+<li>Don't waste time writing a custom static website generator. Writing your own generator is a form of procrastination.</li>
+<li>This website is generated by a custom static website generator. I've written more code for this website than I've written actual articles, so this has been a gigantic waste of time. Dut dammn it's a fun way to waste time.</li>
+</ul>
+</li>
+<li>If you have a dev environment, use jekyll and get on with it.<ul>
+<li>There are tons of generators out there. Jekyll has a huge community and out of the box support by GitHub, so you can quickly get started without using too much brain.</li>
+</ul>
+</li>
+</ul>
+<h1 id="data-backup">Data backup</h1>
+<ul>
+<li><a href="https://www.tarsnap.com/">Tarsnap</a><ul>
+<li>If you are a professional and understand technical things. The creator(Colin Percival) is a fucking legend on <a href="https://news.ycombinator.com/user?id=cperciva">hn</a>.</li>
+</ul>
+</li>
+<li><a href="https://www.backblaze.com/">Backblaze</a><ul>
+<li>Ideal if you do stuff like creating courses, or have huge datasets, movies etc.</li>
+<li>A cheap and no bullshit service: fixed price, unlimited storage. I prefer it over google drive and dropbox.</li>
+<li>NOT AVAILABLE FOR LINUX USERS for obvious reasons (it has a fixed price for unlimited bandwidth. Linux users have a habit of abusing services and will end up backing up entire servers to backblaze).</li>
+<li>Just install their client and point it to your folders. It'll do the rest. No need to pay attention to it.</li>
+</ul>
+</li>
+</ul>
+<h1 id="quick-notes-and-tips">Quick notes and tips</h1>
+<h2 id="google-services">Google services</h2>
+<ul>
+<li>Google has a habit of killing off random services every few years. Make sure that you don't get locked in and develop a hard dependency on google services.</li>
+</ul>
+<p>It's an abusive girlfriend. Don't get too attached.</p>
+<h2 id="docker-kubernetes-etc">Docker, kubernetes etc</h2>
+<ul>
+<li>I use docker a lot.<ul>
+<li>In one line: It simplifies my entire dev setup and enables me to brainlessly deploy stuff to the cloud.</li>
+<li>If someone wants to edit my project, I just point them to my docker image.</li>
+<li>If I am done with dev work and want to puch to the cloud, I simply point to my docker image</li>
+<li>If anyone even breathes in my code's general direction, I simply point to my docker image.</li>
+</ul>
+</li>
+<li>I HAVE ZERO EXPERIENCE WITH KUBERNETES.</li>
+</ul>
+<h1 id="browser-extensions">Browser extensions</h1>
+<ul>
+<li>Ublock origin<ul>
+<li>Because no ads.</li>
+<li>Helps to quickly block elements in websites. For example: I have blocked the entire twitter trending sidebar. The world is no longer outraged 24/7 and twitter is now actually enjoyable to open.</li>
+</ul>
+</li>
+<li>Enhancer for youtube<ul>
+<li>It's download screenshot feature is a KILLER FEATURE.</li>
+</ul>
+</li>
+</ul>
+<h1 id="pdf-readers">Pdf readers</h1>
+<ul>
+<li>Windows<ul>
+<li><a href="https://www.sumatrapdfreader.org/free-pdf-reader">SuamtraPdf</a><ul>
+<li>EXTREMELY FAST, free, and has zero bloat. It makes you want to uninstall Adobe reader.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Linux<ul>
+<li><a href="https://okular.kde.org/">Okular</a><ul>
+<li>FAST</li>
+<li>The annotations, comments and highlights feature is dammn good.</li>
+<li>Can open a huge variety of formats <a href="https://okular.kde.org/formats/">list</a>. I used it to open everything: pdf, epub, mobi etc.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="operating-system">Operating system</h1>
+<ul>
+<li>If you have a mac, use what it came with.</li>
+<li>
+<p>Choosing any linux distro is debatable.</p>
+</li>
+<li>
+<p>Personal machine</p>
+<ul>
+<li>Ubuntu<ul>
+<li>Only the long term support version</li>
+<li>After years of distro hopping across dozens of distros, I've ended up with ubuntu.</li>
+<li>Basically, It simply works without any tweaking. You can get going quickly without even needing to understand linux or anything. </li>
+<li>All packages you need are simply available. All problems you will encounter have been already answered in forums.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Server<ul>
+<li>Debian<ul>
+<li>Rock solid, trusted and well made. People have just install debian and then forgotten about it for decades.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Why not windows?</strong></p>
+<p>Windows10 is a pain to live with. The dev environment is a pain to set up: Add to path, manage registry etc. Also updating things is a pain. Just try a mainstream linux distro once(I recommend Ubuntu. Plain and simple.) and windows will suddenly become insanely painful to use.</p>
+<p>There are very few reasons to stick to windows:</p>
+<ul>
+<li>You don't have the time to switch</li>
+<li>You are completely dependent on the Visual Studio ide (not Visual Studio Code)</li>
+<li>You are married to the Adobe software suite</li>
+</ul>
+<p>My personal reason:</p>
+<p><em>I don't like windows since windows 10. That thing updates a lot, constantly demands reboots to apply updates, and sometimes takes hours to apply compulsory updates. I finally stopped using it when it forcefully restarted one night while I was in flow working on something, and locked away the computer for an hour while updating it. I got very very angry and immediately downloaded ubuntu. Win7 was great, Win10 is a pain.</em></p>
+<h1 id="code-management">Code management</h1>
+<ul>
+<li><a href="https://www.github.com">Github</a> with <a href="https://www.sublimemerge.com">sublime merge</a></li>
+<li><a href="https://www.gitlab.com">GitLab</a> is also a solid option, especially if you are self hosting project data.</li>
+</ul>
+            
+        </div>
+        <div class="rightcolumn">
+            <span>Contents</span>
+                <div class="toc">
+<ul>
+<li><a href="#data-environment-setup">Data environment setup</a></li>
+<li><a href="#visualizations">Visualizations</a></li>
+<li><a href="#huge-datatsets">Huge datatsets</a></li>
+<li><a href="#quickly-understand-datasets">Quickly understand datasets</a></li>
+<li><a href="#sharing-datasetsreports">Sharing datasets/reports</a></li>
+<li><a href="#api-and-web-development">Api and web development</a></li>
+<li><a href="#hosting">Hosting</a></li>
+<li><a href="#domain-registration">Domain registration</a></li>
+<li><a href="#deploying-to-cloud">Deploying to cloud</a></li>
+<li><a href="#quickly-creating-data-dashboards">Quickly creating data dashboards</a></li>
+<li><a href="#quickly-create-crud-apps">Quickly create crud apps</a></li>
+<li><a href="#quickly-create-apis">Quickly create apis</a></li>
+<li><a href="#blogging">Blogging</a></li>
+<li><a href="#data-backup">Data backup</a></li>
+<li><a href="#quick-notes-and-tips">Quick notes and tips</a><ul>
+<li><a href="#google-services">Google services</a></li>
+<li><a href="#docker-kubernetes-etc">Docker, kubernetes etc</a></li>
+</ul>
+</li>
+<li><a href="#browser-extensions">Browser extensions</a></li>
+<li><a href="#pdf-readers">Pdf readers</a></li>
+<li><a href="#operating-system">Operating system</a></li>
+<li><a href="#code-management">Code management</a></li>
+</ul>
+</div>
+
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            document.getElementById("btntoggletoc").addEventListener("click", toggleToc);
+        });
+        function toggleToc(){
+            var toc = document.getElementsByClassName("toc")[0];
+            console.log(toc.style.display);
+            if(toc.style.display === "none" || toc.style.display === "" ){
+                toc.style.display = "block";
+            } else {
+                toc.style.display = "none";
+            }
+        }
+    </script>
+    <script>
+        /*! instant.page v5.1.0 - (C) 2019-2020 Alexandre Dieulot - https://instant.page/license */
+        let t,e;const n=new Set,o=document.createElement("link"),i=o.relList&&o.relList.supports&&o.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype,s="instantAllowQueryString"in document.body.dataset,a="instantAllowExternalLinks"in document.body.dataset,r="instantWhitelist"in document.body.dataset,c="instantMousedownShortcut"in document.body.dataset,d=1111;let l=65,u=!1,f=!1,m=!1;if("instantIntensity"in document.body.dataset){const t=document.body.dataset.instantIntensity;if("mousedown"==t.substr(0,"mousedown".length))u=!0,"mousedown-only"==t&&(f=!0);else if("viewport"==t.substr(0,"viewport".length))navigator.connection&&(navigator.connection.saveData||navigator.connection.effectiveType&&navigator.connection.effectiveType.includes("2g"))||("viewport"==t?document.documentElement.clientWidth*document.documentElement.clientHeight<45e4&&(m=!0):"viewport-all"==t&&(m=!0));else{const e=parseInt(t);isNaN(e)||(l=e)}}if(i){const n={capture:!0,passive:!0};if(f||document.addEventListener("touchstart",function(t){e=performance.now();const n=t.target.closest("a");if(!h(n))return;v(n.href)},n),u?c||document.addEventListener("mousedown",function(t){const e=t.target.closest("a");if(!h(e))return;v(e.href)},n):document.addEventListener("mouseover",function(n){if(performance.now()-e<d)return;const o=n.target.closest("a");if(!h(o))return;o.addEventListener("mouseout",p,{passive:!0}),t=setTimeout(()=>{v(o.href),t=void 0},l)},n),c&&document.addEventListener("mousedown",function(t){if(performance.now()-e<d)return;const n=t.target.closest("a");if(t.which>1||t.metaKey||t.ctrlKey)return;if(!n)return;n.addEventListener("click",function(t){1337!=t.detail&&t.preventDefault()},{capture:!0,passive:!1,once:!0});const o=new MouseEvent("click",{view:window,bubbles:!0,cancelable:!1,detail:1337});n.dispatchEvent(o)},n),m){let t;(t=window.requestIdleCallback?t=>{requestIdleCallback(t,{timeout:1500})}:t=>{t()})(()=>{const t=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){const n=e.target;t.unobserve(n),v(n.href)}})});document.querySelectorAll("a").forEach(e=>{h(e)&&t.observe(e)})})}}function p(e){e.relatedTarget&&e.target.closest("a")==e.relatedTarget.closest("a")||t&&(clearTimeout(t),t=void 0)}function h(t){if(t&&t.href&&(!r||"instant"in t.dataset)&&(a||t.origin==location.origin||"instant"in t.dataset)&&["http:","https:"].includes(t.protocol)&&("http:"!=t.protocol||"https:"!=location.protocol)&&(s||!t.search||"instant"in t.dataset)&&!(t.hash&&t.pathname+t.search==location.pathname+location.search||"noInstant"in t.dataset))return!0}function v(t){if(n.has(t))return;const e=document.createElement("link");e.rel="prefetch",e.href=t,document.head.appendChild(e),n.add(t)}
+    </script>
+</body>
+
+</html>
